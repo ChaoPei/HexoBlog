@@ -3,9 +3,91 @@
 
 
     
+    
+  <url>
+    <loc>https://weizhixiaoyi.com/2018/03/18/Markdown%E5%86%99%E4%BD%9C%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2018-03-26T16:37:15.932Z</lastmod>
+    <data>
+        <display>
+        <title>Markdown写作教程</title>
+        <pubTime>2018-03-18T15:29:14.000Z</pubTime>
+        
+        <tag>博客</tag>
+         
+        <tag>Markdown</tag>
+         
+        <tag>教程</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://weizhixiaoyi.com/2018/03/24/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</loc>
+    <lastmod>2018-03-26T16:29:50.742Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习之线性回归</title>
+        <pubTime>2018-03-24T15:27:53.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+        <tag>算法</tag>
+         
+         
+           
+             
+              <breadCrumb title="机器学习" url="https://weizhixiaoyi.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>https://weizhixiaoyi.com/2018/03/14/Python%E4%B9%8BMatPlotLib%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2018-03-25T11:59:25.077Z</lastmod>
+    <data>
+        <display>
+        <title>Python之MatPlotLib使用教程</title>
+        <pubTime>2018-03-14T03:43:07.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+         
+           
+             
+              <breadCrumb title="Python库" url="https://weizhixiaoyi.com/categories/Python%E5%BA%93/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://weizhixiaoyi.com/2018/03/24/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/</loc>
+    <lastmod>2018-03-24T15:29:46.468Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习知识体系</title>
+        <pubTime>2018-03-24T04:30:14.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
   <url>
     <loc>https://weizhixiaoyi.com/2018/03/16/Mac+Hexo+GitHub%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2018-03-16T09:12:40.691Z</lastmod>
+    <lastmod>2018-03-17T10:23:04.618Z</lastmod>
     <data>
         <display>
         <title>Mac+Hexo+GitHub博客搭建教程</title>
@@ -29,7 +111,6 @@
     </url>
 
     
-    
   <url>
     <loc>https://weizhixiaoyi.com/2018/03/12/Python%E4%B9%8BPandas%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</loc>
     <lastmod>2018-03-15T02:04:04.778Z</lastmod>
@@ -37,26 +118,6 @@
         <display>
         <title>Python之Pandas使用教程</title>
         <pubTime>2018-03-12T05:18:48.000Z</pubTime>
-        
-        <tag>python</tag>
-         
-         
-           
-             
-              <breadCrumb title="Python库" url="https://weizhixiaoyi.com/categories/Python%E5%BA%93/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://weizhixiaoyi.com/2018/03/14/Python%E4%B9%8BMatPlotLib%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2018-03-14T11:02:18.897Z</lastmod>
-    <data>
-        <display>
-        <title>Python之MatPlotLib使用教程</title>
-        <pubTime>2018-03-14T03:43:07.000Z</pubTime>
         
         <tag>python</tag>
          
@@ -109,7 +170,6 @@
     </data>
     </url>
 
-    
     
     
 </urlset>

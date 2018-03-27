@@ -37,7 +37,7 @@
 {% endif %}
 
 {% if theme.bing_site_verification %}
-  <meta name="msvalidate.01" content="{{ theme.bing_site_verification }}" />
+  <meta name="msvalidate.01" content="9219CFDFC7384B4F0A08B73CF8790554" />
 {% endif %}
 
 {% if theme.yandex_site_verification %}

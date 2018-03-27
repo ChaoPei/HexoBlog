@@ -39,9 +39,13 @@ date: 2018-03-15 13:41:17
 
 {% stream %}
 
+{% figure https://img1.doubanio.com/view/photo/raw/public/p2505558477.jpg
+
+[《刻刻》](https://movie.douban.com/subject/27173361/) %}
+
 {% figure https://img3.doubanio.com/view/photo/raw/public/p2203001610.jpg
 
-[《万物理论》](https://movie.douban.com/subject/24815950/)%}
+[《万物理论》](https://movie.douban.com/subject/24815950/) %}
 
 {% figure https://img1.doubanio.com/view/photo/raw/public/p2169296757.jpg
 
@@ -49,7 +53,7 @@ date: 2018-03-15 13:41:17
 
 {% figure https://img3.doubanio.com/view/photo/raw/public/p2511355624.jpg 
 
- [《唐人街探案（二）》 ](https://movie.douban.com/subject/26698897/?from=showing) %}
+ [《唐人街探案（二）》](https://movie.douban.com/subject/26698897/?from=showing) %}
 
 {% figure https://img3.doubanio.com/view/photo/raw/public/p2509643816.jpg 
 

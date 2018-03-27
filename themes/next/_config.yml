@@ -153,11 +153,13 @@ social_icons:
 
 # Blog rolls
 links_icon: link
-links_title: Links
+links_title: 友情链接
 links_layout: block
 #links_layout: inline
-#links:
-  #Title: url
+links: 
+  潘小鶸: https://blog.jamespan.me/
+  ckjbug: http://ckjbug.com/
+
 
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.gif
@@ -350,8 +352,8 @@ font:
 
 # MathJax Support
 mathjax:
-  enable: false
-  per_page: false
+  enable: true
+  per_page: true 
   cdn: //cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML
 
 # Han Support docs: https://hanzi.pro/
@@ -367,7 +369,6 @@ baidu_analytics: b54e835b3551fd0696954b3aedf5d645
 
 #verification
 baidu_site_verification: true
-google_site_verification: true
 
 # Disqus
 disqus:
@@ -429,8 +430,8 @@ gitment:
 # Available value:
 #    button | slide
 # Warning: Baidu Share does not support https.
-#baidushare:
-##  type: button
+# baidushare: true
+#     type: button
 
 # Share
 # This plugin is more useful in China, make sure you known how to use it.
@@ -441,7 +442,7 @@ gitment:
 #add_this_id:
 
 # Share
-#duoshuo_share: true
+#duoshuo_share: false
 
 # NeedMoreShare2
 # This plugin is a pure javascript sharing lib which is useful in China.
@@ -473,14 +474,14 @@ needmoreshare2:
 
 # Google Webmaster tools verification setting
 # See: https://www.google.com/webmasters/
-#google_site_verification:
+google_site_verification: true
 
 # Google Analytics
 #google_analytics:
 
 # Bing Webmaster tools verification setting
 # See: https://www.bing.com/webmaster/
-#bing_site_verification:
+bing_site_verification: true
 
 # Yandex Webmaster tools verification setting
 # See: https://webmaster.yandex.ru/

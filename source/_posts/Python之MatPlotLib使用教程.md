@@ -321,7 +321,7 @@ plt.show()
 
 均匀图中图：MatPlotLib可以组合许多的小图在大图中显示，使用的方法叫做subplot。
 
-```Python
+```python
 plt.figure()
 plt.subplot(2,1,1)#表示整个图像分割成2行2列，当前位置为1
 plt.plot([0,1],[0,1])#横坐标变化为[0,1] 竖坐标变化为[0,2]
@@ -363,7 +363,7 @@ plt.show()
 
 方法一
 
-```Python
+```python
 import matplotlib.gridspec as gridspec#引入新模块
 plt.figure()
 '''
@@ -505,4 +505,3 @@ plt.show()
 
 更多内容请关注公众号'谓之小一'，若有疑问可在公众号后台提问，随时回答，内容转载请注明出处。
 
-![推广](Python之MatPlotLib使用教程/推广.png)
