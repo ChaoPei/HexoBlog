@@ -158,7 +158,6 @@ links_layout: block
 #links_layout: inline
 links: 
   潘小鶸: https://blog.jamespan.me/
-  ckjbug: http://ckjbug.com/
 
 
 # Sidebar Avatar
@@ -198,7 +197,7 @@ sidebar:
   #display: remove
 
   # Sidebar offset from top menubar in pixels (only for Pisces | Gemini).
-  offset: 12
+  offset: 8
 
   # Back to top in sidebar (only for Pisces | Gemini).
   b2t: false
@@ -707,7 +706,7 @@ pace: false
 pace_theme: pace-theme-minimal
 
 # Canvas-nest
-canvas_nest: false
+canvas_nest: false 
 
 # three_waves
 three_waves: false

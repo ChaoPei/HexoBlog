@@ -38,28 +38,29 @@ date: 2018-03-15 13:41:17
 ## 2.电影
 
 {% stream %}
+{% figure http://p66yyzg4i.bkt.clouddn.com/%E6%9C%AA%E9%97%BB%E8%8A%B1%E5%90%8D.png
 
-{% figure https://img1.doubanio.com/view/photo/raw/public/p2505558477.jpg
+[《未闻花名》](https://movie.douban.com/subject/5397537/) %}
+{% figure http://p66yyzg4i.bkt.clouddn.com/%E5%88%BB%E5%88%BB.png
 
 [《刻刻》](https://movie.douban.com/subject/27173361/) %}
 
-{% figure https://img3.doubanio.com/view/photo/raw/public/p2203001610.jpg
-
+{% figure http://p66yyzg4i.bkt.clouddn.com/%E4%B8%87%E7%89%A9%E7%90%86%E8%AE%BA.png
 [《万物理论》](https://movie.douban.com/subject/24815950/) %}
 
-{% figure https://img1.doubanio.com/view/photo/raw/public/p2169296757.jpg
-
+{% figure http://p66yyzg4i.bkt.clouddn.com/%E6%9D%A5%E8%87%AA%E9%A3%8E%E5%B9%B3%E6%B5%AA%E9%9D%99%E7%9A%84%E6%98%8E%E5%A4%A9.png
 [《来自风平浪静的明天》 ](https://movie.douban.com/subject/11624690/) %}
 
-{% figure https://img3.doubanio.com/view/photo/raw/public/p2511355624.jpg 
+{% figure http://p66yyzg4i.bkt.clouddn.com/%E5%94%90%E4%BA%BA%E8%A1%97%E6%8E%A2%E6%A1%882.png
+[《唐人街探案（二）》](https://movie.douban.com/subject/26698897/?from=showing) %}
 
- [《唐人街探案（二）》](https://movie.douban.com/subject/26698897/?from=showing) %}
-
-{% figure https://img3.doubanio.com/view/photo/raw/public/p2509643816.jpg 
+{% figure http://p66yyzg4i.bkt.clouddn.com/%E6%8D%89%E5%A6%96%E8%AE%B02.png
 
 [《捉妖记（二）》 ](https://img3.doubanio.com/view/photo/raw/public/p2509643816.jpg) %}
 
 {% endstream %}
+
+
 
 
 
