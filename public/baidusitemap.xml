@@ -3,17 +3,90 @@
 
 
     
-    
   <url>
-    <loc>https://weizhixiaoyi.com/2018/03/29/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8BSVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/</loc>
-    <lastmod>2018-03-29T07:51:41.458Z</lastmod>
+    <loc>https://weizhixiaoyi.com/2018/04/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%86%B3%E7%AD%96%E6%A0%91-C4-5%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2018-04-20T10:04:44.901Z</lastmod>
     <data>
         <display>
-        <title>机器学习之SVM支持向量机</title>
-        <pubTime>2018-03-29T07:51:41.000Z</pubTime>
+        <title>机器学习之决策树(C4.5算法)</title>
+        <pubTime>2018-04-19T03:03:26.000Z</pubTime>
         
+        <tag>机器学习</tag>
+         
+        <tag>算法</tag>
+         
          
            
+             
+              <breadCrumb title="机器学习" url="https://weizhixiaoyi.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://weizhixiaoyi.com/2018/04/15/Python%E4%B9%8BSklearn%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2018-04-19T01:26:26.055Z</lastmod>
+    <data>
+        <display>
+        <title>Python之Sklearn使用教程</title>
+        <pubTime>2018-04-15T03:43:18.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+        <tag>机器学习</tag>
+         
+         
+           
+             
+              <breadCrumb title="Python库" url="https://weizhixiaoyi.com/categories/Python%E5%BA%93/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>https://weizhixiaoyi.com/2018/04/04/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8BSVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA%EF%BC%88%E4%BA%8C%EF%BC%89/</loc>
+    <lastmod>2018-04-06T13:11:23.223Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习之SVM支持向量机（二）</title>
+        <pubTime>2018-04-04T13:06:26.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+        <tag>算法</tag>
+         
+         
+           
+             
+              <breadCrumb title="机器学习" url="https://weizhixiaoyi.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://weizhixiaoyi.com/2018/03/29/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8BSVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA%EF%BC%88%E4%B8%80%EF%BC%89/</loc>
+    <lastmod>2018-04-03T02:52:42.498Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习之SVM支持向量机（一）</title>
+        <pubTime>2018-03-29T07:51:41.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+        <tag>算法</tag>
+         
+         
+           
+             
+              <breadCrumb title="机器学习" url="https://weizhixiaoyi.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+          
         </display>
     </data>
     </url>
@@ -70,9 +143,9 @@
         <title>Markdown写作教程</title>
         <pubTime>2018-03-18T15:29:14.000Z</pubTime>
         
-        <tag>博客</tag>
-         
         <tag>Markdown</tag>
+         
+        <tag>博客</tag>
          
         <tag>教程</tag>
          
@@ -133,13 +206,13 @@
         <title>Mac+Hexo+GitHub博客搭建教程</title>
         <pubTime>2018-03-16T03:41:35.000Z</pubTime>
         
+        <tag>博客</tag>
+         
         <tag>Mac</tag>
          
         <tag>Hexo</tag>
          
         <tag>GitHub</tag>
-         
-        <tag>博客</tag>
          
          
            
