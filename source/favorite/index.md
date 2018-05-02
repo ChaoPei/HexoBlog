@@ -7,6 +7,8 @@ date: 2018-03-15 13:41:17
 
 {% stream %}
 
+{% figure http://p66yyzg4i.bkt.clouddn.com/%E6%B2%89%E9%BB%98%E7%9A%84%E5%A4%A7%E5%A4%9A%E6%95%B0.png  [《沉默的大多数》 ](https://book.douban.com/subject/1776683/) %}
+
 {% figure http://p66yyzg4i.bkt.clouddn.com/%E6%97%B6%E9%97%B4%E7%AE%80%E5%8F%B2.png  [《时间简史》 ](https://book.douban.com/subject/1034282/) %}
 
 {% figure http://p66yyzg4i.bkt.clouddn.com/%E7%9C%8B%E8%A7%81.png  [《看见》 ](https://book.douban.com/subject/20427187/) %}
@@ -74,6 +76,21 @@ date: 2018-03-15 13:41:17
 ## 2.电影
 
 {% stream %}
+
+{% figure http://p66yyzg4i.bkt.clouddn.com/%E5%8D%81%E6%9C%88%E5%9B%B4%E5%9F%8E.png [《十月围城》](https://movie.douban.com/subject/3626416/) %}
+
+{% figure http://p66yyzg4i.bkt.clouddn.com/%E6%97%A0%E9%97%B4%E9%81%933.png [《无间道3》](https://movie.douban.com/subject/1307694/) %}
+
+{% figure http://p66yyzg4i.bkt.clouddn.com/%E6%97%A0%E9%97%B4%E9%81%932.png [《无间道2》](https://movie.douban.com/subject/1307106/) %}
+
+{% figure http://p66yyzg4i.bkt.clouddn.com/%E8%A5%BF%E8%A5%BF%E9%87%8C%E7%9A%84%E7%BE%8E%E4%B8%BD%E4%BC%A0%E8%AF%B4.png
+[《西西里的美丽传说》](https://movie.douban.com/subject/1292402/) %}
+
+{% figure http://p66yyzg4i.bkt.clouddn.com/K.png
+[《K》](https://movie.douban.com/subject/10545923/) %}
+
+{% figure http://p66yyzg4i.bkt.clouddn.com/%E6%88%91%E7%9A%84%E8%8B%B1%E9%9B%84%E5%AD%A6%E9%99%A2.png
+[《我的英雄学院》](https://movie.douban.com/subject/27160633/) %}
 
 {% figure http://p66yyzg4i.bkt.clouddn.com/%E6%9A%B4%E8%A3%82%E6%97%A0%E5%A3%B0.png
 [《暴裂无声》](https://movie.douban.com/subject/26628329/) %}
