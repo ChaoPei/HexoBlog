@@ -3,10 +3,6 @@ title: 关于
 date: 2018-03-13 21:34:44
 comments: true
 ---
-「谓之小一」希望提供给读者别处看不到的内容，关于互联网、机器学习、数据挖掘、编程、书籍、生活...
+「谓之小一」希望提供给读者别处看不到的内容，关于互联网、机器学习、数据挖掘、编程、书籍、生活...欢迎关注公众号阅读更多内容。
 
- - 知乎：@[谓之小一](https://www.zhihu.com/people/weizhixiaoyi/activities)  
- - GitHub：@[weizhixiaooyi](https://github.com/weizhixiaoyi)
- - 邮箱: zhenhai.gl@gmail.com
- - 微信公众号：@谓之小一
-![公众号](index/公众号.jpg)
+  ![公众号](index/公众号.jpg)
