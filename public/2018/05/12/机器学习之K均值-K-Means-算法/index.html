@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="E1Oy09IV-Rsypa8wpY-yrplcH8RMIHLCzj3m91nX1Eo" />
+
+
+
+  <meta name="msvalidate.01" content="9219CFDFC7384B4F0A08B73CF8790554" />
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="pvvBAkBQvG" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1.K-Means简介K均值(K-Means)算法是无监督的聚类方法，实现起来比较简单，聚类效果也比较好，因此应用很广泛。K-Means算法针对不同应用场景，有不同方面的改进。我们从最传统的K-Means算法讲起，然后在此基础上介绍初始化质心优化K-Means++算法，距离计算优化Elkan K-Means算法和大样本情况下Mini Batch K-Means算法。 K-Means算法的思想很简单">
+<meta name="keywords" content="机器学习,算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习之K均值(K-Means)算法">
+<meta property="og:url" content="https://weizhixiaoyi.com/2018/05/12/机器学习之K均值-K-Means-算法/index.html">
+<meta property="og:site_name" content="谓之小一">
+<meta property="og:description" content="1.K-Means简介K均值(K-Means)算法是无监督的聚类方法，实现起来比较简单，聚类效果也比较好，因此应用很广泛。K-Means算法针对不同应用场景，有不同方面的改进。我们从最传统的K-Means算法讲起，然后在此基础上介绍初始化质心优化K-Means++算法，距离计算优化Elkan K-Means算法和大样本情况下Mini Batch K-Means算法。 K-Means算法的思想很简单">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/05/12/机器学习之K均值-K-Means-算法/机器学习之K均值-K-Means-算法/机器学习值K均值算法图片01.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/05/12/机器学习之K均值-K-Means-算法/机器学习之K均值-K-Means-算法/机器学习值K均值算法图片02.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/05/12/机器学习之K均值-K-Means-算法/机器学习之K均值-K-Means-算法/机器学习值K均值算法图片03.png">
+<meta property="og:image" content="http://p66yyzg4i.bkt.clouddn.com/%E6%8E%A8%E5%B9%BF.png">
+<meta property="og:updated_time" content="2018-05-20T04:02:21.696Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习之K均值(K-Means)算法">
+<meta name="twitter:description" content="1.K-Means简介K均值(K-Means)算法是无监督的聚类方法，实现起来比较简单，聚类效果也比较好，因此应用很广泛。K-Means算法针对不同应用场景，有不同方面的改进。我们从最传统的K-Means算法讲起，然后在此基础上介绍初始化质心优化K-Means++算法，距离计算优化Elkan K-Means算法和大样本情况下Mini Batch K-Means算法。 K-Means算法的思想很简单">
+<meta name="twitter:image" content="https://weizhixiaoyi.com/2018/05/12/机器学习之K均值-K-Means-算法/机器学习之K均值-K-Means-算法/机器学习值K均值算法图片01.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://weizhixiaoyi.com/2018/05/12/机器学习之K均值-K-Means-算法/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>机器学习之K均值(K-Means)算法 | 谓之小一</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b54e835b3551fd0696954b3aedf5d645";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">谓之小一</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">永远相信·美好的事情即将发生</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-favorite">
+    <a href="/favorite/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />喜欢</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/05/12/机器学习之K均值-K-Means-算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XiaoYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="谓之小一">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">机器学习之K均值(K-Means)算法
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-05-12 13:44:19" itemprop="dateCreated datePublished" datetime="2018-05-12T13:44:19+08:00">2018-05-12</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/05/12/机器学习之K均值-K-Means-算法/" class="leancloud_visitors" data-flag-title="机器学习之K均值(K-Means)算法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数"></span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长"></span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-K-Means简介"><a href="#1-K-Means简介" class="headerlink" title="1.K-Means简介"></a>1.K-Means简介</h3><p><strong>K均值(K-Means)</strong>算法是无监督的聚类方法，实现起来比较简单，聚类效果也比较好，因此应用很广泛。K-Means算法针对不同应用场景，有不同方面的改进。我们从最传统的K-Means算法讲起，然后在此基础上介绍初始化质心优化<strong>K-Means++</strong>算法，距离计算优化<strong>Elkan K-Means</strong>算法和大样本情况下<strong>Mini Batch K-Means</strong>算法。</p>
+<p>K-Means算法的思想很简单，对于给定的样本集，按照样本之间的距离大小，将样本集划分为K个簇。让簇内的点尽可能紧密的连在一起，而让簇间的距离尽量的大，下面我们引入K-Means目标函数。</p>
+<p>假设样本集输入变量为(x1,x2,x3,…,xm)，样本集划分为K个簇(C1,C2,C3,…,Ck)，则我们的目标是最小化平方误差E。<br>$$<br>E=\sum _{i=1}^{k} \sum _{x \in C_i}||x-\mu _i||^2<br>$$<br>其中μi是簇Ci的均值向量，也可称作质心，表达式为<br>$$<br>\mu _i=\frac{1}{|C_i|}\sum _{x \in C_i}x<br>$$<br>如果直接求解上述最小值的话，那么为NP Hard问题，因此K-Means算法采用启发式的迭代方法。下面我们通过一个简单聚类来介绍K-Means算法迭代过程。</p>
+<ul>
+<li>如图(a)所示：表示初始化数据集。</li>
+<li>如图(b)所示：假设K=2，随机选择两个点作为类别质心，分别为图中的红色质心和蓝色质心。</li>
+<li>如图(c)所示：分别求样本点xi到这两个质心的距离，并标记每个样本点的类别为距离质心最近的类别。划分得到两个簇C1和C2，完成一次迭代。</li>
+<li>如图(d)所示：对标记为红色的点和蓝色的点分别求新的质心。</li>
+<li>如图(e)所示：重复图(c)(d)过程，标记每个样本点的类别为距离质心最近的类别，重新划分得到两个簇C1和C2。</li>
+<li>如图(f)所示：直到质心不再改变后完成迭代，最终得到两个簇C1和C2。</li>
+</ul>
+<p><img src="机器学习之K均值-K-Means-算法/机器学习值K均值算法图片01.png" alt="机器学习值K均值算法图片01"></p>
+<h3 id="2-K-Means算法流程"><a href="#2-K-Means算法流程" class="headerlink" title="2.K-Means算法流程"></a>2.K-Means算法流程</h3><p>假设输入样本集$D={x_1,x_2,…,x_m}$，聚类簇数为K，最大迭代次数为N。输出的簇划分为$C={C_1,C_2,…,C_m}$。</p>
+<ul>
+<li><p>从数据集D中随机选择K个样本作为初始的质心向量$ \mu={ \mu_1,\mu_2,\mu_3,…,\mu_k }$。</p>
+</li>
+<li><p>迭代$n=1,2,…,N$。</p>
+<ul>
+<li>划分初始化簇$C_t=\varnothing ;\ t=1,2,…,k$。</li>
+<li>对于$i=1,2,…,m$，计算样本$x_i$和各个质心向量$\mu_j(\ j=1,2,…,k)$的距离$d_{ij}$。将$x_i$标记为最小的$d_{ij}$所对应的类别$\lambda_i$，此时更新$C_{\lambda i}=C_{\lambda i} \cup{x_i}$。</li>
+</ul>
+<p>$$<br>d_{ij}=||x_i-\mu_j||^2<br>$$</p>
+<ul>
+<li>对于$j=1,2,…,k$，对$C_j$中所有样本点重新计算新的质心。</li>
+</ul>
+<p>$$<br>\mu_j=\frac{1}{|C_j|}\sum_{x\in C_j}x<br>$$</p>
+<ul>
+<li>如果K个质心向量都不再发生变化，则结束迭代。</li>
+</ul>
+</li>
+<li><p>输出K个划分簇$C$，$C={C_1,C_2,C_3,…,C_k }$。</p>
+</li>
+</ul>
+<p>对于K-Means算法，首先要注意K值的选择和K个初始化质心的选择。</p>
+<ul>
+<li><strong>对于K值的选择:</strong>我们可以通过对数据的先验经验选择合适的K值，如果没有先验条件的话，还可以通过交叉验证选择合适的K值。</li>
+<li><strong>对于K个初始化质心:</strong>由于我们采用启发式迭代方法，K个初始化质心的位置选择对最后的聚类结果和运行时间都有较大的影响，最好选择的K个质心不要离得太近。</li>
+</ul>
+<h3 id="3-初始化优化K-Means"><a href="#3-初始化优化K-Means" class="headerlink" title="3.初始化优化K-Means++"></a>3.初始化优化K-Means++</h3><p>如果是完全随机的选择， 算法的收敛可能很慢。我们在此介绍K-Means++算法，针对随机初始化质心进行优化，具体算法流程如下所示。</p>
+<ul>
+<li>从输入的数据点集合中随机选择一个点作为第一个聚类中心μ1。</li>
+<li>对于数据集中的每个点xi，计算与他最近的聚类中心距离。</li>
+</ul>
+<p>$$<br>D(x)=\arg \min_{r=1}^{k_{selected}}||x_i-\mu_r||^2<br>$$</p>
+<ul>
+<li>选择一个数据点作为新的聚类中心，其中D(x)较大的点被选作新的聚类中心的概率较大。</li>
+<li>重复上述两步，直到选择出K个聚类中心。然后利用这K个质心来作为初始化质心去运行传统K-Means算法。</li>
+</ul>
+<h3 id="4-距离计算优化Elkan-K-Means算法"><a href="#4-距离计算优化Elkan-K-Means算法" class="headerlink" title="4.距离计算优化Elkan K-Means算法"></a>4.距离计算优化Elkan K-Means算法</h3><p>传统K-Means算法中，我们每次迭代时都要计算所有样本点到所有质心之间的距离，那么有没有什么方法来减少计算次数呢? Elkan K-Means算法提出利用两边之和大于第三边、两边之差小于第三边的三角形特性来减少距离的计算。</p>
+<ul>
+<li>对于一个样本点$x$和两个质心$\mu_{j1},\mu_{j2}$，如果我们预先计算出这两个质心之间的距离$D(j_1,j_2)$，如果发现$2D(x,j_1)≤D(j_1,j_2)$，那么我们便能得到$D(x,j_1)≤D(x,j_2)$。此时我们不再计算$D(x,j_2)$，也就节省了一步距离计算。</li>
+<li>对于一个样本点$x$和两个质心$μ<em>{j1},μ</em>{j2}$，我们能够得到$D(x,j_2)≥max{0,D(x,j_1)−D(j_1,j_2)}$。</li>
+</ul>
+<p>Elkan K-Means迭代速度比传统K-Means算法迭代速度有较大提高，但如果我们的样本特征是稀疏的，或者有缺失值的话，此种方法便不再使用。</p>
+<h3 id="5-大样本优化Mini-Batch-K-Means算法"><a href="#5-大样本优化Mini-Batch-K-Means算法" class="headerlink" title="5.大样本优化Mini Batch K-Means算法"></a>5.大样本优化Mini Batch K-Means算法</h3><p>传统的K-Means算法中需要计算所有样本点到所有质心的距离，计算复杂度较高。如果样本量非常大的情况下，比如数据量达到10万，特征在100以上，此时用传统K-Means算法非常耗时。故此针对大样本情况下采用Mini Batch K-Means算法。</p>
+<p>Mini Batch K-Means采用无放回随机采样的方法从样本集中选取部分数据，然后用选取的数据进行传统的K-Means算法训练。然后进行迭代并更新质心，直到质心稳定或达到指定的迭代次数。</p>
+<p>Mini Batch K-Means可以避免样本量太大带来的计算问题，算法收敛速度也能够加快，当然带来的代价就是我们的聚类精确度降低。为增加算法的准确性，我们可以多训练几次Mini Batch K-Means算法，用不同的随机采样集来得到聚类簇，选择其中最优的聚类簇。</p>
+<h3 id="6-Sklearn实现K-Means算法"><a href="#6-Sklearn实现K-Means算法" class="headerlink" title="6.Sklearn实现K-Means算法"></a>6.Sklearn实现K-Means算法</h3><p>我们经常需要通过改变参数来让模型达到聚类结果，具体参数设置可参考<a href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html" target="_blank" rel="noopener">sklearn官方教程</a>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.cluster <span class="keyword">import</span> KMeans</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment">#load iris</span></span><br><span class="line">iris=load_iris()</span><br><span class="line">X=iris.data[:,:<span class="number">2</span>]</span><br><span class="line">print(X.shape)</span><br><span class="line"><span class="comment">#150,2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#plot data</span></span><br><span class="line">plt.figure()</span><br><span class="line">plt.scatter(X[:,<span class="number">0</span>],X[:,<span class="number">1</span>],c=<span class="string">'blue'</span>,</span><br><span class="line">            marker=<span class="string">'o'</span>,label=<span class="string">'point'</span>)</span><br><span class="line">plt.legend(loc=<span class="number">2</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="机器学习之K均值-K-Means-算法/机器学习值K均值算法图片02.png" alt="机器学习值K均值算法图片02"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># fit data</span></span><br><span class="line">kmeans=KMeans(n_clusters=<span class="number">3</span>)</span><br><span class="line">kmeans.fit(X)</span><br><span class="line">label_pred=kmeans.labels_</span><br><span class="line"></span><br><span class="line"><span class="comment">#plot answer</span></span><br><span class="line">plt.figure()</span><br><span class="line">x0 = X[label_pred == <span class="number">0</span>]</span><br><span class="line">x1 = X[label_pred == <span class="number">1</span>]</span><br><span class="line">x2 = X[label_pred == <span class="number">2</span>]</span><br><span class="line">plt.scatter(x0[:, <span class="number">0</span>], x0[:, <span class="number">1</span>], c = <span class="string">"red"</span>,</span><br><span class="line">            marker=<span class="string">'o'</span>, label=<span class="string">'label0'</span>)</span><br><span class="line">plt.scatter(x1[:, <span class="number">0</span>], x1[:, <span class="number">1</span>], c = <span class="string">"green"</span>,</span><br><span class="line">            marker=<span class="string">'*'</span>, label=<span class="string">'label1'</span>)</span><br><span class="line">plt.scatter(x2[:, <span class="number">0</span>], x2[:, <span class="number">1</span>], c = <span class="string">"blue"</span>,</span><br><span class="line">            marker=<span class="string">'+'</span>, label=<span class="string">'label2'</span>)</span><br><span class="line">plt.legend(loc=<span class="number">2</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="机器学习之K均值-K-Means-算法/机器学习值K均值算法图片03.png" alt="机器学习值K均值算法图片03"></p>
+<h3 id="7-K-Means算法优缺点"><a href="#7-K-Means算法优缺点" class="headerlink" title="7.K-Means算法优缺点"></a>7.K-Means算法优缺点</h3><h4 id="7-1优点"><a href="#7-1优点" class="headerlink" title="7.1优点"></a>7.1优点</h4><ul>
+<li><p>聚类效果较优。</p>
+</li>
+<li><p>原理简单，实现容易，收敛速度快。</p>
+</li>
+<li>需要调整的参数较少，通常只需要调整簇数K。</li>
+</ul>
+<h4 id="7-2缺点"><a href="#7-2缺点" class="headerlink" title="7.2缺点"></a>7.2缺点</h4><ul>
+<li>K值选取不好把握。</li>
+<li>对噪音和异常点比较敏感。</li>
+<li>采用迭代方法，得到的结果是局部最优。</li>
+<li>如果各隐含类别的数据不平衡，则聚类效果不佳。</li>
+</ul>
+<h3 id="8-推广"><a href="#8-推广" class="headerlink" title="8.推广"></a>8.推广</h3><p>更多内容请关注公众号<strong>谓之小一</strong>，若有疑问可在公众号后台提问，随时回答，欢迎关注，内容转载请注明出处。</p>
+<p><img src="http://p66yyzg4i.bkt.clouddn.com/%E6%8E%A8%E5%B9%BF.png" alt="推广"></p>
+<p>参考</p>
+<ul>
+<li><a href="http://www.cnblogs.com/pinard/p/6164214.html" target="_blank" rel="noopener">刘建平Pinard_K-Means聚类算法原理</a></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/09/机器学习之最大期望-EM-算法/" rel="next" title="机器学习之最大期望(EM)算法">
+                <i class="fa fa-chevron-left"></i> 机器学习之最大期望(EM)算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/13/机器学习之K近邻-KNN-算法/" rel="prev" title="机器学习之K近邻(KNN)算法">
+                机器学习之K近邻(KNN)算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNDgwNS8xMTM0Mg=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="XiaoYi" />
+            
+              <p class="site-author-name" itemprop="name">XiaoYi</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/weizhixiaoyi" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/weizhixiaoyi/activities" target="_blank" title="ZhiHu" rel="external nofollow"><i class="fa fa-fw fa-book"></i>ZhiHu</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://p66yyzg4i.bkt.clouddn.com/wechat.png" target="_blank" title="WeChat" rel="external nofollow"><i class="fa fa-fw fa-weixin"></i>WeChat</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhenhai.gl@gmail.com" target="_blank" title="E-Mail" rel="external nofollow"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-K-Means简介"><span class="nav-text">1.K-Means简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-K-Means算法流程"><span class="nav-text">2.K-Means算法流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-初始化优化K-Means"><span class="nav-text">3.初始化优化K-Means++</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-距离计算优化Elkan-K-Means算法"><span class="nav-text">4.距离计算优化Elkan K-Means算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-大样本优化Mini-Batch-K-Means算法"><span class="nav-text">5.大样本优化Mini Batch K-Means算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Sklearn实现K-Means算法"><span class="nav-text">6.Sklearn实现K-Means算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-K-Means算法优缺点"><span class="nav-text">7.K-Means算法优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1优点"><span class="nav-text">7.1优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2缺点"><span class="nav-text">7.2缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-推广"><span class="nav-text">8.推广</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XiaoYi</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数"></span>
+  
+
+  
+</div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("Sj2lCA09ErubMSsa2v9oFU9Y-gzGzoHsz", "qJejurdHKM06N75OQedX4SDK");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.get('time'));
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

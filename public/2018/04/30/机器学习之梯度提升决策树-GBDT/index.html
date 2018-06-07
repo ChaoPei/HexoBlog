@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="E1Oy09IV-Rsypa8wpY-yrplcH8RMIHLCzj3m91nX1Eo" />
+
+
+
+  <meta name="msvalidate.01" content="9219CFDFC7384B4F0A08B73CF8790554" />
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="pvvBAkBQvG" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1.GBDT算法简介GBDT(Gradient Boosting Decision Tree)是一种迭代的决策树算法，由多棵决策树组成，所有树的结论累加起来作为最终答案，我们根据其名字(Gradient Boosting Decision Tree)来展开推导过程。决策树(Decision Tree)我们已经不再陌生，在之前介绍到的机器学习之决策树(C4.5算法)、机器学习之分类与回归树(CART">
+<meta name="keywords" content="机器学习,算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习之梯度提升决策树(GBDT)">
+<meta property="og:url" content="https://weizhixiaoyi.com/2018/04/30/机器学习之梯度提升决策树-GBDT/index.html">
+<meta property="og:site_name" content="谓之小一">
+<meta property="og:description" content="1.GBDT算法简介GBDT(Gradient Boosting Decision Tree)是一种迭代的决策树算法，由多棵决策树组成，所有树的结论累加起来作为最终答案，我们根据其名字(Gradient Boosting Decision Tree)来展开推导过程。决策树(Decision Tree)我们已经不再陌生，在之前介绍到的机器学习之决策树(C4.5算法)、机器学习之分类与回归树(CART">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/04/30/机器学习之梯度提升决策树-GBDT/机器学习之梯度提升决策树-GBDT/机器学习之梯度提升决策树图片01.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/04/30/机器学习之梯度提升决策树-GBDT/机器学习之梯度提升决策树-GBDT/机器学习之梯度提升决策树图片02.png">
+<meta property="og:image" content="http://p66yyzg4i.bkt.clouddn.com/%E6%8E%A8%E5%B9%BF.png">
+<meta property="og:updated_time" content="2018-05-02T08:10:56.595Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习之梯度提升决策树(GBDT)">
+<meta name="twitter:description" content="1.GBDT算法简介GBDT(Gradient Boosting Decision Tree)是一种迭代的决策树算法，由多棵决策树组成，所有树的结论累加起来作为最终答案，我们根据其名字(Gradient Boosting Decision Tree)来展开推导过程。决策树(Decision Tree)我们已经不再陌生，在之前介绍到的机器学习之决策树(C4.5算法)、机器学习之分类与回归树(CART">
+<meta name="twitter:image" content="https://weizhixiaoyi.com/2018/04/30/机器学习之梯度提升决策树-GBDT/机器学习之梯度提升决策树-GBDT/机器学习之梯度提升决策树图片01.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://weizhixiaoyi.com/2018/04/30/机器学习之梯度提升决策树-GBDT/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>机器学习之梯度提升决策树(GBDT) | 谓之小一</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b54e835b3551fd0696954b3aedf5d645";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">谓之小一</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">永远相信·美好的事情即将发生</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-favorite">
+    <a href="/favorite/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />喜欢</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/04/30/机器学习之梯度提升决策树-GBDT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XiaoYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="谓之小一">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">机器学习之梯度提升决策树(GBDT)
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-04-30 23:15:14" itemprop="dateCreated datePublished" datetime="2018-04-30T23:15:14+08:00">2018-04-30</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/04/30/机器学习之梯度提升决策树-GBDT/" class="leancloud_visitors" data-flag-title="机器学习之梯度提升决策树(GBDT)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数"></span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长"></span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-GBDT算法简介"><a href="#1-GBDT算法简介" class="headerlink" title="1.GBDT算法简介"></a>1.GBDT算法简介</h3><p><strong>GBDT(Gradient Boosting Decision Tree)</strong>是一种迭代的决策树算法，由多棵决策树组成，所有树的结论累加起来作为最终答案，我们根据其名字(<strong>Gradient Boosting Decision Tree</strong>)来展开推导过程。决策树(<strong>Decision Tree</strong>)我们已经不再陌生，在之前介绍到的<a href="https://mp.weixin.qq.com/s?__biz=MzU3MjA2NTQzMw==&amp;mid=2247483837&amp;idx=1&amp;sn=f73ca53c5d50f7cd090ba3bc0e17c56b&amp;chksm=fcd7d24bcba05b5d157f93577bc7d41856dc4e19374c20f30167e9bfd9dc0956ed09d28431f3#rd" target="_blank" rel="noopener">机器学习之决策树(C4.5算法)</a>、<a href="https://mp.weixin.qq.com/s?__biz=MzU3MjA2NTQzMw==&amp;mid=2247483841&amp;idx=1&amp;sn=b67c59dc4284f0b363b2de881c5da729&amp;chksm=fcd7d237cba05b21d80927e03e8b875e080cd0722496a5779eb3c8d285ea520902e813252ce0#rd" target="_blank" rel="noopener">机器学习之分类与回归树(CART)</a>、<a href="https://mp.weixin.qq.com/s?__biz=MzU3MjA2NTQzMw==&amp;mid=2247483845&amp;idx=1&amp;sn=5484385408d694ba03a8bdc3a03c2263&amp;chksm=fcd7d233cba05b25b0f65289f8416466df9124b019b60704b4e3875d9864ff90e3388c666f66#rd" target="_blank" rel="noopener">机器学习之随机森林</a>中已经多次接触，在此不再赘述。但<strong>Boosting</strong>和<strong>Gradient</strong>方法是什么含义呢，又如何跟Decision Tree相结合?首先我们来了解集成学习中的Boosting概念。</p>
+<h4 id="1-1集成学习之Boosting"><a href="#1-1集成学习之Boosting" class="headerlink" title="1.1集成学习之Boosting"></a>1.1集成学习之Boosting</h4><p>集成学习不是单独的机器学习方法，而是通过构建并结合多个机器学习器来完成任务，集成学习可以用于分类问题集成、回归问题集成、特征选取集成、异常点检测集成等方面。其思想是对于训练数据集，我们通过训练若干个个体学习器，通过一定的结合策略形成一个强学习器，以达到博采众长的目的。在<a href="https://mp.weixin.qq.com/s?__biz=MzU3MjA2NTQzMw==&amp;mid=2247483845&amp;idx=1&amp;sn=5484385408d694ba03a8bdc3a03c2263&amp;chksm=fcd7d233cba05b25b0f65289f8416466df9124b019b60704b4e3875d9864ff90e3388c666f66#rd" target="_blank" rel="noopener">机器学习之随机森林</a>中我们已经用到集成学习中的bagging方法，此处我们详细介绍集成学习中的Boosting方法。</p>
+<p><img src="机器学习之梯度提升决策树-GBDT/机器学习之梯度提升决策树图片01.png" alt="机器学习之梯度提升决策树图片01"></p>
+<p>从上图可以看出，Boosting算法的工作机制是从训练集用初始权重训练出一个弱学习器1，根据弱学习器的学习误差率来更新训练样本的权重，使得之前弱学习器1中学习误差率高的训练样本点权重变高。然后这些误差率高的点在弱学习器2中得到更高的重视，利用调整权重后的训练集来训练弱学习器2。如此重复进行，直到弱学习器数达到事先指定的数目T，最终将这T个弱学习器通过集合策略进行整合，得到最终的强学习器。了解Boosting方法后，我们便可将Boosting方法和Decision Tree相结合便可得到<strong>Boosting Decision Tree</strong>。</p>
+<h4 id="1-2-Boosting-Decision-Tree"><a href="#1-2-Boosting-Decision-Tree" class="headerlink" title="1.2 Boosting Decision Tree"></a>1.2 Boosting Decision Tree</h4><p><strong>提升树(Boosting Decision Tree)</strong>由于输出样本是连续值，因此我们通过迭代多棵回归树来共同决策。在<a href="https://mp.weixin.qq.com/s?__biz=MzU3MjA2NTQzMw==&amp;mid=2247483841&amp;idx=1&amp;sn=b67c59dc4284f0b363b2de881c5da729&amp;chksm=fcd7d237cba05b21d80927e03e8b875e080cd0722496a5779eb3c8d285ea520902e813252ce0#rd" target="_blank" rel="noopener">机器学习之分类与回归树(CART)</a>中我们已经详细推导分类树与回归树的构建过程，在此不再赘述。</p>
+<p>我们利用平方误差来表示损失函数，其中每一棵回归树学习的是之前所有树的结论和残差，拟合得到一个当前的残差回归树。其中残差=真实值-预测值，提升树即是整个迭代过程生成的回归树的累加。</p>
+<p>我们通过以下例子来详解算法过程，希望通过训练提升树来预测年龄。训练集是4个人，A、B、C、D年龄分别是14、16、24、26。样本中有购物金额、上网时长、经常到百度知道提问等特征。提升树的过程如下</p>
+<p><img src="机器学习之梯度提升决策树-GBDT/机器学习之梯度提升决策树图片02.png" alt="机器学习之梯度提升决策树图片02"></p>
+<p>我们能够直观的看到，预测值等于所有树值的累加，如<strong>A的预测值=树1左节点(15)+树2左节点(-1)=14</strong>。因此给定当前决策树模型ft-1(x)，只需拟合决策树的残差，便可迭代得到提升树，算法过程如下</p>
+<ul>
+<li>初始化$f_0(x)=0$</li>
+<li>对$t=1,2,3,…,T$<ul>
+<li>计算残差$r_{ti}=y_i-f_{t-1}(x_i),i=1,2,3,…,m$。</li>
+<li>拟合残差$r_{ti}$学习得到回归树$h_t(x)$</li>
+<li>更新$f_t(x)=f_{t-1}(x)+h_t(x)$</li>
+</ul>
+</li>
+<li>得到回归问题提升树$f_T(x)=f_0(x)+\sum_{t=1}^{T}h_t(x)$</li>
+</ul>
+<p>我们介绍了<strong>Boosting Decision Tree</strong>的基本思路，但是没有解决损失函数拟合方法的问题。针对这个问题，Freidman提出用损失函数的负梯度来拟合本轮损失的近似值，进而拟合一个CART回归树。了解Boosting Decision Tree方法后，我们便可将Gradient与Boosting Decision Tree相结合得到<strong>Gradient Boosting Decision Tree的负梯度拟合</strong>。</p>
+<h4 id="1-3GBDT负梯度拟合"><a href="#1-3GBDT负梯度拟合" class="headerlink" title="1.3GBDT负梯度拟合"></a>1.3GBDT负梯度拟合</h4><p>Boosting Decision Tree迭代过程中，假设我们前一轮迭代得到的强学习器是$f_{t-1}(x)$，损失函数是$L(y,f_{t-1}(x))$，我们本轮迭代的目标是找到一个回归树模型的弱学习器$h_t(x)$，让本轮的损失$L(y,f_t(x))=L(y,f_{t-1}(x)+h_t(x))$最小。也就是说，本轮迭代找到的决策树，要让样本的损失函数尽量变得更小。</p>
+<p>我们利用损失函数$L(y_i,f(x_i))$的负梯度来拟合本轮损失函数的近似值，进而拟合一个CART回归树。其中第t轮的第i个样本的损失函数的负梯度表示为<br>$$<br>r_{ti}=-\left[\frac{\partial L(y_i,f(x_i))}{\partial f(x_i)} \right]<em>{f(x)=f</em>{t-1}(x)}<br>$$<br>利用$(x_i,r_{ti})i=1,2,3,…,m$，我们可以拟合一棵CART回归树，得到第t棵回归树，其对应的叶节点区域为$R_{tj},j=1,2,3,…,J$，其中$J$为叶子节点的个数。</p>
+<p>针对每一个叶子节点中的样本，我们求出使损失函数最小，也就是拟合叶子节点最好的输出值$c_{tj}$。其中决策树中叶节点值已经生成一遍，此步目的是稍加改变决策树中叶节点值，希望拟合的误差越来越小。<br>$$<br>c_{tj}=\underset{c}{\underbrace{\arg\min}} \sum_{x_i \in R_{tj}}L(y_i,f_{t-1}(x_i)+c)<br>$$<br>这样我们便得到本轮的决策树拟合函数<br>$$<br>h_t(x)=\sum <em>{j=1} ^{J} c</em>{tj},I(x \in R_{tj})<br>$$<br>从而本轮最终得到的强学习器表达式如下<br>$$<br>f_t(x)=f_{t-1}(x)+\sum_{j=1}^{J}c_{tj},I(x\in R_{tj})<br>$$<br>通过损失函数的负梯度拟合，我们找到一种通用的拟合损失函数的方法，这样无论是分类问题还是回归问题，我们通过其损失函数的负梯度拟合，就可以用GBDT来解决我们的分类回归问题。</p>
+<h3 id="2-GBDT回归算法"><a href="#2-GBDT回归算法" class="headerlink" title="2.GBDT回归算法"></a>2.GBDT回归算法</h3><p>通过上述GBDT负梯度拟合我们来总结下GBDT的回归算法，为什么没有加上分类算法是因为分类算法的输出是不连续的类别值，需要一些处理才能使用负梯度，我们将在下一节详细介绍GBDT分类算法。</p>
+<p>假设训练集样本$T={ (x,y_1),(x,y_2),…,(x,y_m)}$，最大迭代次数为$T$，损失函数$L$，输出是强学习器$f(x)$。回归算法过程如下所示</p>
+<ul>
+<li>初始化弱学习器，c的均值可设置为样本y的均值。</li>
+</ul>
+<p>$$<br>f_0(x)=\underset{c}{\underbrace{\arg\min}} \sum_{i=1}^{m}L(y_i,c)<br>$$</p>
+<ul>
+<li><p>对迭代次数$t=1,2,3,…,T$有</p>
+<ul>
+<li>对样本$i=1,2,3,…,m$，计算负梯度</li>
+</ul>
+<p>$$<br>r_{ti}=-\left[\frac{\partial L(y_i,f(x_i))}{\partial f(x_i)} \right]<em>{f(x)=f</em>{t-1}(x)}<br>$$</p>
+<ul>
+<li>利用$(x_i,r_{ti})i=1,2,3,…,m$，拟合一棵CART回归树，得到第t棵回归树，其对应的叶子节点区域为$R_{tj},j=1,2,3,…,J$。其中$J$为回归树$t$的叶子节点个数。</li>
+<li>对叶子区域$j=1,2,3,…,J$，计算最佳拟合值</li>
+</ul>
+<p>$$<br>c_{tj}=\underset{c}{\underbrace{\arg\min}} \sum_{x_i \in R_{tj}}L(y_i,f_{t-1}(x_i)+c)<br>$$</p>
+<ul>
+<li>更新强学习器</li>
+</ul>
+<p>$$<br>f_t(x)=f_{t-1}(x)+\sum_{j=1}^{J}c_{tj},I(x\in R_{tj})<br>$$</p>
+</li>
+<li><p>得到强学习器$f(x)$表达式<br>$$<br>f(x)=f_T(x)=f_0(x)+\sum_{t=1}^{T}\sum_{j=1}^{J}c_{tj},I(x\in R_{tj})<br>$$</p>
+</li>
+</ul>
+<h3 id="3-GBDT分类算法"><a href="#3-GBDT分类算法" class="headerlink" title="3.GBDT分类算法"></a>3.GBDT分类算法</h3><p>GBDT分类算法在思想上和回归算法没有区别，但是由于样本输出不是连续的值，而是离散的类别，导致我们无法直接从输出类别去拟合类别输出的误差。为解决此问题，我们尝试用类似于逻辑回归的对数似然损失函数的方法,也就是说我们用的是类别的预测概率值和真实概率值来拟合损失函数。对于对数似然损失函数，我们有二元分类和多元分类的区别。</p>
+<h4 id="3-1二元GBDT分类算法"><a href="#3-1二元GBDT分类算法" class="headerlink" title="3.1二元GBDT分类算法"></a>3.1二元GBDT分类算法</h4><p>对于二元GBDT，如果用类似于逻辑回归的对数似然损失函数，则损失函数表示为<br>$$<br>L(y,f(x))=log(1+exp(-yf(x)))<br>$$<br>其中$y \in { -1,1}$。则此时的负梯度误差为<br>$$<br>r_{ti}=-\left[\frac{\partial L(y_i,f(x_i))}{\partial f(x_i)} \right]<em>{f(x)=f</em>{t-1}(x)}=\frac{y_i}{1+exp(y_if(x_i))}<br>$$<br>对于生成的决策树，我们各个叶子节点的最佳残差拟合值为<br>$$<br>c_{tj}=\underset{c}{\underbrace{\arg\min}} \sum _{x_i\in R_{tj}}log(1+exp(-y_i(f_{t-1}(x_i)+c)))<br>$$<br>由于上式比较难优化，我们一般使用近似值代替<br>$$<br>c_{tj}=\frac{\sum _{x_i\in R_{tj}}r_{ti}}{\sum _{x_i \in R_{tj}}|r_{ti}|(1-|r_{ti}|)}<br>$$<br>除了负梯度计算和叶子节点的最佳残差拟合的线性搜索外，二元GBDT分类和GBDT回归算法过程相同。</p>
+<h4 id="3-2多元GBDT分类算法"><a href="#3-2多元GBDT分类算法" class="headerlink" title="3.2多元GBDT分类算法"></a>3.2多元GBDT分类算法</h4><p>多元GBDT要比二元GBDT复杂一些，对应的是多元逻辑回归和二元逻辑回归的复杂度差别。假如类别数为K，则我们的对数似然函数为<br>$$<br>L(y,f(x))=-\sum_{k=1}^{K}y_k log(p_k(x))<br>$$<br>其中如果样本输出类别为k，则$y_k=1$。第k类的概率$p_k(x)$的表达式为<br>$$<br>p_k(x)=\frac {exp(f_k(x))}{\sum _{l=1}^{K}exp(f_l(x))}<br>$$<br>集合上两式，我们可以计算出第t轮的第i个样本对应类别l的负梯度误差为<br>$$<br>r_{til}=-\left[\frac{\partial L(y_i,f(x_i))}{\partial f(x_i)} \right]_{f_k(x)=f_{t-1,l}(x)}=y_{il}-p_{t-1,l}(x_i)<br>$$<br>其实这里的误差就是样本i对应类别l的真实概率和t-1轮预测概率的差值。对于生成的决策树，我们各个叶子节点的最佳残差拟合值为<br>$$<br>c_{tjl}=\underset{cjl}{\underbrace{\arg\min}} \sum_{i=1}^{m} \sum_{k=1}^{K}L(y_k,f_{t-1,l}(x))+\sum <em>{j=1}^{J}c</em>{jl},I(x_i\in R_{tj})<br>$$<br>由于上式比较难优化，我们用近似值代替<br>$$<br>c_{tjl}=\frac{K-1}{K}=\frac{\sum_{x_i\in R_{tjl}}r_{til}}{\sum _{x_i\in R_{til}}|r_{til}|(1-|r_{til}|)}<br>$$<br>除了负梯度计算和叶子节点的最佳残差拟合的线性搜索，多元GBDT分类和二元GBDT分类以及GBDT回归算法过程相同。</p>
+<h3 id="4-GBDT损失函数"><a href="#4-GBDT损失函数" class="headerlink" title="4.GBDT损失函数"></a>4.GBDT损失函数</h3><p>对于<strong>回归算法</strong>，常用损失函数有均方差、绝对损失、Huber损失和分位数损失。</p>
+<ul>
+<li>均方差损失。</li>
+</ul>
+<p>$$<br>L(y,f(x))=(y-f(x))^2<br>$$</p>
+<ul>
+<li>绝对损失和对应的负梯度误差。</li>
+</ul>
+<p>$$<br>L(y,f(x))=|y-f(x)|<br>$$</p>
+<p>$$<br>sign(y_i-f(x_i))<br>$$</p>
+<ul>
+<li>Huber损失是均方差和绝对损失的折衷产物，对于远离中心的异常点，采用绝对损失，而中心点附近采用均方差。这个界限一般用分位数点来度量，损失函数和对应的负梯度误差如下</li>
+</ul>
+<p>$$<br>L(y,f(x))=\left{\begin{matrix}<br>\frac{1}{2}(y-f(x))^2 &amp;|y-f(x)|\le \delta \<br> \delta (|y-f(x)|-\frac{\delta}{2})&amp;|y-f(x)|&gt; \delta<br>\end{matrix}\right.<br>$$</p>
+<p>$$<br>r(y_i,f(x_i))=\left{\begin{matrix}<br>y_i-f(x_i) &amp;|y_i-f(x_i)|\le \delta \<br>\delta sign(y_i-f(x_i))&amp;|y_i-f(x_i)|&gt; \delta<br>\end{matrix}\right.<br>$$</p>
+<ul>
+<li>分位数损失和负梯度误差如下所示。其中其中$\theta$为分位数，需要我们在回归前指定。</li>
+</ul>
+<p>$$<br>L(y,f(x))=\sum _{y\ge f(x)} \theta|y-f(x)|+\sum _{y&lt;f(x)}(1-\theta)|y-f(x)|<br>$$</p>
+<p>$$<br>r(y_i,f(x_i))=\left{\begin{matrix}<br>\theta &amp;y_i\ge f(x_i) \<br>\theta -1 &amp;y_i&lt;f(x_i)<br>\end{matrix}\right.<br>$$</p>
+<p>对于Huber损失和分位数损失，主要用于健壮回归，也就是减少异常点对损失函数的影响。</p>
+<p>对于分类算法，常用损失函数有指数损失函数和对数损失函数。</p>
+<ul>
+<li>对数损失函数，分为二元分类和多元分类两种，我们已在上述3.1和3.2节进行介绍。</li>
+</ul>
+<ul>
+<li>指数损失函数<br>$$<br>L(y,f(x))=exp(-yf(x))<br>$$</li>
+</ul>
+<h3 id="5-GBDT正则化"><a href="#5-GBDT正则化" class="headerlink" title="5.GBDT正则化"></a>5.GBDT正则化</h3><p>针对GBDT正则化，我们通过子采样比例方法和定义步长v方法来防止过拟合。</p>
+<ul>
+<li><strong>子采样比例:</strong>通过不放回抽样的子采样比例（subsample），取值为(0,1]。如果取值为1，则全部样本都使用。如果取值小于1，利用部分样本去做GBDT的决策树拟合。选择小于1的比例可以减少方差，防止过拟合，但是会增加样本拟合的偏差。因此取值不能太低，推荐在[0.5, 0.8]之间。</li>
+</ul>
+<ul>
+<li><strong>定义步长v:</strong>针对弱学习器的迭代，我们定义步长v，取值为(0,1]。对于同样的训练集学习效果，较小的v意味着我们需要更多的弱学习器的迭代次数。通常我们用步长和迭代最大次数一起来决定算法的拟合效果。<br>$$<br>f_k(x)=f_{k-1}(x)+vh_k(x)<br>$$</li>
+</ul>
+<h3 id="6-Sklearn实现GBDT算法"><a href="#6-Sklearn实现GBDT算法" class="headerlink" title="6.Sklearn实现GBDT算法"></a>6.Sklearn实现GBDT算法</h3><p>我们经常需要通过改变参数来让模型达到更好的分类或回归结果，具体参数设置可参考<a href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html" target="_blank" rel="noopener">sklearn官方教程</a>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> GradientBoostingRegressor</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> make_regression</span><br><span class="line"></span><br><span class="line">X,y=make_regression(n_samples=<span class="number">1000</span>,n_features=<span class="number">4</span>,</span><br><span class="line">                    n_informative=<span class="number">2</span>,random_state=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">print(X[<span class="number">0</span>:<span class="number">10</span>],y[<span class="number">0</span>:<span class="number">10</span>])</span><br><span class="line"><span class="comment">### X Number</span></span><br><span class="line"><span class="comment"># [[-0.34323505  0.73129362  0.07077408 -0.78422138]</span></span><br><span class="line"><span class="comment">#  [-0.02852887 -0.30937759 -0.32473027  0.2847906 ]</span></span><br><span class="line"><span class="comment">#  [ 2.00921856  0.42218461 -0.48981473 -0.85152258]</span></span><br><span class="line"><span class="comment">#  [ 0.15081821  0.54565732 -0.25547079 -0.35687153]</span></span><br><span class="line"><span class="comment">#  [-0.97240289  1.49613964  1.34622107 -1.49026539]</span></span><br><span class="line"><span class="comment">#  [ 1.00610171  1.42889242  0.02479266 -0.69043143]</span></span><br><span class="line"><span class="comment">#  [ 0.77083696  0.96234174  0.24316822  0.45730965]</span></span><br><span class="line"><span class="comment">#  [ 0.8717585  -0.6374392   0.37450029  0.74681383]</span></span><br><span class="line"><span class="comment">#  [ 0.69178453 -0.23550331  0.56438821  2.01124319]</span></span><br><span class="line"><span class="comment">#  [ 0.52904524  0.14844958  0.42262862  0.47689837]]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### Y Number</span></span><br><span class="line"><span class="comment"># [ -12.63291254    2.12821377  -34.59433043    6.2021494   -18.03000376</span></span><br><span class="line"><span class="comment">#    32.9524098    85.33550027   15.3410771   124.47105816   40.98334709]</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">clf=GradientBoostingRegressor(n_estimators=<span class="number">150</span>,learning_rate=<span class="number">0.6</span>,</span><br><span class="line">                              max_depth=<span class="number">15</span>,random_state=<span class="number">0</span>,loss=<span class="string">'ls'</span>)</span><br><span class="line">clf.fit(X,y)</span><br><span class="line"></span><br><span class="line">print(clf.predict([[<span class="number">1</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">1</span>]]))</span><br><span class="line"><span class="comment"># [ 25.62761791]</span></span><br><span class="line">print(clf.score(X,y))</span><br><span class="line"><span class="comment"># 0.999999999987</span></span><br></pre></td></tr></table></figure>
+<h3 id="7-GBDT优缺点"><a href="#7-GBDT优缺点" class="headerlink" title="7.GBDT优缺点"></a>7.GBDT优缺点</h3><h4 id="7-1优点"><a href="#7-1优点" class="headerlink" title="7.1优点"></a>7.1优点</h4><ul>
+<li>相对少的调参时间情况下可以得到较高的准确率。</li>
+</ul>
+<ul>
+<li>可灵活处理各种类型数据，包括连续值和离散值，使用范围广。</li>
+<li>可使用一些健壮的损失函数，对异常值的鲁棒性较强，比如Huber损失函数。</li>
+</ul>
+<h4 id="7-2缺点"><a href="#7-2缺点" class="headerlink" title="7.2缺点"></a>7.2缺点</h4><ul>
+<li>弱学习器之间存在依赖关系，难以并行训练数据。</li>
+</ul>
+<h3 id="8-推广"><a href="#8-推广" class="headerlink" title="8.推广"></a>8.推广</h3><p>更多内容请关注公众号<strong>谓之小一</strong>，若有疑问可在公众号后台提问，随时回答，欢迎关注，内容转载请注明出处。</p>
+<p><img src="http://p66yyzg4i.bkt.clouddn.com/%E6%8E%A8%E5%B9%BF.png" alt="推广"></p>
+<p>文章参考</p>
+<ul>
+<li><a href="https://www.cnblogs.com/pinard/p/6140514.html#!comments" target="_blank" rel="noopener">刘建平Pinard_梯度提升树(GBDT)原理小结</a></li>
+<li><a href="https://blog.csdn.net/taoqick/article/details/72822727" target="_blank" rel="noopener">taotick_GBDT梯度提升决策树</a></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/30/机器学习之随机森林/" rel="next" title="机器学习之随机森林">
+                <i class="fa fa-chevron-left"></i> 机器学习之随机森林
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/03/机器学习之自适应增强-Adaboost/" rel="prev" title="机器学习之自适应增强(Adaboost)">
+                机器学习之自适应增强(Adaboost) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNDgwNS8xMTM0Mg=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="XiaoYi" />
+            
+              <p class="site-author-name" itemprop="name">XiaoYi</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/weizhixiaoyi" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/weizhixiaoyi/activities" target="_blank" title="ZhiHu" rel="external nofollow"><i class="fa fa-fw fa-book"></i>ZhiHu</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://p66yyzg4i.bkt.clouddn.com/wechat.png" target="_blank" title="WeChat" rel="external nofollow"><i class="fa fa-fw fa-weixin"></i>WeChat</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhenhai.gl@gmail.com" target="_blank" title="E-Mail" rel="external nofollow"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-GBDT算法简介"><span class="nav-text">1.GBDT算法简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1集成学习之Boosting"><span class="nav-text">1.1集成学习之Boosting</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-Boosting-Decision-Tree"><span class="nav-text">1.2 Boosting Decision Tree</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3GBDT负梯度拟合"><span class="nav-text">1.3GBDT负梯度拟合</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-GBDT回归算法"><span class="nav-text">2.GBDT回归算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-GBDT分类算法"><span class="nav-text">3.GBDT分类算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1二元GBDT分类算法"><span class="nav-text">3.1二元GBDT分类算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2多元GBDT分类算法"><span class="nav-text">3.2多元GBDT分类算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-GBDT损失函数"><span class="nav-text">4.GBDT损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-GBDT正则化"><span class="nav-text">5.GBDT正则化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Sklearn实现GBDT算法"><span class="nav-text">6.Sklearn实现GBDT算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-GBDT优缺点"><span class="nav-text">7.GBDT优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1优点"><span class="nav-text">7.1优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2缺点"><span class="nav-text">7.2缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-推广"><span class="nav-text">8.推广</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XiaoYi</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数"></span>
+  
+
+  
+</div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("Sj2lCA09ErubMSsa2v9oFU9Y-gzGzoHsz", "qJejurdHKM06N75OQedX4SDK");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.get('time'));
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

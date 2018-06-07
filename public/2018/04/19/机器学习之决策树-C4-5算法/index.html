@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="E1Oy09IV-Rsypa8wpY-yrplcH8RMIHLCzj3m91nX1Eo" />
+
+
+
+  <meta name="msvalidate.01" content="9219CFDFC7384B4F0A08B73CF8790554" />
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="pvvBAkBQvG" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1.决策树简介我们已有如下所示数据集，特征属性包含天气、温度、湿度、风速，然后根据这些数据去分类或预测能否去打高尔夫球，针对此类问题你会怎么解决呢。    序号 天气 温度 湿度 风速 高尔夫     1 晴 炎热 高 弱 进行   2 晴 炎热 高 强 进行   3 阴 炎热 高 弱 取消   4 雨 适中 高 弱 取消   5 雨 寒冷 正常 弱 取消   6 雨 寒冷 正常 强 进行   7">
+<meta name="keywords" content="机器学习,算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习之决策树(C4.5算法)">
+<meta property="og:url" content="https://weizhixiaoyi.com/2018/04/19/机器学习之决策树-C4-5算法/index.html">
+<meta property="og:site_name" content="谓之小一">
+<meta property="og:description" content="1.决策树简介我们已有如下所示数据集，特征属性包含天气、温度、湿度、风速，然后根据这些数据去分类或预测能否去打高尔夫球，针对此类问题你会怎么解决呢。    序号 天气 温度 湿度 风速 高尔夫     1 晴 炎热 高 弱 进行   2 晴 炎热 高 强 进行   3 阴 炎热 高 弱 取消   4 雨 适中 高 弱 取消   5 雨 寒冷 正常 弱 取消   6 雨 寒冷 正常 强 进行   7">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/04/19/机器学习之决策树-C4-5算法/机器学习之决策树-C4-5算法/机器学习之决策树图片01.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/04/19/机器学习之决策树-C4-5算法/机器学习之决策树-C4-5算法/机器学习之决策树图片02.png">
+<meta property="og:image" content="http://p66yyzg4i.bkt.clouddn.com/%E6%8E%A8%E5%B9%BF.png">
+<meta property="og:updated_time" content="2018-04-20T10:10:03.597Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习之决策树(C4.5算法)">
+<meta name="twitter:description" content="1.决策树简介我们已有如下所示数据集，特征属性包含天气、温度、湿度、风速，然后根据这些数据去分类或预测能否去打高尔夫球，针对此类问题你会怎么解决呢。    序号 天气 温度 湿度 风速 高尔夫     1 晴 炎热 高 弱 进行   2 晴 炎热 高 强 进行   3 阴 炎热 高 弱 取消   4 雨 适中 高 弱 取消   5 雨 寒冷 正常 弱 取消   6 雨 寒冷 正常 强 进行   7">
+<meta name="twitter:image" content="https://weizhixiaoyi.com/2018/04/19/机器学习之决策树-C4-5算法/机器学习之决策树-C4-5算法/机器学习之决策树图片01.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://weizhixiaoyi.com/2018/04/19/机器学习之决策树-C4-5算法/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>机器学习之决策树(C4.5算法) | 谓之小一</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b54e835b3551fd0696954b3aedf5d645";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">谓之小一</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">永远相信·美好的事情即将发生</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-favorite">
+    <a href="/favorite/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />喜欢</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/04/19/机器学习之决策树-C4-5算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XiaoYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="谓之小一">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">机器学习之决策树(C4.5算法)
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-04-19 11:03:26" itemprop="dateCreated datePublished" datetime="2018-04-19T11:03:26+08:00">2018-04-19</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/04/19/机器学习之决策树-C4-5算法/" class="leancloud_visitors" data-flag-title="机器学习之决策树(C4.5算法)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数"></span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长"></span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-决策树简介"><a href="#1-决策树简介" class="headerlink" title="1.决策树简介"></a>1.决策树简介</h3><p>我们已有如下所示数据集，特征属性包含天气、温度、湿度、风速，然后根据这些数据去分类或预测能否去打高尔夫球，针对此类问题你会怎么解决呢。</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th style="text-align:center">天气</th>
+<th style="text-align:center">温度</th>
+<th style="text-align:center">湿度</th>
+<th style="text-align:center">风速</th>
+<th style="text-align:center">高尔夫</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td style="text-align:center">晴</td>
+<td style="text-align:center">炎热</td>
+<td style="text-align:center">高</td>
+<td style="text-align:center">弱</td>
+<td style="text-align:center">进行</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align:center">晴</td>
+<td style="text-align:center">炎热</td>
+<td style="text-align:center">高</td>
+<td style="text-align:center">强</td>
+<td style="text-align:center">进行</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align:center">阴</td>
+<td style="text-align:center">炎热</td>
+<td style="text-align:center">高</td>
+<td style="text-align:center">弱</td>
+<td style="text-align:center">取消</td>
+</tr>
+<tr>
+<td>4</td>
+<td style="text-align:center">雨</td>
+<td style="text-align:center">适中</td>
+<td style="text-align:center">高</td>
+<td style="text-align:center">弱</td>
+<td style="text-align:center">取消</td>
+</tr>
+<tr>
+<td>5</td>
+<td style="text-align:center">雨</td>
+<td style="text-align:center">寒冷</td>
+<td style="text-align:center">正常</td>
+<td style="text-align:center">弱</td>
+<td style="text-align:center">取消</td>
+</tr>
+<tr>
+<td>6</td>
+<td style="text-align:center">雨</td>
+<td style="text-align:center">寒冷</td>
+<td style="text-align:center">正常</td>
+<td style="text-align:center">强</td>
+<td style="text-align:center">进行</td>
+</tr>
+<tr>
+<td>7</td>
+<td style="text-align:center">阴</td>
+<td style="text-align:center">寒冷</td>
+<td style="text-align:center">正常</td>
+<td style="text-align:center">强</td>
+<td style="text-align:center">进行</td>
+</tr>
+<tr>
+<td>8</td>
+<td style="text-align:center">晴</td>
+<td style="text-align:center">适中</td>
+<td style="text-align:center">高</td>
+<td style="text-align:center">弱</td>
+<td style="text-align:center">进行</td>
+</tr>
+<tr>
+<td>9</td>
+<td style="text-align:center">晴</td>
+<td style="text-align:center">寒冷</td>
+<td style="text-align:center">正常</td>
+<td style="text-align:center">弱</td>
+<td style="text-align:center">进行</td>
+</tr>
+<tr>
+<td>10</td>
+<td style="text-align:center">雨</td>
+<td style="text-align:center">适中</td>
+<td style="text-align:center">正常</td>
+<td style="text-align:center">弱</td>
+<td style="text-align:center">进行</td>
+</tr>
+<tr>
+<td>11</td>
+<td style="text-align:center">晴</td>
+<td style="text-align:center">适中</td>
+<td style="text-align:center">正常</td>
+<td style="text-align:center">强</td>
+<td style="text-align:center">进行</td>
+</tr>
+<tr>
+<td>12</td>
+<td style="text-align:center">阴</td>
+<td style="text-align:center">适中</td>
+<td style="text-align:center">高</td>
+<td style="text-align:center">强</td>
+<td style="text-align:center">进行</td>
+</tr>
+<tr>
+<td>13</td>
+<td style="text-align:center">阴</td>
+<td style="text-align:center">炎热</td>
+<td style="text-align:center">正常</td>
+<td style="text-align:center">弱</td>
+<td style="text-align:center">取消</td>
+</tr>
+<tr>
+<td>14</td>
+<td style="text-align:center">雨</td>
+<td style="text-align:center">适中</td>
+<td style="text-align:center">高</td>
+<td style="text-align:center">强</td>
+<td style="text-align:center">取消</td>
+</tr>
+</tbody>
+</table>
+<p>正当你苦思冥想之时，天空之中突然飘来一张决策图，发现这图好像一张倒着的树啊，于是你命名为决策树。你发现可直接根据决策树得到相应结果，高兴的像个300斤的孩子。但下次再面临这样的问题时，还能够那么好运嘛？于是你陷入苦苦思考之中，怎样才能得到分类决策树呢。</p>
+<p><img src="机器学习之决策树-C4-5算法/机器学习之决策树图片01.png" alt="机器学习之决策树图片01"></p>
+<h3 id="2-C4-5算法"><a href="#2-C4-5算法" class="headerlink" title="2.C4.5算法"></a>2.C4.5算法</h3><p><strong>上古之神赐予你智慧</strong>：C4.5是一系列用在机器学习和数据挖掘中分类问题的算法，它的目标是监督学习。即给定一个数据集，其中的每一个元组都能用一组属性值描述，每一个元组属于一个互斥的类别中的某一类。C4.5的目标是通过学习，找到一个从属性值到类别的映射关系，并且这个映射能够用于对新的类别未知的实体进行分类。</p>
+<p>C4.5是在ID3的基础上提出的。ID3算法用来构造决策树。决策树是一种类似流程图的树结构，其中每个内部节点（非树叶节点）表示在一个属性上的测试，每个分枝代表一个测试输出，而每个树叶节点存放一个类标号。一旦建立好决策树，对于一个未给定类标号的元组，跟踪一条有根节点到叶节点的路径，该叶节点就存放着该元组的预测。上述数据集有4个属性，属性集合A={天气、温度、湿度、风速}，类别集合D={进行、取消}。我们先做一些假设</p>
+<ul>
+<li>类标记元组训练集记为$D$，$|D|$表示元组个数，例如上述数据$|D|=14$。</li>
+<li>类标号记为$m$，例如上述数据$m=2$，分别为进行、取消。</li>
+<li>属性集合记为为$C$，例如$C_1$为天气情况，$C_iD$是$D$中$C_i$类元组的集合，$|C_iD|$为$C_iD$中元组个数。</li>
+<li>属性标号记为$n$，例如上述数据$n=2$，分别为天气、温度、湿度、风速。</li>
+<li>$p_i$表示类别$i$的概率，比如$p(进行)=\frac{9}{14}$。</li>
+</ul>
+<h4 id="2-1信息增益"><a href="#2-1信息增益" class="headerlink" title="2.1信息增益"></a>2.1信息增益</h4><p>信息增益实际上是ID3算法中用来进行属性选择度量的，具有较高信息增益的属性来作为节点N的分裂属性。该属性使结果划分中的元组分类所需信息量最小。</p>
+<p><strong>计算类别信息熵</strong>:类别信息熵表示的是所有样本中各种类别出现的不确定之和。根据熵的概念，熵越大，不确定性就越大，把事情理解清楚所需要的信息量就越多。对D中的元组分类所需的期望信息表达式如下，同时计算出上述数据的期望信息<br>$$<br>Info(D)=-\sum_{i=1}^{m}p_ilog_2(p_i)<br>$$</p>
+<p>$$<br>Info(D)=-\frac{9}{14}log_2\frac{9}{14}-\frac{5}{14}log_2\frac{5}{14}=0.940<br>$$</p>
+<p><strong>计算每个属性的信息熵</strong>:每个属性的信息熵相当于条件熵。表示的是在某种属性的条件下，各种类别出现的不确定之和。属性的信息熵越大，表示这个属性中拥有的样本类别越乱。现在假定按照属性集合C划分D中的元组，且属性Ci将D划分成v个不同的类。在该划分之后，为了得到准确的分类还需要下式进行度量。<br>$$<br>Info_A(D)=\sum_{j=1}^{v}\frac{|D_j|}{|D|}*Info(D_j)<br>$$</p>
+<p>$$<br>Info(天气)=\frac{5}{14}<em>[-\frac{2}{5}log_2\frac{2}{5}-\frac{3}{5}log_2\frac{3}{5}]+\frac{4}{14}</em>[-\frac{4}{4}log_2\frac{4}{4}]+\frac{5}{14}*[-\frac{3}{5}log_2\frac{3}{5}-\frac{2}{5}log_2\frac{2}{5}]=0.694<br>$$</p>
+<p>$$<br>Info(温度)=0.911,Info(湿度)=0.739,Info(风速)=0.892<br>$$</p>
+<p><strong>计算信息增益</strong>:信息增益=熵-条件熵，在这里表示为类别信息熵-属性信息熵。它表示的是信息不确定性减少的程度。如果一个属性的信息增益越大，就表示用这个属性进行样本划分可以更好的减少划分后样本的不确定性，选择该属性就可以更快更好的完成我们的分类目标。<br>$$<br>Gain(A)=Info(D)-Info_A(D)<br>$$</p>
+<p>$$<br>Gain(天气)=Info(D)-Info(天气)=0.940-0.694=0.246<br>$$</p>
+<p>$$<br>Gain(温度)=0.029,Gain(湿度)=0.15,Gain(风速)=0.048<br>$$</p>
+<p>但是我们假设这种情况，每个属性中每个类别都只有一个样本，那这样属性信息熵就等于0，根据信息增益就无法选择出有效分类特征，所以C4.5算法选择使用信息增益率对ID3进行改进。</p>
+<h4 id="2-2信息增益率"><a href="#2-2信息增益率" class="headerlink" title="2.2信息增益率"></a>2.2信息增益率</h4><p><strong>计算属性分裂信息度量</strong>:用分裂信息度量来考虑某种属性进行分裂时分支的数量信息和尺寸信息，我们把这些信息称为属性的内在信息。信息增益率用<strong>信息增益 / 内在信息</strong>表示，信息增益率会导致属性的重要性随着内在信息的增大而减小<strong>（也就是说，如果这个属性本身不确定性就很大，那我就越不倾向于选取它）</strong>，这样算是对单纯用信息增益有所补偿。信息增益率定义如下<br>$$<br>SplitInfo_A(D)=-\sum_{j=1}^{v}\frac{|D_j|}{|D|}*log_2\frac{|D_j|}{|D|}<br>$$</p>
+<p>$$<br>SplitInfo(天气)=-\frac{5}{14}<em>log_2\frac{5}{14}-\frac{5}{14}</em>log_2\frac{5}{14}-\frac{4}{14}*log_2\frac{4}{14}=1.577<br>$$</p>
+<p>$$<br>SplitInfo(温度)=1.556,SplitInfo(湿度)=1.0,SplitInfo(风速)=0.985<br>$$</p>
+<p>$$<br>GainRatio(A)=\frac{Gain(A)}{SplitInfo(A)}<br>$$</p>
+<p>$$<br>GainRatio(天气)=\frac{Gain(天气)}{SplitInfo(天气)}=\frac{0.246}{1.577}=0.155<br>$$</p>
+<p>$$<br>GainRatio(温度)=0.0186,GainRatio(湿度)=0.151,GainRatio(风速)=0.048<br>$$</p>
+<p>天气的信息增益率最高，选择天气为分裂属性。分裂之后，天气是“阴”的条件下无其他分裂点，所以把它定义为叶子节点，选择较乱的结点继续分裂。重复上述过程，直到算法完成，我们便可得到决策树。</p>
+<h3 id="3-树剪枝"><a href="#3-树剪枝" class="headerlink" title="3.树剪枝"></a>3.树剪枝</h3><p>决策树创建过程中，由于数据中的噪声和离群点，许多分支反应的是训练数据中的异常。剪枝方法是用来处理这种过分拟合的问题，通常剪枝方法都是使用统计度量，减去最不可靠的分支。减枝方法分为先减枝和后剪枝。</p>
+<h4 id="3-1先剪枝"><a href="#3-1先剪枝" class="headerlink" title="3.1先剪枝"></a>3.1先剪枝</h4><p>先剪枝方法通过提前停止树的构造(比如决定在某个节点不再分裂或划分训练元组的自己)。但先剪枝有个视野效果缺点问题，也就是说在相同的标准下，也许当前扩展不能满足要求，但更进一步又能满足要求，这样会过早停止树的生长。先剪枝可通过以下方法</p>
+<ul>
+<li>当决策树达到一定的高度就停止决策树的生长。</li>
+<li>到达节点的实例个数小于某个阈值的时候也可以停止树的生长，不足之处是不能处理那些数量比较小的特殊情况。</li>
+<li>计算每次扩展对系统性能的增益，如果小于某个阈值就可以停止树的生长。</li>
+</ul>
+<h4 id="3-2后剪枝"><a href="#3-2后剪枝" class="headerlink" title="3.2后剪枝"></a>3.2后剪枝</h4><p>后剪枝是由完全生长的树剪去子树而形成，通过删除节点的分支并用树叶来替换它，树叶一般用子树中最频繁的类别来标记。C4.5采用悲观剪枝法，它使用训练集生成决策树，然后对生成的决策树进行剪枝，通过对比剪枝前后分类错误率来验证是否进行剪枝。</p>
+<p>把一颗子树的分类(具有多个叶子结点)的分类用一个叶子节点替换的话，在训练集上的误判率肯定是上升的，但是在新数据上则不一定，于是我们需要把子树的误判计算加上一个经验性的惩罚因子。对于一颗叶子节点，它覆盖了N个样本，其中有E个错误，那么该叶子节点的错误率为(E+0.5)/N。这个0.5就是惩罚因子，那么一颗子树，他有L个叶子节点，那么该子树的误判率为<br>$$<br>\frac{\sum (E_i+0.5*L)}{\sum N_i}<br>$$<br>这样的话我们可以看到一颗子树虽然有多个子节点，但由于加上惩罚因子，所以子树的误判率未必占到便宜。剪枝后内部节点变成叶子节点，其误判个数J也需要加上一个惩罚因子，变成J+0.5。那么子树是否可以被剪枝就取决于剪枝后的错误J+0.5的标准范围内。对于样本的误差率e，我们可以根据经验把它估计成各种各样的分布模型，比如二项式分布或正态分布。</p>
+<p>假如决策树正确分类的样本值为1，错误分类的样本值为0，该树错误分类的概率(误判率)为e(<strong>e为分布的固有属性，可以统计出来</strong>)，那么树的误判次数就是伯努利分布，我们可以估计出概述的误差次数均值和标准值。<br>$$<br>E(subtree_err_count)=N*e<br>$$</p>
+<p>$$<br>var(subtree_err_count)=\sqrt{N<em>e</em>(1-e)}<br>$$</p>
+<p>把子树替换成叶子节点后，该叶子的误判次数也是伯努利分布，其概率误判率为(E+0.5)/N，因此叶子节点的误判次数均值为<br>$$<br>E(leaf_err_count)=N*e<br>$$<br>使用训练数据时，子树总是比替换为一个叶节点后产生的误差小，但是使用校正后有误差计算方法却并非如此，当子树的误判个数减去标准差后大于对应叶节点的误判个数，就决定剪枝<br>$$<br>E(subtree_err_count)-var(subtree_err_count)&gt;E(leaf_err_count)<br>$$<br>上述条件就是剪枝的标准。当然并不一定非要减去标准差，可以给定任意的置信区间，我们设定一定的显著性因子，就可以估算出误判次数的上下界。</p>
+<h3 id="4-Sklearn实现决策树"><a href="#4-Sklearn实现决策树" class="headerlink" title="4.Sklearn实现决策树"></a>4.Sklearn实现决策树</h3><p>我们以sklearn中iris数据作为训练集，iris属性特征包括花萼长度、花萼宽度、花瓣长度、花瓣宽度，类别共三类，分别为Setosa、Versicolour、Virginca。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> tree</span><br><span class="line"></span><br><span class="line"><span class="comment">#引入数据</span></span><br><span class="line">iris=load_iris()</span><br><span class="line">X=iris.data</span><br><span class="line">y=iris.target</span><br><span class="line"></span><br><span class="line"><span class="comment">#训练数据和模型,采用ID3或C4.5训练</span></span><br><span class="line">clf=tree.DecisionTreeClassifier(criterion=<span class="string">'entropy'</span>)</span><br><span class="line">clf=clf.fit(X,y)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#引入graphviz模块用来导出图,结果图如下所示</span></span><br><span class="line"><span class="keyword">import</span> graphviz</span><br><span class="line">dot_data=tree.export_graphviz(clf,out_file=<span class="keyword">None</span>,</span><br><span class="line">                              feature_names=iris.feature_names,</span><br><span class="line">                              class_names=iris.target_names,</span><br><span class="line">                              filled=<span class="keyword">True</span>,rounded=<span class="keyword">True</span>,</span><br><span class="line">                              special_characters=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">graph=graphviz.Source(dot_data)</span><br><span class="line">graph.view()</span><br></pre></td></tr></table></figure>
+<p><img src="机器学习之决策树-C4-5算法/机器学习之决策树图片02.png" alt="机器学习之决策树图片02"></p>
+<h3 id="5-实际使用技巧"><a href="#5-实际使用技巧" class="headerlink" title="5.实际使用技巧"></a>5.实际使用技巧</h3><ul>
+<li>对于拥有大量特征的数据决策树会出现过拟合的现象。获得一个合适的样本比例和特征数量十分重要，因为在高维空间中只有少量的样本的树是十分容易过拟合的。</li>
+<li>训练之前平衡数据集，以防止决策树偏向于主导类。可以通过从每个类中抽取相等数量的样本来进行类平衡，或者优选地通过将每个类的样本权重 (<code>sample_weight</code>) 的和归一化为相同的值。</li>
+<li>考虑实现进行降维(PCA、ICA)，使决策树能够更好地找到具有分辨性的特征。</li>
+<li>通过 <code>export</code> 功能可以可视化您的决策树。使用 <code>max_depth=3</code>作为初始树深度，让决策树知道如何适应您的数据，然后再增加树的深度。</li>
+<li>填充树的样本数量会增加树的每个附加级别。使用 <code>max_depth</code> 来控制树的大小防止过拟合。</li>
+<li>通过使用 <code>min_samples_split</code> 和 <code>min_samples_leaf</code> 来控制叶节点上的样本数量。当这个值很小时意味着生成的决策树将会过拟合，然而当这个值很大时将会不利于决策树的对样本的学习。</li>
+</ul>
+<h3 id="6-推广"><a href="#6-推广" class="headerlink" title="6.推广"></a>6.推广</h3><p>更多内容请关注公众号’谓之小一’，若有疑问可在公众号后台提问，随时回答，欢迎关注，内容转载请注明出处。</p>
+<p><img src="http://p66yyzg4i.bkt.clouddn.com/%E6%8E%A8%E5%B9%BF.png" alt="推广"></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/15/Python之Sklearn使用教程/" rel="next" title="Python之Sklearn使用教程">
+                <i class="fa fa-chevron-left"></i> Python之Sklearn使用教程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/22/机器学习之分类与回归树-CART/" rel="prev" title="机器学习之分类与回归树(CART)">
+                机器学习之分类与回归树(CART) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNDgwNS8xMTM0Mg=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="XiaoYi" />
+            
+              <p class="site-author-name" itemprop="name">XiaoYi</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/weizhixiaoyi" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/weizhixiaoyi/activities" target="_blank" title="ZhiHu" rel="external nofollow"><i class="fa fa-fw fa-book"></i>ZhiHu</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://p66yyzg4i.bkt.clouddn.com/wechat.png" target="_blank" title="WeChat" rel="external nofollow"><i class="fa fa-fw fa-weixin"></i>WeChat</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhenhai.gl@gmail.com" target="_blank" title="E-Mail" rel="external nofollow"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-决策树简介"><span class="nav-text">1.决策树简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-C4-5算法"><span class="nav-text">2.C4.5算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1信息增益"><span class="nav-text">2.1信息增益</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2信息增益率"><span class="nav-text">2.2信息增益率</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-树剪枝"><span class="nav-text">3.树剪枝</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1先剪枝"><span class="nav-text">3.1先剪枝</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2后剪枝"><span class="nav-text">3.2后剪枝</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Sklearn实现决策树"><span class="nav-text">4.Sklearn实现决策树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-实际使用技巧"><span class="nav-text">5.实际使用技巧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-推广"><span class="nav-text">6.推广</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XiaoYi</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数"></span>
+  
+
+  
+</div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("Sj2lCA09ErubMSsa2v9oFU9Y-gzGzoHsz", "qJejurdHKM06N75OQedX4SDK");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.get('time'));
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
