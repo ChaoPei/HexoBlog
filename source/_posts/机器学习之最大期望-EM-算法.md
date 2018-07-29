@@ -131,10 +131,17 @@ $$
 $$
 \theta =\arg \max_{\theta} \sum _{i=1}^{m}logP(x^{(i)};\theta)
 $$
+
+
 如果我们得到的观察数据有未观察到的隐含数据$z=(z^{(1)},z^{(2)},z^{(3)},…,z^{(m)})$，此时我们极大化模型分布的对数似然函数如下
 $$
-\theta =\arg \max_{\theta} \sum _{i=1}^{m}logP(x^{(i)};\theta)=\arg \max_{\theta} \sum _{i=1}^{m}log\sum _{z^{(i)}}P(x^{(i)},z^{(i)};\theta)
+\theta =\arg \max_{\theta} \sum _{i=1}^{m}logP(x^{(i)};\theta)
 $$
+
+$$
+=\arg \max_{\theta} \sum _{i=1}^{m}log\sum _{z^{(i)}}P(x^{(i)},z^{(i)};\theta)
+$$
+
 上面方程是无法直接求出θ的，因此需要一些特殊技巧，在此我们引入**Jensen不等式**。
 
 > 设f是定义域为实数的函数，如果对于所有的实数X，f(X)的二次导数大于等于0，那么f是凸函数。相反，f(X)的二次导数小于0，那么f是凹函数。
@@ -144,8 +151,14 @@ $$
 我们再回到上述推导过程，得到如下方程式。
 $$
 \sum _{i=1}^{m}log\sum _{z^{(i)}}P(x^{(i)},z^{(i)};\theta) 
-\\=\sum _{i=1}^{m}log\sum _{z^{(i)}}Q_i(z^{(i)})\frac{P(x^{(i)},z^{(i)};\theta) }{Q_i(z^{(i)})}\ \ \ \ \ \ \ (1)
-\\ \ge \sum _{i=1}^{m}\sum _{z^{(i)}}Q_i(z^{(i)})log\frac{P(x^{(i)},z^{(i)};\theta) }{Q_i(z^{(i)})} \ \ \ \ \ \ \ (2)
+$$
+
+$$
+=\sum _{i=1}^{m}log\sum _{z^{(i)}}Q_i(z^{(i)})\frac{P(x^{(i)},z^{(i)};\theta) }{Q_i(z^{(i)})}\ \ \ \ \ \ \ (1)
+$$
+
+$$
+\ge \sum _{i=1}^{m}\sum _{z^{(i)}}Q_i(z^{(i)})log\frac{P(x^{(i)},z^{(i)};\theta) }{Q_i(z^{(i)})} \ \ \ \ \ \ \ (2)
 $$
 
 我们来解释下怎样得到的方程式(1)和方程式(2)，上面(1)式中引入一个未知的新的分布$Q_i(z^{(i)})$，第二式用到Jensen不等式。
@@ -177,8 +190,13 @@ $$
 因此得到下列方程，其中方程(3)利用到条件概率公式。
 $$
 Q_i(z^{(i)})=\frac{P(x^{(i)},z^{(i)};\theta)}{c}=\frac{P(x^{(i)},z^{(i)};\theta)}{\sum _z P(x^{(i)},z^{(i)};\theta)}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
-\\=\frac{P(x^{(i)},z^{(i)};\theta)}{ P(x^{(i)};\theta)}=P(z^{(i)}|x^{(i)};\theta)  \ \ \ \ \ \ \ \  \ \ \ \ \ \   (3)
 $$
+$$
+=\frac{P(x^{(i)},z^{(i)};\theta)}{ P(x^{(i)};\theta)}=P(z^{(i)}|x^{(i)};\theta)  \ \ \ \ \ \ \ \  \ \ \ \ \ \   (3)
+$$
+
+
+
 如果$Q_i(z^{(i)})=P(z^{(i)}|x^{(i)};\theta)$，那么第(2)式就是我们隐藏数据的对数似然的下界。如果我们能极大化方程式(2)的下界，则也在尝试极大化我们的方程式(1)。即我们需要最大化下式
 $$
 \arg \max _{\theta} \sum _{i=1}^{m}\sum _{z^{(i)}}Q_i(z^{(i)})log\frac{P(x^{(i)},z^{(i)};\theta) }{Q_i(z^{(i)})}
@@ -186,8 +204,11 @@ $$
 去掉上式中常数部分，则我们需要极大化的对数似然下界为
 $$
 \arg \max _{\theta} \sum _{i=1}^{m}\sum _{z^{(i)}}Q_i(z^{(i)})[log P(x^{(i)},z^{(i)};\theta)-log {Q_i(z^{(i)})}]
-\\=\arg \max _{\theta} \sum _{i=1}^{m}\sum _{z^{(i)}}Q_i(z^{(i)})log P(x^{(i)},z^{(i)};\theta)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4)
 $$
+$$
+=\arg \max _{\theta} \sum _{i=1}^{m}\sum _{z^{(i)}}Q_i(z^{(i)})log P(x^{(i)},z^{(i)};\theta)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4)
+$$
+
 注意到上式中$Q_i(z^{(i)})$是一个分布，因此$\sum _{z^{(i)}}Q_i(z^{(i)})log P(x^{(i)},z^{(i)};\theta)$可以理解为$logP(x^{(i)},z^{(i)};\theta)$基于条件概率分布$Q_i(z^{(i)})$的期望，也就是我们EM算法中**E步**。极大化方程式(4)也就是我们EM算法中的**M步**。
 
 ### 4.EM算法流程
@@ -233,27 +254,43 @@ $$
 L(\theta,\theta^j)=\sum _{i=1}^{m}\sum _{z^{(i)}}P(z^{(i)}|x^{(i)};\theta^j)log P(x^{(i)},z^{(i)};\theta)
 $$
 令
+
+
 $$
 H(\theta,\theta^j)=\sum _{i=1}^{m}\sum _{z^{(i)}}P(z^{(i)}|x^{(i)};\theta^j)log P(z^{(i)}|x^{(i)};\theta)
 $$
 上两式相减得到
+
+
 $$
 \sum_{i=1}^{m}log P(x^{(i)};\theta)=L(\theta,\theta^j)-H(\theta,\theta^j)
 $$
 在上式中分别取$\theta$为$\theta^j$和$\theta^{j+1}$，并相减得到
+
+
 $$
 \sum_{i=1}^{m}log P(x^{(i)};\theta^{j+1})-\sum_{i=1}^{m}log P(x^{(i)};\theta^j)=[L(\theta^{j+1},\theta^j)-L(\theta^j,\theta^j)]-[H(\theta^{j+1},\theta^j)-H(\theta^j,\theta^j)]
 $$
 要证明EM算法的收敛性，我们只要证明上式的右边是非负即可。由于$\theta^{j+1}$使得$L(\theta,\theta^j)$极大，因此有
+
+
 $$
 L(\theta^{j+1},\theta^j)-L(\theta^j,\theta^j)\ge 0
 $$
 而对于第二部分，我们有
+
+
 $$
 H(\theta^{j+1},\theta^j)-H(\theta^j,\theta^j)=\sum _{i=1}^{m}\sum _{z^{(i)}}P(z^{(i)}|x^{(i)};\theta^j)log \frac{P(z^{(i)}|x^{(i)};\theta^{j+1})}{P(z^{(i)}|x^{(i)};\theta^{j})} \ \ \ \ \ \ \ \ \ (5)
-\\ \le \sum _{i=1}^{m}log \{ \sum _{z^{(i)}}P(z^{(i)}|x^{(i)};\theta^j)\frac{P(z^{(i)}|x^{(i)};\theta^{j+1})}{P(z^{(i)}|x^{(i)};\theta^{j})} \}\ \ \ \ \ \ \ \ \ (6)
-\\ = \sum _{i=1}^{m}log (\sum _{z^{(i)}}P(z^{(i)}|x^{(i)};\theta^{j+1}))=0 \ \ \ \ \ \ \ \ \ \ (7) 
 $$
+$$
+\le \sum _{i=1}^{m}log \{ \sum _{z^{(i)}}P(z^{(i)}|x^{(i)};\theta^j)\frac{P(z^{(i)}|x^{(i)};\theta^{j+1})}{P(z^{(i)}|x^{(i)};\theta^{j})} \}\ \ \ \ \ \ \ \ \ (6)
+$$
+
+$$
+= \sum _{i=1}^{m}log (\sum _{z^{(i)}}P(z^{(i)}|x^{(i)};\theta^{j+1}))=0 \ \ \ \ \ \ \ \ \ \ (7)
+$$
+
 其中第(6)式用到了Jensen不等式，只不过和第**3.EM算法推导**中使用相反，第(7)式用到了概率分布累计为1的性质。至此我们得到
 $$
 \sum _{i=1}^{m}log P(x^{(i)};\theta^{j+1})- \sum _{i=1}^{m}log P(x^{(i)};\theta^{j}) \ge 0

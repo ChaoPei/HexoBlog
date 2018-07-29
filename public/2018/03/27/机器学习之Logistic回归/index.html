@@ -129,15 +129,15 @@
 <meta property="og:site_name" content="谓之小一">
 <meta property="og:description" content="1.Logistic回归简介线性回归能够找到一个假设函数来估计原函数，从而根据特征变量来得到假设值，但线性回归模型不能达到分类的效果。在线性回归的基础上，我们将假设值和概率结合得到分类器，达到分类的效果。虽然Logistic回归是回归模型，但在实际项目中我们经常用于分类问题。 2.Sigmoid函数为什么选择Sigmoid函数呢？我们目标是寻找函数进行分类，首先假设任意多类的分类问题（不仅是两类）">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://weizhixiaoyi.com/2018/03/27/机器学习之Logistic回归/机器学习之Logistic回归/机器学习之Logistic回归01.png">
-<meta property="og:image" content="https://weizhixiaoyi.com/2018/03/27/机器学习之Logistic回归/机器学习之Logistic回归/机器学习之Logistic回归02.png">
-<meta property="og:image" content="https://weizhixiaoyi.com/2018/03/27/机器学习之Logistic回归/机器学习之Logistic回归/机器学习之Logistic回归03.png">
-<meta property="og:image" content="https://weizhixiaoyi.com/2018/03/27/机器学习之Logistic回归/机器学习之Logistic回归/推广.png">
-<meta property="og:updated_time" content="2018-03-28T16:43:35.044Z">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/03/27/机器学习之Logistic回归/机器学习之Logistic回归01.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/03/27/机器学习之Logistic回归/机器学习之Logistic回归02.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/03/27/机器学习之Logistic回归/机器学习之Logistic回归03.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/03/27/机器学习之Logistic回归/推广.png">
+<meta property="og:updated_time" content="2018-06-07T17:52:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习之Logistic回归">
 <meta name="twitter:description" content="1.Logistic回归简介线性回归能够找到一个假设函数来估计原函数，从而根据特征变量来得到假设值，但线性回归模型不能达到分类的效果。在线性回归的基础上，我们将假设值和概率结合得到分类器，达到分类的效果。虽然Logistic回归是回归模型，但在实际项目中我们经常用于分类问题。 2.Sigmoid函数为什么选择Sigmoid函数呢？我们目标是寻找函数进行分类，首先假设任意多类的分类问题（不仅是两类）">
-<meta name="twitter:image" content="https://weizhixiaoyi.com/2018/03/27/机器学习之Logistic回归/机器学习之Logistic回归/机器学习之Logistic回归01.png">
+<meta name="twitter:image" content="https://weizhixiaoyi.com/2018/03/27/机器学习之Logistic回归/机器学习之Logistic回归01.png">
 
 
 
@@ -475,7 +475,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数"></span>
+                <span title="本文字数">6.6k</span>
               
 
               
@@ -489,7 +489,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长"></span>
+                <span title="阅读时长">11 分钟</span>
               
             </div>
           
@@ -510,30 +510,52 @@
 
       
         <h3 id="1-Logistic回归简介"><a href="#1-Logistic回归简介" class="headerlink" title="1.Logistic回归简介"></a>1.Logistic回归简介</h3><p>线性回归能够找到一个假设函数来估计原函数，从而根据特征变量来得到假设值，但线性回归模型不能达到分类的效果。在线性回归的基础上，我们将假设值和概率结合得到分类器，达到分类的效果。虽然Logistic回归是回归模型，但在实际项目中我们经常用于分类问题。</p>
-<h3 id="2-Sigmoid函数"><a href="#2-Sigmoid函数" class="headerlink" title="2.Sigmoid函数"></a>2.Sigmoid函数</h3><p>为什么选择Sigmoid函数呢？我们目标是寻找函数进行分类，首先假设任意多类的分类问题（不仅是两类）。Exponential假设第i个体征对第k类问题的贡献是$w_{ki}$，则数据点$(x_1,x_2,…,x_n)$属于第k类的概率正比于<br>$$<br>exp(w_{k1}x_1+…+w_{kn}x_n)。<br>$$<br>因为一个数据点属于各类的概率之和为1，所以可以得到<br>$$<br>P(y=k)=\frac{exp(\sum_{i=1}^{n}w_{ki}{x_i})}{\sum_{k’}exp(\sum_{i=1}^{n}w_{k’i}x_i)}<br>$$<br>现在回到两类（0,1）的情况，此时分母上只有两项<br>$$<br>P(y=1)=\frac{exp(\sum_{i=1}^{n}w_{1i}{x_i})}{exp(\sum_{i=1}^{n}w_{1i}x_i)+exp(\sum_{i=1}^{n}w_{0i}x_i)}<br>$$<br>公式分子、分母同时除以分子，并设$w_i=w_{1i}-w_{0i}$，则有<br>$$<br>P(y=1)=\frac{1}{1+exp(-\sum_{i=1}^{n}w_ix_i)}<br>$$<br>上述公式便是Logistic函数，参数$w_i$表示第i个特征对1类的贡献与0类的贡献的差值。<br>$$<br>Sigmoid Function: f(x)=\frac{1}{1+e^{-x}}<br>$$<br>Sigmoid函数具有如下性质</p>
+<h3 id="2-Sigmoid函数"><a href="#2-Sigmoid函数" class="headerlink" title="2.Sigmoid函数"></a>2.Sigmoid函数</h3><p>为什么选择Sigmoid函数呢？我们目标是寻找函数进行分类，首先假设任意多类的分类问题（不仅是两类）。Exponential假设第i个体征对第k类问题的贡献是$w_{ki}$，则数据点$(x_1,x_2,…,x_n)$属于第k类的概率正比于</p>
+<script type="math/tex; mode=display">
+exp(w_{k1}x_1+…+w_{kn}x_n)。</script><p>因为一个数据点属于各类的概率之和为1，所以可以得到</p>
+<script type="math/tex; mode=display">
+P(y=k)=\frac{exp(\sum_{i=1}^{n}w_{ki}{x_i})}{\sum_{k'}exp(\sum_{i=1}^{n}w_{k'i}x_i)}</script><p>现在回到两类（0,1）的情况，此时分母上只有两项</p>
+<script type="math/tex; mode=display">
+P(y=1)=\frac{exp(\sum_{i=1}^{n}w_{1i}{x_i})}{exp(\sum_{i=1}^{n}w_{1i}x_i)+exp(\sum_{i=1}^{n}w_{0i}x_i)}</script><p>公式分子、分母同时除以分子，并设$w_i=w_{1i}-w_{0i}$，则有</p>
+<script type="math/tex; mode=display">
+P(y=1)=\frac{1}{1+exp(-\sum_{i=1}^{n}w_ix_i)}</script><p>上述公式便是Logistic函数，参数$w_i$表示第i个特征对1类的贡献与0类的贡献的差值。</p>
+<script type="math/tex; mode=display">
+Sigmoid Function: f(x)=\frac{1}{1+e^{-x}}</script><p>Sigmoid函数具有如下性质</p>
 <ul>
 <li>函数连续且单调递增</li>
 <li>函数关于（0,0.5）对称</li>
 <li>$x\in(-\infty,\infty)$时$y\in(0,1)$</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#plot sigmoid function </span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment">##sigmoid function</span></span><br><span class="line">x=np.arange(<span class="number">-5</span>,<span class="number">5</span>,<span class="number">0.1</span>)</span><br><span class="line">y=<span class="number">1</span>/(<span class="number">1</span>+np.exp(-x))</span><br><span class="line"></span><br><span class="line"><span class="comment">#plot</span></span><br><span class="line">plt.figure()</span><br><span class="line">plt.plot(x,y,color=<span class="string">'red'</span>,linewidth=<span class="string">'2'</span>)</span><br><span class="line">ax=plt.gca()</span><br><span class="line">ax.spines[<span class="string">'right'</span>].set_color(<span class="string">'none'</span>)</span><br><span class="line">ax.spines[<span class="string">'top'</span>].set_color(<span class="string">'none'</span>)</span><br><span class="line">ax.xaxis.set_ticks_position(<span class="string">'bottom'</span>)</span><br><span class="line">ax.spines[<span class="string">'bottom'</span>].set_position((<span class="string">'data'</span>,<span class="number">0</span>))</span><br><span class="line">ax.yaxis.set_ticks_position(<span class="string">'left'</span>)</span><br><span class="line">ax.spines[<span class="string">'left'</span>].set_position((<span class="string">'data'</span>,<span class="number">0</span>))</span><br><span class="line">plt.xlabel(<span class="string">'independent variable'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'dependent variable'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="机器学习之Logistic回归/机器学习之Logistic回归01.png" alt="机器学习之Logistic回归01"></p>
+<p><img src="/2018/03/27/机器学习之Logistic回归/机器学习之Logistic回归01.png" alt="机器学习之Logistic回归01"></p>
 <h3 id="3-Logistic回归推导"><a href="#3-Logistic回归推导" class="headerlink" title="3.Logistic回归推导"></a>3.Logistic回归推导</h3><ul>
 <li>特征向量$X=(x_0,x_1,x_2…x_n)$，默认$x_0=1$。</li>
 <li>$\theta=(\theta_0,\theta_1,\theta_2…\theta_n)$</li>
 <li>$n$表示特征数量</li>
 <li>$m$表示训练数据数量</li>
 </ul>
-<p>线性回归函数为$z=\theta_0+\theta_1x_1+\theta_2x_2+…+\theta_nx_n=\theta^TX$。对于Logistic回归来说，其思想也基于线性回归（Logistic回归属于广义线性回归模型）。结合线性回归和Sigmoid函数，将线性回归得到的结果映射到Sigmoid函数之中，我们便得到目标函数。<br>$$<br>h(X)=\frac{1}{1+e^{-\theta^TX}}<br>$$<br>我们可以把$h(X)$看成样本数据的概率密度函数，当$h(X)&lt;0.5$是判断当前数据属于A类，当$h(X)&gt;0.5$判断当前数据属于B类。对于上述函数$h(X)$，接下来我们需要做的便是怎样去估计参数$\theta$。</p>
-<p>条件概率$P(y=1|X)$为某事件发生的概率，Logistic回归模型可以表示为<br>$$<br>P(y=1|X)=\pi(X)=\frac{1}{1+e^{-\theta^TX}}<br>$$<br>条件概率$P(y=0|X)$为某事件不发生的概率，Logistic回归模型可以表示为<br>$$<br>P(y=0|X)=1-\pi(X)=\frac{1}{1+e^{\theta^TX}}<br>$$<br>因此我们可以得到事件的发生比为<br>$$<br>odds=\frac{P(y=1|X)}{P(y=0|X)}<br>$$<br>事件的发生和不发生为相互独立事件，样本数据结果记录为$(y_1,y_2…y_m)$。设$p_i=P(y_i=1|X_i)$为给定条件下得到$y_i=1$的概率，同样$1-p_i=P(y_i=0|X_i)$的概率，所以得到一个观测值的概率为$P(y_i)=p_i^{y_i}(1-p_i)^{1-y_i}$，最后参数估计时我们可以采用极大似然估计。</p>
-<p>各个观测样本之间相互独立，那么它们的联合分布为各边缘分布的乘积，得到如下极大似然函数<br>$$<br>L(\theta)=\prod_{i=1}^{m}[\pi(X_i)]^{y_i}[1-\pi(X_i)]^{1-y_i}<br>$$<br>目标便是求得使这一似然函数值最大的参数估计，于是函数取对数得到<br>$$<br>lnL(\theta)=\sum_{i=1}^{m}\left { y_iln[\pi(X_i)] +(1-y_i)ln[1-\pi(X_i)] \right }<br>$$</p>
-<p>$$<br>=\sum_{i=1}^{m}ln[1-\pi(X_i)]+\sum_{i=1}^{m}y_iln\frac{\pi(X_i)}{1-\pi(X_i)}<br>$$</p>
-<p>$$<br>=\sum_{i=1}^{m}ln[1-\pi(X_i)]+\sum_{i=1}^{m}y_i\theta^TX<br>$$</p>
-<p>$$<br>=\sum_{i=1}^{m}-ln[1+e^{\theta^Tx}]+\sum_{i=1}^{m}y_i\theta^TX<br>$$</p>
-<p>通过上面得到的结论来求解使得似然函数最大化的参数向量，此处我们利用梯度下降算法求$\theta$。首先在前面乘上负的系数$-\frac{1}{m}$，所以$J(\theta)$最小时的$\theta$为最佳参数。<br>$$<br>J(\theta)=-\frac{1}{m}lnL(\theta)<br>$$</p>
-<p>$$<br>=-\frac{1}{m}\left {\sum_{i=1}^{m}-ln[1+e^{\theta^Tx}]+\sum_{i=1}^{m}y_i\theta^TX \right}<br>$$</p>
-<h3 id="4-梯度下降算法"><a href="#4-梯度下降算法" class="headerlink" title="4.梯度下降算法"></a>4.梯度下降算法</h3><h4 id="4-1梯度下降算法简述"><a href="#4-1梯度下降算法简述" class="headerlink" title="4.1梯度下降算法简述"></a>4.1梯度下降算法简述</h4><p>实际生活中我们有时也利用梯度下降算法，比如我们处在一座山的某处位置，但我们并不知道如何下山，于是决定走一步算一步，但每次都沿着最陡峭的地点下山，也就是沿着梯度的负方向前进。但有事也会遇见问题，不能每次都到达山脚，可能到达山峰的某个局部最低点。</p>
-<p><img src="机器学习之Logistic回归/机器学习之Logistic回归02.png" alt="器学习之Logistic回归0"></p>
+<p>线性回归函数为$z=\theta_0+\theta_1x_1+\theta_2x_2+…+\theta_nx_n=\theta^TX$。对于Logistic回归来说，其思想也基于线性回归（Logistic回归属于广义线性回归模型）。结合线性回归和Sigmoid函数，将线性回归得到的结果映射到Sigmoid函数之中，我们便得到目标函数。</p>
+<script type="math/tex; mode=display">
+h(X)=\frac{1}{1+e^{-\theta^TX}}</script><p>我们可以把$h(X)$看成样本数据的概率密度函数，当$h(X)<0.5$是判断当前数据属于a类，当$h(x)>0.5$判断当前数据属于B类。对于上述函数$h(X)$，接下来我们需要做的便是怎样去估计参数$\theta$。</0.5$是判断当前数据属于a类，当$h(x)></p>
+<p>条件概率$P(y=1|X)$为某事件发生的概率，Logistic回归模型可以表示为</p>
+<script type="math/tex; mode=display">
+P(y=1|X)=\pi(X)=\frac{1}{1+e^{-\theta^TX}}</script><p>条件概率$P(y=0|X)$为某事件不发生的概率，Logistic回归模型可以表示为</p>
+<script type="math/tex; mode=display">
+P(y=0|X)=1-\pi(X)=\frac{1}{1+e^{\theta^TX}}</script><p>因此我们可以得到事件的发生比为</p>
+<script type="math/tex; mode=display">
+odds=\frac{P(y=1|X)}{P(y=0|X)}</script><p>事件的发生和不发生为相互独立事件，样本数据结果记录为$(y_1,y_2…y_m)$。设$p_i=P(y_i=1|X_i)$为给定条件下得到$y_i=1$的概率，同样$1-p_i=P(y_i=0|X_i)$的概率，所以得到一个观测值的概率为$P(y_i)=p_i^{y_i}(1-p_i)^{1-y_i}$，最后参数估计时我们可以采用极大似然估计。</p>
+<p>各个观测样本之间相互独立，那么它们的联合分布为各边缘分布的乘积，得到如下极大似然函数</p>
+<script type="math/tex; mode=display">
+L(\theta)=\prod_{i=1}^{m}[\pi(X_i)]^{y_i}[1-\pi(X_i)]^{1-y_i}</script><p>目标便是求得使这一似然函数值最大的参数估计，于是函数取对数得到</p>
+<script type="math/tex; mode=display">
+lnL(\theta)=\sum_{i=1}^{m}\left \{ y_iln[\pi(X_i)] +(1-y_i)ln[1-\pi(X_i)] \right \}</script><script type="math/tex; mode=display">
+=\sum_{i=1}^{m}ln[1-\pi(X_i)]+\sum_{i=1}^{m}y_iln\frac{\pi(X_i)}{1-\pi(X_i)}</script><script type="math/tex; mode=display">
+=\sum_{i=1}^{m}ln[1-\pi(X_i)]+\sum_{i=1}^{m}y_i\theta^TX</script><script type="math/tex; mode=display">
+=\sum_{i=1}^{m}-ln[1+e^{\theta^Tx}]+\sum_{i=1}^{m}y_i\theta^TX</script><p>通过上面得到的结论来求解使得似然函数最大化的参数向量，此处我们利用梯度下降算法求$\theta$。首先在前面乘上负的系数$-\frac{1}{m}$，所以$J(\theta)$最小时的$\theta$为最佳参数。</p>
+<script type="math/tex; mode=display">
+J(\theta)=-\frac{1}{m}lnL(\theta)</script><script type="math/tex; mode=display">
+=-\frac{1}{m}\left \{\sum_{i=1}^{m}-ln[1+e^{\theta^Tx}]+\sum_{i=1}^{m}y_i\theta^TX \right\}</script><h3 id="4-梯度下降算法"><a href="#4-梯度下降算法" class="headerlink" title="4.梯度下降算法"></a>4.梯度下降算法</h3><h4 id="4-1梯度下降算法简述"><a href="#4-1梯度下降算法简述" class="headerlink" title="4.1梯度下降算法简述"></a>4.1梯度下降算法简述</h4><p>实际生活中我们有时也利用梯度下降算法，比如我们处在一座山的某处位置，但我们并不知道如何下山，于是决定走一步算一步，但每次都沿着最陡峭的地点下山，也就是沿着梯度的负方向前进。但有事也会遇见问题，不能每次都到达山脚，可能到达山峰的某个局部最低点。</p>
+<p><img src="/2018/03/27/机器学习之Logistic回归/机器学习之Logistic回归02.png" alt="器学习之Logistic回归0"></p>
 <p>从上面解释可以看出，梯度下降不一定能够找到全局最优解，有可能是局部最优解，但此种方法已能帮助我们求解Logistic回归问题。另外如果求解的函数是凸函数，梯度下降法得到得解一定是全局最优解。</p>
 <h4 id="4-2-梯度下降算法相关概念"><a href="#4-2-梯度下降算法相关概念" class="headerlink" title="4.2 梯度下降算法相关概念"></a>4.2 梯度下降算法相关概念</h4><p>求解梯度下降算法之前，我们先了解相关概念。</p>
 <ul>
@@ -542,27 +564,38 @@
 <li><strong>假设函数（Hypothesis Function）</strong>：监督学习中，为了拟合输入样本，而使用假设函数。</li>
 <li><strong>损失函数（Loss Function）</strong>：为了评估模型拟合的好坏，通常用损失函数来度量拟合的程度。损失函数极小，意味着拟合的程度越好，对应的模型参数即为最优参数。Logistic损失函数为</li>
 </ul>
-<p>$$<br>J(\theta)=-\frac{1}{m}\left {\sum_{i=1}^{m}-ln[1+e^{\theta^Tx}]+\sum_{i=1}^{m}y_i\theta^TX \right}<br>$$</p>
-<p>我们利用梯度下降算法，目标便是找到一组$\theta$使得$J(\theta)$达到最小。</p>
+<script type="math/tex; mode=display">
+J(\theta)=-\frac{1}{m}\left \{\sum_{i=1}^{m}-ln[1+e^{\theta^Tx}]+\sum_{i=1}^{m}y_i\theta^TX \right\}</script><p>我们利用梯度下降算法，目标便是找到一组$\theta$使得$J(\theta)$达到最小。</p>
 <h4 id="4-3梯度下降算法过程"><a href="#4-3梯度下降算法过程" class="headerlink" title="4.3梯度下降算法过程"></a>4.3梯度下降算法过程</h4><ul>
 <li>随机选取一组$\theta$。</li>
 <li>不断变化$\theta$，让$J(\theta)$变小，$\alpha$为学习步长。</li>
 </ul>
-<p>$$<br>\theta_j:=\theta_j-\alpha\frac{\partial}{\partial\theta_j}J(\theta)<br>$$</p>
-<ul>
+<script type="math/tex; mode=display">
+\theta_j:=\theta_j-\alpha\frac{\partial}{\partial\theta_j}J(\theta)</script><ul>
 <li>直到$J(\theta)$得到最小值，$\frac{\partial}{\partial\theta_k}J(\theta)$为$J(\theta)$对$\theta_k$的偏导。</li>
 </ul>
-<p>$$<br>\frac{\partial J(\theta)}{\partial\theta_j}=\frac{1}{m}\sum_{i=1}^{m}\frac{1}{1+e^{\theta^TX}}e^{\theta^TX}X_{ij}-\sum_{i=1}^{m}y_iX_{ij}<br>$$</p>
-<p>$$<br>=\frac{1}{m}\sum_{i=1}^{m}X_{ij}[\frac{e^{\theta^TX}}{1+e^{\theta^Tx}}-y_i]<br>$$</p>
-<p>$$<br>=\frac{1}{m}\sum_{i=1}^{m}X_{ij}[\pi(X_i)-y_i]<br>$$</p>
-<p>因此梯度下降算法的迭代最终表述为<br>$$<br>\theta_j:=\theta_j-\alpha\frac{1}{m}\sum_{i=1}^{m}X_{ij}[\pi(X_i)-y_i]<br>$$<br>梯度下降算法需多次迭代、算法复杂度为$O(kn^2)$。当利用梯度下降算法求得一组$\theta$时我们便能得到Logistic函数。</p>
+<script type="math/tex; mode=display">
+\frac{\partial J(\theta)}{\partial\theta_j}=\frac{1}{m}\sum_{i=1}^{m}\frac{1}{1+e^{\theta^TX}}e^{\theta^TX}X_{ij}-\sum_{i=1}^{m}y_iX_{ij}</script><script type="math/tex; mode=display">
+=\frac{1}{m}\sum_{i=1}^{m}X_{ij}[\frac{e^{\theta^TX}}{1+e^{\theta^Tx}}-y_i]</script><script type="math/tex; mode=display">
+=\frac{1}{m}\sum_{i=1}^{m}X_{ij}[\pi(X_i)-y_i]</script><p>因此梯度下降算法的迭代最终表述为</p>
+<script type="math/tex; mode=display">
+\theta_j:=\theta_j-\alpha\frac{1}{m}\sum_{i=1}^{m}X_{ij}[\pi(X_i)-y_i]</script><p>梯度下降算法需多次迭代、算法复杂度为$O(kn^2)$。当利用梯度下降算法求得一组$\theta$时我们便能得到Logistic函数。</p>
 <h3 id="5-Logistic回归实现"><a href="#5-Logistic回归实现" class="headerlink" title="5.Logistic回归实现"></a>5.Logistic回归实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> matplotlib.colors <span class="keyword">import</span> ListedColormap</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_decision_regions</span><span class="params">(X, y, classifier, test_idx=None, resolution=<span class="number">0.02</span>)</span>:</span></span><br><span class="line">    <span class="comment"># setup marker generator and color map</span></span><br><span class="line">    markers = (<span class="string">'s'</span>, <span class="string">'x'</span>, <span class="string">'o'</span>, <span class="string">'^'</span>, <span class="string">'v'</span>)</span><br><span class="line">    colors = (<span class="string">'red'</span>, <span class="string">'blue'</span>, <span class="string">'lightgreen'</span>, <span class="string">'cyan'</span>, <span class="string">'gray'</span>)</span><br><span class="line">    cmap = ListedColormap(colors[:len(np.unique(y))])</span><br><span class="line">    <span class="comment"># plot the decision surface</span></span><br><span class="line">    x1_min, x1_max = X[:, <span class="number">0</span>].min() - <span class="number">1</span>, X[:, <span class="number">0</span>].max() + <span class="number">1</span></span><br><span class="line">    x2_min, x2_max = X[:, <span class="number">1</span>].min() - <span class="number">1</span>, X[:, <span class="number">1</span>].max() + <span class="number">1</span></span><br><span class="line">    xx1, xx2 = np.meshgrid(np.arange(x1_min, x1_max, resolution), np.arange(x2_min, x2_max, resolution))</span><br><span class="line">    Z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)</span><br><span class="line">    Z = Z.reshape(xx1.shape)</span><br><span class="line">    plt.contourf(xx1, xx2, Z, alpha=<span class="number">0.4</span>, cmap=cmap)</span><br><span class="line">    plt.xlim(xx1.min(), xx1.max())</span><br><span class="line">    plt.ylim(xx2.min(), xx2.max())</span><br><span class="line">    <span class="comment"># plot class samples</span></span><br><span class="line">    <span class="keyword">for</span> idx, cl <span class="keyword">in</span> enumerate(np.unique(y)):</span><br><span class="line">        plt.scatter(x=X[y == cl, <span class="number">0</span>], y=X[y == cl, <span class="number">1</span>],alpha=<span class="number">0.8</span>, c=cmap(idx),marker=markers[idx], label=cl)</span><br><span class="line">    <span class="comment"># highlight test samples</span></span><br><span class="line">    <span class="keyword">if</span> test_idx:</span><br><span class="line">        X_test, y_test = X[test_idx, :], y[test_idx]</span><br><span class="line">        plt.scatter(X_test[:, <span class="number">0</span>], X_test[:, <span class="number">1</span>], c=<span class="string">'blue'</span>, alpha=<span class="number">1.0</span>, linewidth=<span class="number">1</span>, marker=<span class="string">'o'</span>, s=<span class="number">55</span>, label=<span class="string">'test set'</span>)</span><br><span class="line"></span><br><span class="line">iris = datasets.load_iris()</span><br><span class="line">X = iris.data[:, [<span class="number">2</span>, <span class="number">3</span>]]</span><br><span class="line">y = iris.target</span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">0.3</span>, random_state=<span class="number">0</span>)</span><br><span class="line"><span class="comment">#为了追求机器学习的最佳性能，我们将特征缩放</span></span><br><span class="line">sc = StandardScaler()</span><br><span class="line">sc.fit(X_train)<span class="comment">#估算每个特征的平均值和标准差</span></span><br><span class="line">X_train_std=sc.transform(X_train)<span class="comment">#用同样的参数来标准化测试集，使得测试集和训练集之间有可比性</span></span><br><span class="line">X_test_std=sc.transform(X_test)</span><br><span class="line">X_combined_std = np.vstack((X_train_std, X_test_std))</span><br><span class="line">y_combined = np.hstack((y_train, y_test))</span><br><span class="line"></span><br><span class="line"><span class="comment">#训练感知机模型</span></span><br><span class="line">lr = LogisticRegression(C=<span class="number">1000.0</span>,random_state=<span class="number">0</span>)<span class="comment">#迭代次数为1000次,random_state设置随机种子，每次迭代都有相同的训练集顺序</span></span><br><span class="line">lr.fit(X_train_std, y_train)</span><br><span class="line">lr.predict_proba(X_test_std)</span><br><span class="line"></span><br><span class="line"><span class="comment">#绘图</span></span><br><span class="line">plot_decision_regions(X_combined_std, y_combined, classifier=lr, test_idx=range(<span class="number">105</span>,<span class="number">150</span>))</span><br><span class="line">plt.xlabel(<span class="string">'petal length [standardized]'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'petal width [standardized]'</span>)</span><br><span class="line">plt.legend(loc=<span class="string">'upper left'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="机器学习之Logistic回归/机器学习之Logistic回归03.png" alt="机器学习之Logistic回归03"></p>
+<p><img src="/2018/03/27/机器学习之Logistic回归/机器学习之Logistic回归03.png" alt="机器学习之Logistic回归03"></p>
 <h3 id="6-推广"><a href="#6-推广" class="headerlink" title="6.推广"></a>6.推广</h3><p>更多内容请关注公众号’谓之小一’，若有疑问可在公众号后台提问，随时回答，欢迎关注，内容转载请注明出处。</p>
-<p><img src="机器学习之Logistic回归/推广.png" alt=""></p>
+<p><img src="/2018/03/27/机器学习之Logistic回归/推广.png" alt=""></p>
 <ul>
 <li>参考</li>
 </ul>
+<blockquote id="fn_1">
+<sup>1</sup>. <a href="https://www.zhihu.com/people/maigo/activities" target="_blank" rel="noopener">https://www.zhihu.com/people/maigo/activities</a><a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_2">
+<sup>2</sup>. <a href="https://blog.csdn.net/programmer_wei/article/details/52072939" target="_blank" rel="noopener">https://blog.csdn.net/programmer_wei/article/details/52072939</a><a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_3">
+<sup>3</sup>. <a href="https://blog.csdn.net/javaisnotgood/article/details/78873819" target="_blank" rel="noopener">https://blog.csdn.net/javaisnotgood/article/details/78873819</a><a href="#reffn_3" title="Jump back to footnote [3] in the text."> &#8617;</a>
+</blockquote>
 
       
     </div>
@@ -693,7 +726,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -714,7 +747,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -749,7 +790,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -841,7 +890,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数"></span>
+    <span title="站点总字数">155k</span>
   
 
   
@@ -1427,9 +1476,25 @@
             });
           } else {
             
-              var $element = $(document.getElementById(url));
-              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
-              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
             
           }
         },

@@ -129,18 +129,18 @@
 <meta property="og:site_name" content="谓之小一">
 <meta property="og:description" content="1.KNN简介K近邻(K-Nearest Neighbors, KNN)算法既可处理分类问题，也可处理回归问题，其中分类和回归的主要区别在于最后做预测时的决策方式不同。KNN做分类预测时一般采用多数表决法，即训练集里和预测样本特征最近的K个样本，预测结果为里面有最多类别数的类别。KNN做回归预测时一般采用平均法，预测结果为最近的K个样本数据的平均值。其中KNN分类方法的思想对回归方法同样适用，因此">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://weizhixiaoyi.com/2018/05/13/机器学习之K近邻-KNN-算法/机器学习之K近邻-KNN-算法/机器学习之K近邻算法图片01.png">
-<meta property="og:image" content="https://weizhixiaoyi.com/2018/05/13/机器学习之K近邻-KNN-算法/机器学习之K近邻-KNN-算法/机器学习之K近邻算法图片02.png">
-<meta property="og:image" content="https://weizhixiaoyi.com/2018/05/13/机器学习之K近邻-KNN-算法/机器学习之K近邻-KNN-算法/机器学习之K近邻算法图片03.png">
-<meta property="og:image" content="https://weizhixiaoyi.com/2018/05/13/机器学习之K近邻-KNN-算法/机器学习之K近邻-KNN-算法/机器学习之K近邻算法图片04.png">
-<meta property="og:image" content="https://weizhixiaoyi.com/2018/05/13/机器学习之K近邻-KNN-算法/机器学习之K近邻-KNN-算法/机器学习之K近邻算法图片05.png">
-<meta property="og:image" content="https://weizhixiaoyi.com/2018/05/13/机器学习之K近邻-KNN-算法/机器学习之K近邻-KNN-算法/机器学习之K近邻算法图片06.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/05/13/机器学习之K近邻-KNN-算法/机器学习之K近邻算法图片01.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/05/13/机器学习之K近邻-KNN-算法/机器学习之K近邻算法图片02.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/05/13/机器学习之K近邻-KNN-算法/机器学习之K近邻算法图片03.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/05/13/机器学习之K近邻-KNN-算法/机器学习之K近邻算法图片04.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/05/13/机器学习之K近邻-KNN-算法/机器学习之K近邻算法图片05.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/05/13/机器学习之K近邻-KNN-算法/机器学习之K近邻算法图片06.png">
 <meta property="og:image" content="http://p66yyzg4i.bkt.clouddn.com/%E6%8E%A8%E5%B9%BF.png">
-<meta property="og:updated_time" content="2018-05-20T04:02:14.778Z">
+<meta property="og:updated_time" content="2018-06-07T17:52:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习之K近邻(KNN)算法">
 <meta name="twitter:description" content="1.KNN简介K近邻(K-Nearest Neighbors, KNN)算法既可处理分类问题，也可处理回归问题，其中分类和回归的主要区别在于最后做预测时的决策方式不同。KNN做分类预测时一般采用多数表决法，即训练集里和预测样本特征最近的K个样本，预测结果为里面有最多类别数的类别。KNN做回归预测时一般采用平均法，预测结果为最近的K个样本数据的平均值。其中KNN分类方法的思想对回归方法同样适用，因此">
-<meta name="twitter:image" content="https://weizhixiaoyi.com/2018/05/13/机器学习之K近邻-KNN-算法/机器学习之K近邻-KNN-算法/机器学习之K近邻算法图片01.png">
+<meta name="twitter:image" content="https://weizhixiaoyi.com/2018/05/13/机器学习之K近邻-KNN-算法/机器学习之K近邻算法图片01.png">
 
 
 
@@ -478,7 +478,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数"></span>
+                <span title="本文字数">5k</span>
               
 
               
@@ -492,7 +492,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长"></span>
+                <span title="阅读时长">8 分钟</span>
               
             </div>
           
@@ -514,7 +514,7 @@
       
         <h3 id="1-KNN简介"><a href="#1-KNN简介" class="headerlink" title="1.KNN简介"></a>1.KNN简介</h3><p><strong>K近邻(K-Nearest Neighbors, KNN)</strong>算法既可处理分类问题，也可处理回归问题，其中分类和回归的主要区别在于最后做预测时的决策方式不同。KNN做<strong>分类</strong>预测时一般采用多数表决法，即训练集里和预测样本特征最近的K个样本，预测结果为里面有最多类别数的类别。KNN做<strong>回归</strong>预测时一般采用平均法，预测结果为最近的K个样本数据的平均值。其中KNN分类方法的思想对回归方法同样适用，因此本文主要讲解KNN分类问题，下面我们通过一个简单例子来了解下KNN算法流程。</p>
 <p>如下图所示，我们想要知道绿色点要被决定赋予哪个类，是红色三角形还是蓝色正方形？我们利用KNN思想，如果假设<strong>K=3</strong>，选取三个距离最近的类别点，由于红色三角形所占比例为2/3，因此绿色点被赋予红色三角形类别。如果假设<strong>K=5</strong>，由于蓝色正方形所占比例为3/5，因此绿色点被赋予蓝色正方形类别。</p>
-<p><img src="机器学习之K近邻-KNN-算法/机器学习之K近邻算法图片01.png" alt="机器学习之K近邻算法图片01"></p>
+<p><img src="/2018/05/13/机器学习之K近邻-KNN-算法/机器学习之K近邻算法图片01.png" alt="机器学习之K近邻算法图片01"></p>
 <p>从上面实例，我们可以总结下KNN算法过程</p>
 <ol>
 <li>计算测试数据与各个训练数据之间的距离。</li>
@@ -525,9 +525,9 @@
 <ul>
 <li><strong>距离度量方式：</strong>KNN算法常用欧式距离度量方式，当然我们也可以采用其他距离度量方式，比如曼哈顿距离，相应公式如下所示。</li>
 </ul>
-<p>$$<br>D(x,y)=\sqrt{(x_1-y_1)^2+(x_2-y_2)^2+…+(x_n-y_n)^2}=\sqrt{\sum_{i=1}^{n}(x_i-y_i)^2}<br>$$</p>
-<p>$$<br>D(x,y)={|x_1-y_1|+|x_2-y_2|+|x_3-y_3|…+|x_n-y_n|}={\sum_{i=1}^{n}|x_i-y_i|}<br>$$</p>
-<ul>
+<script type="math/tex; mode=display">
+D(x,y)=\sqrt{(x_1-y_1)^2+(x_2-y_2)^2+...+(x_n-y_n)^2}=\sqrt{\sum_{i=1}^{n}(x_i-y_i)^2}</script><script type="math/tex; mode=display">
+D(x,y)={|x_1-y_1|+|x_2-y_2|+|x_3-y_3|...+|x_n-y_n|}={\sum_{i=1}^{n}|x_i-y_i|}</script><ul>
 <li><strong>K值的选取：</strong>KNN算法决策结果很大程度上取决于K值的选择。选择较小的K值相当于用较小领域中的训练实例进行预测，训练误差会减小，但同时整体模型变得复杂，容易过拟合。选择较大的K值相当于用较大领域中训练实例进行预测，可以减小泛化误差，但同时整体模型变得简单，预测误差会增大。</li>
 <li><strong>分类决策规则：</strong>KNN分类决策规则经常使用我们前面提到的多数表决法，在此不再赘述。</li>
 </ul>
@@ -547,8 +547,8 @@
 <li><strong>确定左子空间和右子空间：</strong>分割超平面x=7将空间分为两部分。x&lt;=7的部分为左子空间，包含节点为{(2,3)，(5,4)，(4,7)}。x&gt;7的部分为右子空间，包含节点为{(9,6)，(8,1)}。</li>
 <li><strong>递归构建KD树：</strong>用同样的方法划分左子树{(2,3)，(5,4)，(4,7)}和右子树{(9,6)，(8,1)}，最终得到KD树。</li>
 </ol>
-<p><img src="机器学习之K近邻-KNN-算法/机器学习之K近邻算法图片02.png" alt="机器学习之K近邻算法图片02"></p>
-<p><img src="机器学习之K近邻-KNN-算法/机器学习之K近邻算法图片03.png" alt="机器学习之K近邻算法图片03"></p>
+<p><img src="/2018/05/13/机器学习之K近邻-KNN-算法/机器学习之K近邻算法图片02.png" alt="机器学习之K近邻算法图片02"></p>
+<p><img src="/2018/05/13/机器学习之K近邻-KNN-算法/机器学习之K近邻算法图片03.png" alt="机器学习之K近邻算法图片03"></p>
 <h4 id="2-2KD树搜索最近邻"><a href="#2-2KD树搜索最近邻" class="headerlink" title="2.2KD树搜索最近邻"></a>2.2KD树搜索最近邻</h4><p>当我们生成KD树后，就可以预测测试样本集里面的样本目标点。</p>
 <ol>
 <li><strong>二叉搜索：</strong>对于目标点，通过二叉搜索，能够很快在KD树里面找到包含目标点的<strong>叶子节点</strong>。</li>
@@ -561,10 +561,10 @@
 <li><strong>回溯：</strong>节点(4,7)与目标查找点距离为3.202，回溯到父节点(5,4)与目标查找点之间距离为3.041，所以(5,4)为查询点的最近邻。以目标点(2,4.5)为圆心，以3.041为半径作圆，最近邻一定在超球体内部。</li>
 <li><strong>更新最近邻：</strong>该圆和y = 4超平面交割，所以需要进入(5,4)左子空间进行查找，将(2,3)节点加入搜索路径{(7,2)-&gt;(2,3)}。回溯至(2,3)叶子节点，(2,4.5)到(2,3)的距离比到(5,4)要近，所以最近邻点更新为(2,3)，最近距离更新为1.5。回溯至(7,2)，以(2,4.5)为圆心，1.5为半径作圆，发现并不和x = 7分割超平面交割，至此搜索路径回溯完成，完成更新最近邻操作，返回最近邻点(2,3)。</li>
 </ol>
-<p><img src="机器学习之K近邻-KNN-算法/机器学习之K近邻算法图片04.png" alt="机器学习之K近邻算法图片04"></p>
+<p><img src="/2018/05/13/机器学习之K近邻-KNN-算法/机器学习之K近邻算法图片04.png" alt="机器学习之K近邻算法图片04"></p>
 <h4 id="2-3KD树预测"><a href="#2-3KD树预测" class="headerlink" title="2.3KD树预测"></a>2.3KD树预测</h4><p>根据KD树搜索最近邻的方法，我们能够得到第一个最近邻数据点，然后把它置为已选。然后忽略置为已选的样本，重新选择最近邻，这样运行K次，就能得到K个最近邻。如果是KNN分类，根据多数表决法，预测结果为K个最近邻类别中有最多类别数的类别。如果是KNN回归，根据平均法，预测结果为K个最近邻样本输出的平均值。</p>
 <h3 id="3-球树原理"><a href="#3-球树原理" class="headerlink" title="3.球树原理"></a>3.球树原理</h3><p>KD树算法能够提高KNN搜索效率，但在某些时候效率并不高，比如处理不均匀分布的数据集时。如下图所示，如果黑色的实例点离目标点(星点)再远一点，那么虚线会像红线那样扩大，导致与左上方矩形的右下角相交。既然相交那就要检查左上方矩形，而实际上最近的点离目标点(星点)很近，检查左上方矩形区域已是多余。因此KD树把二维平面划分成矩形会带来无效搜索的问题。</p>
-<p><img src="机器学习之K近邻-KNN-算法/机器学习之K近邻算法图片05.png" alt="机器学习之K近邻算法图片05"></p>
+<p><img src="/2018/05/13/机器学习之K近邻-KNN-算法/机器学习之K近邻算法图片05.png" alt="机器学习之K近邻算法图片05"></p>
 <p>为优化超矩形体带来的搜索效率问题，我们在此介绍球树算法来进一步提高最近邻搜索效率。</p>
 <h4 id="3-1球树建立"><a href="#3-1球树建立" class="headerlink" title="3.1球树建立"></a>3.1球树建立</h4><p>球树的每个分割块都是超球体，而不像KD树中的超矩形体，这样在做最近邻搜索是可以避免无效搜索，下面我们介绍球树构建过程</p>
 <ol>
@@ -572,7 +572,7 @@
 <li><strong>划分子超球体：</strong>从超球体中选择一个离超球体中心最远的点，然后选择第二个点离第一个点最远，将球中所有的点分配到离这两个聚类中心最近的一个。然后计算每个聚类的中心，以及聚类能够包含它所有数据点所需的最小半径，这样我们便得到两个子超球体，和KD树中的左右子树对应。</li>
 <li><strong>递归：</strong>对上述两个子超球体，递归执行步骤2，最终得到球树。</li>
 </ol>
-<p><img src="机器学习之K近邻-KNN-算法/机器学习之K近邻算法图片06.png" alt="机器学习之K近邻算法图片06"></p>
+<p><img src="/2018/05/13/机器学习之K近邻-KNN-算法/机器学习之K近邻算法图片06.png" alt="机器学习之K近邻算法图片06"></p>
 <h4 id="3-2球树搜索最近邻"><a href="#3-2球树搜索最近邻" class="headerlink" title="3.2球树搜索最近邻"></a>3.2球树搜索最近邻</h4><p>KD树在搜索路径优化时使用的是两点之间的距离来判断，而球树使用的是两边之和大于第三边来判断。相对来说球树的判断更加复杂，但却避免一些无效的搜索，下述为球树搜索最近邻过程。</p>
 <ol>
 <li>自上而下贯穿整棵树找出包含目标点所在的叶子，并在这个球里找出与目标点最邻近的点，这将确定目标点距离最邻近点的上限值。</li>
@@ -732,7 +732,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -753,7 +753,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -788,7 +796,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -880,7 +896,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数"></span>
+    <span title="站点总字数">155k</span>
   
 
   
@@ -1466,9 +1482,25 @@
             });
           } else {
             
-              var $element = $(document.getElementById(url));
-              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
-              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
             
           }
         },

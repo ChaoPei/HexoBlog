@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="E1Oy09IV-Rsypa8wpY-yrplcH8RMIHLCzj3m91nX1Eo" />
+
+
+
+  <meta name="msvalidate.01" content="9219CFDFC7384B4F0A08B73CF8790554" />
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="pvvBAkBQvG" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1.正则化之前介绍的文章之中，我们已多次接触到正则化方法，但没有详细的解释为什么要正则化，什么是正则化，以及L1正则化和L2正则化的区别。本次文章之中，我们将详解机器学习中正则化的概念和深度神经网络中的正则化方法。 1.1 为什么要正则化？讲到为什么需要正则化，就需要了解什么是过拟合问题。以下面图片为例，我们能够看到有两个类别，其中以X代表男生，O代表女生。  我们想要通过学习来得到分类曲线，其中">
+<meta name="keywords" content="机器学习,算法,深度学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度神经网络之正则化">
+<meta property="og:url" content="https://weizhixiaoyi.com/2018/07/03/深度神经网络之正则化/index.html">
+<meta property="og:site_name" content="谓之小一">
+<meta property="og:description" content="1.正则化之前介绍的文章之中，我们已多次接触到正则化方法，但没有详细的解释为什么要正则化，什么是正则化，以及L1正则化和L2正则化的区别。本次文章之中，我们将详解机器学习中正则化的概念和深度神经网络中的正则化方法。 1.1 为什么要正则化？讲到为什么需要正则化，就需要了解什么是过拟合问题。以下面图片为例，我们能够看到有两个类别，其中以X代表男生，O代表女生。  我们想要通过学习来得到分类曲线，其中">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/07/03/深度神经网络之正则化/深度神经网络之正则化图片01.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/07/03/深度神经网络之正则化/深度神经网络之正则化图片02.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/07/03/深度神经网络之正则化/深度神经网络之正则化图片03.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/07/03/深度神经网络之正则化/深度神经网络之正则化图片04.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/07/03/深度神经网络之正则化/深度神经网络之正则化图片05.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/07/03/深度神经网络之正则化/推广.png">
+<meta property="og:updated_time" content="2018-07-04T03:06:17.403Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深度神经网络之正则化">
+<meta name="twitter:description" content="1.正则化之前介绍的文章之中，我们已多次接触到正则化方法，但没有详细的解释为什么要正则化，什么是正则化，以及L1正则化和L2正则化的区别。本次文章之中，我们将详解机器学习中正则化的概念和深度神经网络中的正则化方法。 1.1 为什么要正则化？讲到为什么需要正则化，就需要了解什么是过拟合问题。以下面图片为例，我们能够看到有两个类别，其中以X代表男生，O代表女生。  我们想要通过学习来得到分类曲线，其中">
+<meta name="twitter:image" content="https://weizhixiaoyi.com/2018/07/03/深度神经网络之正则化/深度神经网络之正则化图片01.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://weizhixiaoyi.com/2018/07/03/深度神经网络之正则化/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>深度神经网络之正则化 | 谓之小一</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b54e835b3551fd0696954b3aedf5d645";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">谓之小一</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">永远相信·美好的事情即将发生</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-favorite">
+    <a href="/favorite/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />喜欢</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/07/03/深度神经网络之正则化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XiaoYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="谓之小一">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">深度神经网络之正则化
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-03 09:58:46" itemprop="dateCreated datePublished" datetime="2018-07-03T09:58:46+08:00">2018-07-03</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/07/03/深度神经网络之正则化/" class="leancloud_visitors" data-flag-title="深度神经网络之正则化">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">8 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-正则化"><a href="#1-正则化" class="headerlink" title="1.正则化"></a>1.正则化</h3><p>之前介绍的<a href="https://mp.weixin.qq.com/s/UeEL1rOdjMpaKqTFpclS3A" target="_blank" rel="noopener">文章</a>之中，我们已多次接触到正则化方法，但没有详细的解释为什么要正则化，什么是正则化，以及L1正则化和L2正则化的区别。本次文章之中，我们将详解机器学习中正则化的概念和深度神经网络中的正则化方法。</p>
+<h4 id="1-1-为什么要正则化？"><a href="#1-1-为什么要正则化？" class="headerlink" title="1.1 为什么要正则化？"></a>1.1 为什么要正则化？</h4><p>讲到为什么需要正则化，就需要了解什么是过拟合问题。以下面图片为例，我们能够看到有两个类别，其中以X代表男生，O代表女生。</p>
+<p><img src="/2018/07/03/深度神经网络之正则化/深度神经网络之正则化图片01.png" alt="深度神经网络之正则化图片01"></p>
+<p>我们想要通过学习来得到分类曲线，其中分类曲线能够有效区分男生和女生，现在来分析下上面的三种分类结果。</p>
+<ul>
+<li><strong>欠拟合：</strong>图1分类明显欠缺，有些男生被分为女生，有些女生被分为男生。</li>
+<li><strong>正拟合：</strong>图2虽然有两个男生被分类为女生，但能够理解，毕竟我们人类自己也有分类错误的情况，比如通过化妆，女装等方法。</li>
+<li><strong>过拟合：</strong>图3虽然能够全部分类正确，但结果全部正确就一定好吗？不一定，我们能够看到分类曲线明显过于复杂，模型学习的时候学习了过多的参数项，但其中某些参数项是无用的特征，比如<strong>眼睛大小</strong>。当我们进行识别测试集数据时，就需要提供更多的特征，如果测试集包含海量的数据，模型的时间复杂度可想而知。</li>
+</ul>
+<h4 id="1-2-什么是正则化？"><a href="#1-2-什么是正则化？" class="headerlink" title="1.2 什么是正则化？"></a>1.2 什么是正则化？</h4><p>既然我们已经知道什么是过拟合，那么怎么解决过拟合问题呢？上面有介绍到，模型出现过拟合，是在模型<strong>特征</strong>上过于复杂。而特征又包含在我们的目标函数f(x)之中，那么只能从目标函数f(x)中寻找解决问题的方法。假设目标函数f(x)和损失函数J0为</p>
+<script type="math/tex; mode=display">
+f(X)=w_0x_0+w_1x_1+w_2x_3+...+w_nx_n</script><script type="math/tex; mode=display">
+J_0=||f(x)-y||_2^2=||XW-y||^2_2</script><p>对于上式，如果特征项$x_0,x_1,x_2,…,x_n$越多的话，自然$w_0,w_1,w_2,…,w_n$也就越多。想要减少特征的数量，自然减小<strong>N</strong>也就好了。而N影响的是$X=(x_0,x_1,x_2,…,x_n)$和$W=(w_0,w_1,w_2,…,w_n)$两项，那么是从<strong>X</strong>解决问题还是从<strong>W</strong>解决问题呢？</p>
+<p>如果从<strong>X</strong>入手解决问题，但训练过程中我们不知道下一个样本X是什么，会怎样的影响目标函数，所以此路不通。那么<strong>W</strong>如何呢？我们知道W系数是训练过程中通过学习历史数据得到的，和历史数据有关，所以应该可以。现在再回到我们原来的问题，希望减少N的数目，而让N最小化，其实就是让X向量或W向量中项的个数最小化，既然X不行，那么我们可以尝试让W向量中项的个数最小化。如何求解才能让W向量中项的个数最小，我们先简单介绍下0、1、2范数的概念。</p>
+<ul>
+<li><strong>L0范数：</strong>向量中非零元素的个数，记为$||W||_0$。</li>
+<li><strong>L1范数：</strong>绝对值之和，记为$||W||_1$。</li>
+<li><strong>L2范数：</strong>通常意义上的模，记为$||W||_2$。</li>
+</ul>
+<p>所以为了防止过拟合，我们需要让$||W||_0$最小，同时让损失函数$J_0$最小，为了满足两项最小化，可以让$J_0$和$||W||_0$之和最小化。但因为$||W||_0$比较难求(NP难问题)，我们进而可以转化为求$||W||_1$。$||W||_1$是$||W||_0$的最优凸近似，都可以实现<strong>稀疏</strong>，比较容易求解，这也是为什么可以选用$||W||_1$的原因。最后损失函数后面添加的额外项$||W||_1$，也就是我们称作的L1正则化，$\alpha$含义在后面进行讲解。</p>
+<script type="math/tex; mode=display">
+J=J_0+L1=||XW-y||^2_2+\alpha||W||_1</script><p>说完L0范数和L1范数，就不得不提L2范数。L2范数是指先求向量各元素的平方和，然后再进行求平方根，也就是通常意义上的模。同样，对于正则化问题，我们的目标是让W向量中的每个元素都很小，也就是让L2范数最小。L1范数和L2范数的不同点在于，L1范数会让其中某些元素等于0，而L2范数只是让其中元素接近0，这里有很大不同，我们在后面会进行详细讲解。最后损失函数后面添加的额外项||W||2，也就是我们称作的L2正则化。</p>
+<script type="math/tex; mode=display">
+J=J_0+L2=||XW-y||^2_2+\alpha ||W||_2</script><h4 id="1-3-L1正则化和L2正则化"><a href="#1-3-L1正则化和L2正则化" class="headerlink" title="1.3 L1正则化和L2正则化"></a>1.3 L1正则化和L2正则化</h4><p><strong>L1正则化</strong>可以产生稀疏值矩阵，即产生一个稀疏模型，可以用于特征选择和解决过拟合。那什么是稀疏值矩阵呢？稀疏矩阵是矩阵中很多元素为0，只有少数元素是非零值的矩阵，稀疏矩阵的好处就是能够帮助模型找到重要特征，而去掉无用特征或影响甚小的特征。</p>
+<p>比如在分类或预测时，很多特征难以选择，如果代入稀疏矩阵，能够筛选出少数对目标函数有贡献的特征，去掉绝大部分贡献很小或没有贡献的特征(因为稀疏矩阵很多值是0或是很小值)。因此我们只需要关注系数是非零值的特征，从而达到特征选择和解决过拟合的问题。那么为什么L1正则化可以产生稀疏模型呢？</p>
+<p>假如带有L1正则化的损失函数方程如下所示，其中$J_0$是原始损失函数，$\alpha \sum_{w}|w|$是正则化项，$\alpha$是正则化系数。根据1.2节的介绍，可以采用一定的方法，比如梯度下降法，求出在L1的约束下$J_0$的最小值。</p>
+<script type="math/tex; mode=display">
+J=J_0+L_1=J_0+\alpha \sum_{w}|w|</script><p>以上述损失函数为例，我们考虑二维的情况，即只有两个权值$w_1$和$w_2$，此时$L1=\alpha(|w|_1+|w|_2)$。对于梯度下降法，求解$J_0$的过程，可以画出如下的等值线。同时L1正则化函数也可以在$w_1,w_2$二维平面上表示出来，即黑色直线所围成的菱形。</p>
+<p><img src="/2018/07/03/深度神经网络之正则化/深度神经网络之正则化图片02.png" alt="深度神经网络之正则化图片02"></p>
+<p>从上图可以看出，当J0等值线与L1图形首次相交的点就是最优解，也就是上图中的(0,w)。而对于L1函数有许多突出的点(二维情况下是4个)，J0函数与这些顶点接触的概率远大于与L1其他部分接触的概率，恰好在这些顶点上会有很多权值等于0，这就是为什么L1正则化可以产生稀疏模型，进而可以用于特征选择。最后针对L1正则化再介绍下系数α，其目的是控制L1图形的大小。当α越小，L1的图形越大，α越大，L1图形也就越小。L1图形可以小到在原点附近，这也就是为什么w可以取到很小的原因。</p>
+<p>另外<strong>L2正则化</strong>也可以很好的解决过拟合问题。从上面得知，拟合过程中通常都倾向于让权值尽可能小，最后构造出一个让所有参数都比较小的模型。因为一般认为参数值小的模型比较简单，能够适应于不同的数据集，比如对于目标方程，若参数很大，那么数据只要偏倚一点点，那么对结果的影响就很大。如果参数很小的话，即使数据变化范围比较大，对结果影响也不是很大。相对来说，参数较小的话，对模型的抗扰动能力强。那么为什么L2正则化可以获得很小的参数值呢？我们假设带有L2正则化的损失函数方程如下所示，并对损失函数进行求导。</p>
+<script type="math/tex; mode=display">
+J=J_0+L_2=J_0+\frac{\lambda}{2n}\sum_{w}w^2</script><script type="math/tex; mode=display">
+\frac{\partial J}{\partial w}=\frac{\partial J_0}{\partial w}+\frac{\lambda}{n}w</script><script type="math/tex; mode=display">
+\frac{\partial J}{\partial b}=\frac{\partial J_0}{\partial n}</script><p>当利用梯度下降算法进行更新w时，w变化如下所示，其中α是学习速率。</p>
+<script type="math/tex; mode=display">
+w\rightarrow w-\alpha \frac{\partial J_0}{\partial w}-\frac{\alpha \lambda}{n}w</script><script type="math/tex; mode=display">
+=(1-\frac{\alpha \lambda}{n})w-\alpha\frac{\partial J_0}{\partial w}</script><p>可以看到在梯度下降算法过程中，w是不断进行减小的，也就是权重衰减，这样也就能得到一个让所有参数都比较小的模型，也就能解决过拟合问题。最后再解释下为什么L2正则化不具有稀疏性的原因，如下图所示，二维平面下L2正则化的函数图形是圆，与L1图形相比，没有了菱角。因此J0与L2接触时，使w1或w2等于0的机率就小了很多，所以L2正则化不具有稀疏性。</p>
+<p><img src="/2018/07/03/深度神经网络之正则化/深度神经网络之正则化图片03.png" alt="深度神经网络之正则化图片03"></p>
+<h3 id="2-DNN之L1和L2正则化"><a href="#2-DNN之L1和L2正则化" class="headerlink" title="2.DNN之L1和L2正则化"></a>2.DNN之L1和L2正则化</h3><p>和普通机器学习算法一样，DNN也会遇到过拟合的问题，因此需要考虑泛化。结合我们上面讲到的L1和L2正则化，这里对深度神经网络中的正则化做个总结，其中L1正则化和L2正则化原理类似，这里主要介绍L2正则化方法。通过<a href="https://mp.weixin.qq.com/s?__biz=MzU3MjA2NTQzMw==&amp;mid=2247483903&amp;idx=1&amp;sn=4e3f92578399013eba9f203d35afe972&amp;chksm=fcd7d209cba05b1ffc66494ea8008c669e40f3045398695b479aba14e1c425f85b7c8f033c4f#rd" target="_blank" rel="noopener">深度神经网络之前向传播算法</a>的学习，我们知道前向传播过程中损失函数为</p>
+<script type="math/tex; mode=display">
+J(W,b)=\frac{1}{2m}\sum _{i=1}^{m}||a^L-y||_2^2</script><p>加入L2正则化后，损失函数如下所示。其中λ是正则化参数，实际使用时需要我们进行调参。</p>
+<script type="math/tex; mode=display">
+J(W,b)=\frac{1}{2m}\sum _{i=1}^{m}||a^L-y||_2^2+\frac{\lambda}{2m}\sum_{l=2}^{L}||w||_2^2</script><p>如果使用上式的损失函数，进行反向传播算法时，流程和没有正则化时的反向传播算法相同。区别在于进行梯度下降时，W更新公式会进行改变。在<a href="https://mp.weixin.qq.com/s?__biz=MzU3MjA2NTQzMw==&amp;mid=2247483911&amp;idx=1&amp;sn=bcc0fe6a4a0c20a422f254b3264a5fb8&amp;chksm=fcd7d1f1cba058e7bddefb3d47ba6f87879663c15a5cea5c6653138d0fb1aa9d3454e2ea605a#rd" target="_blank" rel="noopener">深度神经网络之反向传播算法</a>中，W的梯度下降更新公式为</p>
+<script type="math/tex; mode=display">
+W^l=W^l-\alpha \sum_{i=1}^{m} \delta^{i,l}(a^{x,l-1})^T</script><p>加入L2正则化后，W迭代更新公式如下所示</p>
+<script type="math/tex; mode=display">
+W^l=W^l-\alpha \sum_{i=1}^{m} \delta^{i,l}(a^{x,l-1})^T-\frac{\alpha }{m}\lambda W^l</script><p>类似的正则化方法，同样可以用于其他损失函数，在这里不再介绍。</p>
+<h3 id="3-DNN之Dropout正则化"><a href="#3-DNN之Dropout正则化" class="headerlink" title="3.DNN之Dropout正则化"></a>3.DNN之Dropout正则化</h3><p>Dropout指的是在用前向传播算法和反向传播算法训练模型时，随机的从全连接DNN网络中去掉一部分隐含层的神经元。比如我们完整的DNN模型如下所示</p>
+<p><img src="/2018/07/03/深度神经网络之正则化/深度神经网络之正则化图片04.png" alt="深度神经网络之正则化图片04"></p>
+<p>然后随机的去掉部分隐含层的神经元，利用数据进行训练模型，更新所有的W,b。</p>
+<p><img src="/2018/07/03/深度神经网络之正则化/深度神经网络之正则化图片05.png" alt="深度神经网络之正则化图片05"></p>
+<p>总结下Dropout方法就是，每轮梯度下降迭代时，将训练数据分成若干批，然后分批进行迭代。每批数据迭代时，将原始的DNN模型随机去掉部分隐含层的神经元，然后用残缺的DNN模型来迭代更新W,b。每批数据迭代完成之后，将残缺的DNN模型恢复成原始的DNN模型，接着去训练模型，更新W,b。当然，运用Dropout正则化方法，需要有较大数据量支持，否则可能会出现欠拟合的情况。</p>
+<h3 id="4-DNN之集成学习正则化"><a href="#4-DNN之集成学习正则化" class="headerlink" title="4.DNN之集成学习正则化"></a>4.DNN之集成学习正则化</h3><p>在<a href="https://mp.weixin.qq.com/s?__biz=MzU3MjA2NTQzMw==&amp;mid=2247483845&amp;idx=1&amp;sn=5484385408d694ba03a8bdc3a03c2263&amp;chksm=fcd7d233cba05b25b0f65289f8416466df9124b019b60704b4e3875d9864ff90e3388c666f66#rd" target="_blank" rel="noopener">机器学习之随机森林</a>和<a href="https://mp.weixin.qq.com/s?__biz=MzU3MjA2NTQzMw==&amp;mid=2247483849&amp;idx=1&amp;sn=3cd3d40d26e600901cf3d72c43f7c696&amp;chksm=fcd7d23fcba05b2923651f1b0808861b4e559de1b004f37a2adcec7fae9002dd9f11d99c7791#rd" target="_blank" rel="noopener">机器学习之梯度提升决策树</a>之中，我们已经学习集成学习中的Bagging和Boosting方法，而DNN可以用Bagging方法来正则化。随机森林中，Bagging方法通过随机采样构建若干个相互独立的弱决策树学习器，最后通过采用加权平均法或者投票法决定集成的输出。</p>
+<p>DNN中我们采用的是若干个DNN的网络，首先对原始的训练样本进行有放回的随机采样，构建N组m个样本的数据集，然后分别用这N组数据集去训练我们的DNN。通过利用前向传播算法和反向传播算法得到N个DNN模型的W,b参数组合，然后对N个DNN模型的输出用加权平均法或者投票法决定最后的输出。最后，因为DNN模型比较复杂，通过Bagging后模型参数会增加N倍，从而导致训练模型需要花费较长的时间，因此一般N的取值不能太大，5-10个即可。</p>
+<h3 id="5-DNN之增强数据集正则化"><a href="#5-DNN之增强数据集正则化" class="headerlink" title="5.DNN之增强数据集正则化"></a>5.DNN之增强数据集正则化</h3><p>增强模型泛化能力最好的方法，是有更多更好的训练数据，但实际情况之中，对于某些数据，我们很难能够得到。那么，我们不如去构造一些数据，来让模型得到更强的泛化能力。对于传统的机器学习算法，比如上面提到的<a href="https://mp.weixin.qq.com/s?__biz=MzU3MjA2NTQzMw==&amp;mid=2247483845&amp;idx=1&amp;sn=5484385408d694ba03a8bdc3a03c2263&amp;chksm=fcd7d233cba05b25b0f65289f8416466df9124b019b60704b4e3875d9864ff90e3388c666f66#rd" target="_blank" rel="noopener">机器学习之随机森林</a>和<a href="https://mp.weixin.qq.com/s?__biz=MzU3MjA2NTQzMw==&amp;mid=2247483849&amp;idx=1&amp;sn=3cd3d40d26e600901cf3d72c43f7c696&amp;chksm=fcd7d23fcba05b2923651f1b0808861b4e559de1b004f37a2adcec7fae9002dd9f11d99c7791#rd" target="_blank" rel="noopener">机器学习之梯度提升决策树</a>算法，想要构造数据的话，能够很方便的构造输入数据，但是很难构造出对应的输出数据。</p>
+<p>但对于深度神经网络来说，比如图像识别领域，对于原始数据集的图像，我们可以偏倚或者旋转图像之后，得到新的数据集。显然原始数据和新构造的数据输入是不同的图像，但输出是相同的，因此通过训练后，模型的泛化便能够增强。对应的例子，比如利用DNN识别手写数字，数字5旋转15度之后，识别之后还是5。</p>
+<p>参考</p>
+<blockquote>
+<p><a href="https://www.cnblogs.com/pinard/p/6472666.html" target="_blank" rel="noopener">深度神经网络(DNN)的正则化-刘建平Pinard</a></p>
+<p><a href="https://blog.csdn.net/jinping_shi/article/details/52433975" target="_blank" rel="noopener">机器学习中正则化项L1和L2的直观理解-阿拉丁吃米粉</a></p>
+<p><a href="https://www.zhihu.com/question/20924039" target="_blank" rel="noopener">机器学习中常常提到的正则化到底是什么意思？-陶轻松</a></p>
+</blockquote>
+<h3 id="6-推广"><a href="#6-推广" class="headerlink" title="6.推广"></a>6.推广</h3><p>更多内容请关注公众号<strong>谓之小一</strong>，若有疑问可在公众号后台提问，随时回答，欢迎关注，内容转载请注明出处。</p>
+<p><img src="/2018/07/03/深度神经网络之正则化/推广.png" alt="推广"></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/30/深度神经网络之损失函数和激活函数/" rel="next" title="深度神经网络之损失函数和激活函数">
+                <i class="fa fa-chevron-left"></i> 深度神经网络之损失函数和激活函数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNDgwNS8xMTM0Mg=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="XiaoYi" />
+            
+              <p class="site-author-name" itemprop="name">XiaoYi</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/weizhixiaoyi" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/weizhixiaoyi/activities" target="_blank" title="ZhiHu" rel="external nofollow"><i class="fa fa-fw fa-book"></i>ZhiHu</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://p66yyzg4i.bkt.clouddn.com/wechat.png" target="_blank" title="WeChat" rel="external nofollow"><i class="fa fa-fw fa-weixin"></i>WeChat</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhenhai.gl@gmail.com" target="_blank" title="E-Mail" rel="external nofollow"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-正则化"><span class="nav-text">1.正则化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-为什么要正则化？"><span class="nav-text">1.1 为什么要正则化？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-什么是正则化？"><span class="nav-text">1.2 什么是正则化？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-L1正则化和L2正则化"><span class="nav-text">1.3 L1正则化和L2正则化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-DNN之L1和L2正则化"><span class="nav-text">2.DNN之L1和L2正则化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-DNN之Dropout正则化"><span class="nav-text">3.DNN之Dropout正则化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-DNN之集成学习正则化"><span class="nav-text">4.DNN之集成学习正则化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-DNN之增强数据集正则化"><span class="nav-text">5.DNN之增强数据集正则化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-推广"><span class="nav-text">6.推广</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XiaoYi</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">155k</span>
+  
+
+  
+</div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("Sj2lCA09ErubMSsa2v9oFU9Y-gzGzoHsz", "qJejurdHKM06N75OQedX4SDK");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.get('time'));
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

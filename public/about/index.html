@@ -121,18 +121,18 @@
 
 
 
-  <meta name="description" content="「谓之小一」希望提供给读者别处看不到的内容，关于互联网、机器学习、数据挖掘、编程、书籍、生活…欢迎关注公众号阅读更多内容。">
+  <meta name="description" content="「谓之小一」希望提供给读者别处看不到的内容，关于互联网、机器学习、数据挖掘、编程、书籍、生活…欢迎关注公众号阅读更多内容。个人简历">
 <meta property="og:type" content="website">
 <meta property="og:title" content="关于">
 <meta property="og:url" content="https://weizhixiaoyi.com/about/index.html">
 <meta property="og:site_name" content="谓之小一">
-<meta property="og:description" content="「谓之小一」希望提供给读者别处看不到的内容，关于互联网、机器学习、数据挖掘、编程、书籍、生活…欢迎关注公众号阅读更多内容。">
+<meta property="og:description" content="「谓之小一」希望提供给读者别处看不到的内容，关于互联网、机器学习、数据挖掘、编程、书籍、生活…欢迎关注公众号阅读更多内容。个人简历">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://weizhixiaoyi.com/about/index/公众号.jpg">
-<meta property="og:updated_time" content="2018-05-20T12:48:30.543Z">
+<meta property="og:updated_time" content="2018-07-01T08:57:35.075Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于">
-<meta name="twitter:description" content="「谓之小一」希望提供给读者别处看不到的内容，关于互联网、机器学习、数据挖掘、编程、书籍、生活…欢迎关注公众号阅读更多内容。">
+<meta name="twitter:description" content="「谓之小一」希望提供给读者别处看不到的内容，关于互联网、机器学习、数据挖掘、编程、书籍、生活…欢迎关注公众号阅读更多内容。个人简历">
 <meta name="twitter:image" content="https://weizhixiaoyi.com/about/index/公众号.jpg">
 
 
@@ -406,8 +406,8 @@
       <div class="post-body">
         
         
-          <p>「谓之小一」希望提供给读者别处看不到的内容，关于互联网、机器学习、数据挖掘、编程、书籍、生活…欢迎关注公众号阅读更多内容。</p>
-<p>  <img src="index/公众号.jpg" alt="公众号"></p>
+          <p>「谓之小一」希望提供给读者别处看不到的内容，关于互联网、机器学习、数据挖掘、编程、书籍、生活…欢迎关注公众号阅读更多内容。<a href="http://p66yyzg4i.bkt.clouddn.com/%E7%8E%8B%E6%8C%AF%E6%B5%B7%28Eric%29_C++.pdf" target="_blank" rel="noopener"><strong>个人简历</strong></a></p>
+<p><img src="/about/index/公众号.jpg" alt="公众号"></p>
 
         
       </div>
@@ -476,7 +476,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -497,7 +497,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -532,7 +540,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -608,7 +624,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数"></span>
+    <span title="站点总字数">155k</span>
   
 
   
@@ -1194,9 +1210,25 @@
             });
           } else {
             
-              var $element = $(document.getElementById(url));
-              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
-              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
             
           }
         },

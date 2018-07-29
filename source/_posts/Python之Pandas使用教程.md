@@ -8,11 +8,16 @@ comments: true
 ---
 ### 1.Pandas概述
 
- 1. Pandas是Python的一个数据分析包，该工具为解决数据分析任务而创建。
- 2. Pandas纳入大量库和标准数据模型，提供高效的操作数据集所需的工具。
- 3. Pandas提供大量能使我们快速便捷地处理数据的函数和方法。
- 4. Pandas是字典形式，基于NumPy创建，让NumPy为中心的应用变得更加简单。   
+  1. Pandas是Python的一个数据分析包，该工具为解决数据分析任务而创建。
+  2. Pandas纳入大量库和标准数据模型，提供高效的操作数据集所需的工具。
+  3. Pandas提供大量能使我们快速便捷地处理数据的函数和方法。
+  4. Pandas是字典形式，基于NumPy创建，让NumPy为中心的应用变得更加简单。   
+
+
 ### 2.Pandas安装
+
+
+
 ```
 pip3 install pandas
 ```
@@ -652,4 +657,4 @@ K2  A2  B2  C2  D2
 ```
 ----------
 更多内容请关注公众号'谓之小一'，若有疑问可在公众号后台提问，随时回答，内容转载请注明出处。「谓之小一」希望提供给读者别处看不到的内容，关于互联网、机器学习、数据挖掘、编程、书籍、生活...
-<div align=center>![公众号](http://img.blog.csdn.net/20180311001720557?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvWGlhb1lpX0VyaWM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![推广](http://p66yyzg4i.bkt.clouddn.com/%E6%8E%A8%E5%B9%BF.png)

@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="E1Oy09IV-Rsypa8wpY-yrplcH8RMIHLCzj3m91nX1Eo" />
+
+
+
+  <meta name="msvalidate.01" content="9219CFDFC7384B4F0A08B73CF8790554" />
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="pvvBAkBQvG" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="首先非常抱歉，最近一段时间由于学校课程作业较多，外加个人较懒，所以一直没有更新文章，以后一定会勤奋点，多加更新。正如前几天在stormzhang(张哥)的公众号里看到的一样，写作其实并不难，每个人都可以做到，但是长期坚持写作就非常难，这也是写作者想要长期创作遇到的第一个大问题，所以贵在坚持。另外长期写作的第二大问题是什么呢？你猜猜看，看看我们认为的是不是一样。 最近主要是完成专业内的一些课程作业，">
+<meta name="keywords" content="文字识别">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网店工商信息图片文字提取">
+<meta property="og:url" content="https://weizhixiaoyi.com/2018/06/10/网店工商信息图片文字提取/index.html">
+<meta property="og:site_name" content="谓之小一">
+<meta property="og:description" content="首先非常抱歉，最近一段时间由于学校课程作业较多，外加个人较懒，所以一直没有更新文章，以后一定会勤奋点，多加更新。正如前几天在stormzhang(张哥)的公众号里看到的一样，写作其实并不难，每个人都可以做到，但是长期坚持写作就非常难，这也是写作者想要长期创作遇到的第一个大问题，所以贵在坚持。另外长期写作的第二大问题是什么呢？你猜猜看，看看我们认为的是不是一样。 最近主要是完成专业内的一些课程作业，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://p66yyzg4i.bkt.clouddn.com/%E7%BD%91%E5%BA%97%E5%B7%A5%E5%95%86%E4%BF%A1%E6%81%AF%E5%9B%BE%E7%89%87%E6%96%87%E5%AD%97%E6%8F%90%E5%8F%9601.png">
+<meta property="og:image" content="http://p66yyzg4i.bkt.clouddn.com/%E7%BD%91%E5%BA%97%E5%B7%A5%E5%95%86%E4%BF%A1%E6%81%AF%E5%9B%BE%E7%89%87%E6%96%87%E5%AD%97%E6%8F%90%E5%8F%9602.png">
+<meta property="og:image" content="http://p66yyzg4i.bkt.clouddn.com/%E6%8E%A8%E5%B9%BF.png">
+<meta property="og:updated_time" content="2018-06-11T12:57:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网店工商信息图片文字提取">
+<meta name="twitter:description" content="首先非常抱歉，最近一段时间由于学校课程作业较多，外加个人较懒，所以一直没有更新文章，以后一定会勤奋点，多加更新。正如前几天在stormzhang(张哥)的公众号里看到的一样，写作其实并不难，每个人都可以做到，但是长期坚持写作就非常难，这也是写作者想要长期创作遇到的第一个大问题，所以贵在坚持。另外长期写作的第二大问题是什么呢？你猜猜看，看看我们认为的是不是一样。 最近主要是完成专业内的一些课程作业，">
+<meta name="twitter:image" content="http://p66yyzg4i.bkt.clouddn.com/%E7%BD%91%E5%BA%97%E5%B7%A5%E5%95%86%E4%BF%A1%E6%81%AF%E5%9B%BE%E7%89%87%E6%96%87%E5%AD%97%E6%8F%90%E5%8F%9601.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://weizhixiaoyi.com/2018/06/10/网店工商信息图片文字提取/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>网店工商信息图片文字提取 | 谓之小一</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b54e835b3551fd0696954b3aedf5d645";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">谓之小一</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">永远相信·美好的事情即将发生</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-favorite">
+    <a href="/favorite/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />喜欢</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/06/10/网店工商信息图片文字提取/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XiaoYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="谓之小一">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">网店工商信息图片文字提取
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-06-10 21:00:24" itemprop="dateCreated datePublished" datetime="2018-06-10T21:00:24+08:00">2018-06-10</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/文字识别/" itemprop="url" rel="index"><span itemprop="name">文字识别</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/06/10/网店工商信息图片文字提取/" class="leancloud_visitors" data-flag-title="网店工商信息图片文字提取">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">5.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">9 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>首先非常抱歉，最近一段时间由于学校课程作业较多，外加个人较懒，所以一直没有更新文章，以后一定会勤奋点，多加更新。正如前几天在stormzhang<strong>(张哥)</strong>的公众号里看到的一样，写作其实并不难，每个人都可以做到，但是长期坚持写作就非常难，这也是写作者想要长期创作遇到的第一个大问题，所以贵在坚持。另外长期写作的第二大问题是什么呢？你猜猜看，看看我们认为的是不是一样。</p>
+<p>最近主要是完成专业内的一些课程作业，比如Oracle数据库、JaveEE、搜索引擎等作业。国内大学总是会学很多课程，其实对多数学生来说，一些课程都不知道学着有什么意义。这点国外做的较是不错，在英国UWS当交换生的时候，可以选择自己喜欢的课程，这样也就有很大的兴趣去学习这些知识点。</p>
+<p>在解决这些课程作业之中，有件事感觉可以和大家分享一下。我们都知道计算机行业技术更新非常快，然而JavaEE老师教的知识点还是10多年前的内容，每次课程结束之中还需完成一个实验。但就是这样一个简单实验，却需要我们学生花费2天或者3天时间去完成。花这么长时间，按理来说应该很难吧，恰恰相反，实验很简单，那为什么还要花这么长时间呢。其实多数时间都是用在各种环境配置、参数设置、寻找各种jar包中，实在不需要写多少代码。比如我需要调用某个jar包，版本太高不行，版本太低不行，来来回回换个好几个，遇到问题想去查一些博客，竟然都是10年前的资料。完成一次实验之后，至此JaveEE的实验我再也没有去做，每次要交的时候，都是借用同学的电脑给老师展示一下，然后拿个分数就走。不是说我懒，没有什么探索、钻研精神，全然是因为学习这种东西实在没有什么用处，还浪费很多时间，不如利用这些时间去完成一些自己比较感兴趣的事情。</p>
+<p>另外需要声明一点的是，我的意思并不是旧的东西就没有用，而是强调在实用性和意义方面。比如数据结构、网络原理、操作系统，这样原理性的知识点，沉淀起来才是精华。但对于JavaEE这种实际开发技术来说，我认为过于陈旧的东西实在没有必要去学习。另外针对JaveEE开发这门课，任课老师为什么就不能更新一下知识点，来教一些更新的技术呢。既然如此，我的目标又不是追求多高多高的GPA，那么不如利用这些时间来解决一些自己比较感兴趣的问题，做一些有意义的事情较好。</p>
+<p>专业课程作业之外，还有一个实训作业，也就是从<a href="http://www.cnsoftbei.com/" target="_blank" rel="noopener">中软杯</a>12个题目之中选出来一个完成，然后进行答辩，由指导老师进行评分。这个我感觉还是比较有意思的，所以选了个网店工商信息图片文字提取的题目，然后花四天时间完成，下面主要和大家分享一下问题的解决思路。</p>
+<h3 id="1-网店工商信息图片文字提取"><a href="#1-网店工商信息图片文字提取" class="headerlink" title="1.网店工商信息图片文字提取"></a>1.网店工商信息图片文字提取</h3><p>图片内容如下所示，但每张图片中信息出现的位置不尽相同，题目要求所写的程序能够完成如下几个功能点。</p>
+<ul>
+<li>程序能够识别不同格式的图片，并能够提取所要求的信息。</li>
+</ul>
+<ul>
+<li><p>从图片之中提取企业注册号和企业名称信息，并保存到Excel表格之中。</p>
+</li>
+<li><p>程序能够自动读取企业工商信息图片所在的文件夹路径。</p>
+</li>
+<li>识别速度保持在60秒识别50张图片，识别正确率保证在95%以上。</li>
+</ul>
+<p><img src="http://p66yyzg4i.bkt.clouddn.com/%E7%BD%91%E5%BA%97%E5%B7%A5%E5%95%86%E4%BF%A1%E6%81%AF%E5%9B%BE%E7%89%87%E6%96%87%E5%AD%97%E6%8F%90%E5%8F%9601.png" alt="网店工商信息图片文字提取01"></p>
+<h3 id="2-Tess4j"><a href="#2-Tess4j" class="headerlink" title="2.Tess4j"></a>2.Tess4j</h3><p>了解题目要求之后，我们便开始来解决问题。首先明确一点的是，肯定不能从头去写文字识别算法或者文字识别程序，OCR(Optical Character Recognition , 光学字符识别)发展这么多年来，开源的库肯定不少，只需找到适合中文识别的类库或者项目即可。</p>
+<p>个人采用的是Tess4j开源库，其中Tess4j是由Tesseract扩展而来，Tesseract是HP实验室开发由Google维护的开源OCR引擎，Tess4j支持Tiff,jpeg,gif,png,pdf等多种格式识别。我们只需要在<a href="https://sourceforge.net/projects/tess4j/" target="_blank" rel="noopener">https://sourceforge.net/projects/tess4j/</a>下载类库，然后编写下述代码便可实现文字识别，使用方法很简单。如果你要使用的话，请注意package,imageFile,instance的位置。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> net.sourceforge.tess4j.example;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> net.sourceforge.tess4j.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TesseractExample1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;        </span><br><span class="line">    	</span><br><span class="line">        File imageFile = <span class="keyword">new</span> File(<span class="string">"/Users/zhenhai/Downloads/SoftwareCup/Tess4J/test/resources/tianmao/1.png"</span>);</span><br><span class="line">        ITesseract instance = <span class="keyword">new</span> Tesseract();  <span class="comment">// JNA Interface Mapping</span></span><br><span class="line">        <span class="comment">// ITesseract instance = new Tesseract1(); // JNA Direct Mapping</span></span><br><span class="line">        instance.setDatapath(<span class="string">"/Users/zhenhai/Downloads/SoftwareCup/Tess4J"</span>);</span><br><span class="line">		instance.setLanguage(<span class="string">"chi_sim"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            String result = instance.doOCR(imageFile);</span><br><span class="line">            System.out.println(result);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (TesseractException e) &#123;</span><br><span class="line">            System.err.println(e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-网店工商信息图片文字提取"><a href="#3-网店工商信息图片文字提取" class="headerlink" title="3.网店工商信息图片文字提取"></a>3.网店工商信息图片文字提取</h3><p>下载的tess4j项目自带英文字体库，而我们需要识别中文信息，所以需下载中文简体字体库。字体库下载完成之后，将题目提供给我们的图片进行识别，识别之后发现准确率很低，而且识别时间过长，所以需要对图片进行处理。</p>
+<blockquote>
+<p>企业注册号 : 913302055612570鄄7 ′</p>
+<p>企业名称: 宁麦皮中哲票广鲳I忏善 蓼鬓′墓示埔壹甬</p>
+<p>类 型 霉嫣膘占辆 虫资) 趴辕~蓼唧 `</p>
+<p>住惑7妻 踢「【庄北长兴路689弄22号11巾童A1壬蔚雀菅业^ 刁乏喔憩」壹雇</p>
+<p>法 人: 杨禾口荣</p>
+<p>成立时间:2010-08-26 甬 甬</p>
+<p>注册资本 : 1000万人民币元 / /</p>
+<p>营业I言【j目〖艮:2010-08洲:i墅o碾言壹 鹏 莹鬓、′墓示簪</p>
+<p>经莒范戛蓼反逼卫 目艮饰日勺扎匕发、 零售、 薯批愤嵩爵签稻昊信息的咨询 ; 服装i氦十犹撕{</p>
+<p>菖〈茵珥跨止\ 懦牌苣理 广告服务、 企业苣癫颧琨蓼 扩〈喔圃蓼′</p>
+<p>登i 机关 : 浙江雀宁波市江北区工商『壬政苣王里局</p>
+<p>核准时间 : 2015-12-24 <strong>日q </strong>日辄</p>
+</blockquote>
+<h4 id="3-1去除水印"><a href="#3-1去除水印" class="headerlink" title="3.1去除水印"></a>3.1去除水印</h4><p>首先能够看到，提供的图片带有<strong>天猫营业执照信息公示专用</strong>水印，所以我们需要进行去水印处理。花了很长时间在网上找去水印的开源代码，但多数都需要先提供水印模版，然后才能进行去水印处理。水印模版不是问题，我们直接截取水印图片即可，但重点是去水印处理之后，水印去除效果并不是很理想。观察一番之后，发现所有的图片水印都是同一个颜色，那么我们是不是可以把水印的rgb值改为和背景色相同，实验之后发现果然可以，由于代码比较简单，此处就不再贴出代码，可以自行尝试一下。然后重新对图片进行识别，发现准确率还是很低，那是什么原因呢？</p>
+<blockquote>
+<p>企业注册号 : 913302055612570鄄7 ′</p>
+<p>企业名称: 宁麦皮中哲票广鲳I忏善 蓼鬓′墓示埔壹甬</p>
+<p>类 型 霉裴章膘占辆 虫资) 趴辕~苜趴 `</p>
+<p>住惑)妻 踢「【庄北长兴路689弄22号11巾童A1壬蔚雀菅业^ 刁乏喔憩」壹雇</p>
+<p>法 人: 杨禾口荣</p>
+<p>成立时间:2010-08-26 甬 甬</p>
+<p>注册资本 : 1000万人民币元 / /</p>
+<p>营业I言【j目〖艮:2010-08洲:i墅o蔺言壹 鹏 莹鬓、′墓示簪</p>
+<p>经莒范戛蓼反逼卫 目艮饰日勺扎匕发、 零售、 薯批愤嵩爵垦稻昊信息的咨询 ; 眼装i氦十犹撕{</p>
+<p>菖〈茵珥跨止\ 懦牌苣理 广告目艮务、 企业苣癫颧寰蓼 扩〈喔圃蓼′</p>
+<p>登i 机关 : 浙江雀宁波市江北区工商『壬政苣王里局</p>
+<p>核准时间 : 2015-12-24 <strong>日q </strong>日辄</p>
+</blockquote>
+<h4 id="3-2图片格式转换"><a href="#3-2图片格式转换" class="headerlink" title="3.2图片格式转换"></a>3.2图片格式转换</h4><p>将图片放大之后，发现图片处于全黑的状态，完全看不到任何字。然后尝试将图片格式转换为其他格式，比如jpg，当然这里不是直接改后缀名，而是利用在线图片格式转换工具。当然你也可以转换成其他格式，看看效果如何，转换完成之后，再次进行图片文字识别，发现准确率有较大提升。</p>
+<blockquote>
+<p>企业注丹舟号 : 9133020……612…70177</p>
+<p>企业名称 : 宁波中哲慕尚电子商务有限公司</p>
+<p>类 型 : 有限责任公司〈法人独资)</p>
+<p>住 所 二 宁波市江才匕长兴路689弄22号11瞳A112室</p>
+<p>法定代表人: 杨禾口荣</p>
+<p>成立时间 : 2010-08-26</p>
+<p>注册资本 : 1000万人民币元</p>
+<p>营业期限 : 2010-08-26至2020-08-25</p>
+<p>经菖范围 : 服装、 箱包、 鞋帽<code>眼饰的批发</code> 零售、 网上批发` 零售及棺关信息的咨询 : 眼装i毓十</p>
+<p>、 企业品牌营王里、 广 告眼务、 企业盲理咨询。</p>
+<p>登记机关 : 浙江雀宁波市麦工才匕区工商肴壬政苣王里局</p>
+<p>核准时间 : 2015-12-24</p>
+</blockquote>
+<h4 id="3-3分区域识别"><a href="#3-3分区域识别" class="headerlink" title="3.3分区域识别"></a>3.3分区域识别</h4><p>图片识别准确率有一定程度提升之后，但是时间还是很高，大概15s左右，所以需要进一步优化。由于题目只需要我们识别企业注册号和企业名称，所以没有必要识别整张图片。但我们又不知道企业名称和企业注册号处于图片的什么位置，所以只能扫描着进行文字图片识别。我这里采用的是每次识别图片高度的18%，例第一次识别区域为0-18%，如果没有识别到我们所需的文字信息，下次识别图片15%-32%，这样就不会遇到文字刚好被识别区域切割的问题。</p>
+<p>那这样识别会识别到很多重复区域，时间怎么会提升呢？其实不然，观察题目所给的50张图片，其中有46张图片的信息都是在头部，那么第一次扫描便能得到所需的信息，综合来看时间有很大程度提升。另外如果长时间未能识别到某张图片信息，那么则自动放弃识别。更改程序后重新识别图片，时间有很大程度提升，每张图片的识别速度在3s左右。</p>
+<blockquote>
+<p>企业注册号 : 913302055612570177</p>
+<p>企业名称 : 宁波中哲票尚电子商务有眼公司</p>
+</blockquote>
+<p>对于本张图片来说，企业注册号已经能够正确识别，但是企业名称还是有个别字错误，比如将<strong>幕</strong>识别成<strong>票</strong>，将<strong>限</strong>识别成<strong>眼</strong>，因此需要进一步优化。</p>
+<h4 id="3-4-图片二值化"><a href="#3-4-图片二值化" class="headerlink" title="3.4 图片二值化"></a>3.4 图片二值化</h4><p>为进一步提高准确率，我们将图片二值化，然后再对图片放大10倍，其实放大倍数越高，识别准确率也应该越高。这里为了在时间和准确度之间做个平衡，对图片只放大10倍。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">BufferedImage textImage = ImageHelper.convertImageToGrayscale(ImageHelper.getSubImage(image, <span class="number">0</span>, startHeight, resetWidth, resetHeight));</span><br><span class="line"></span><br><span class="line">textImage = ImageHelper.convertImageToBinary(textImage);</span><br><span class="line"></span><br><span class="line">textImage = ImageHelper.getScaledInstance(textImage, textImage.getWidth() * <span class="number">10</span>, textImage.getHeight() * <span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+<p>图片放大10倍之后，我们再次对图片进行识别，发现企业注册号和企业名称完全正确。</p>
+<blockquote>
+<p>企业注册号 : 913302055612570177</p>
+<p>企业名称 : 宁波中哲幕尚电子商务有限公司</p>
+</blockquote>
+<h4 id="3-5图片模糊寻找和结果导出"><a href="#3-5图片模糊寻找和结果导出" class="headerlink" title="3.5图片模糊寻找和结果导出"></a>3.5图片模糊寻找和结果导出</h4><p>图片模糊寻找的意思也就是，给出图片文件夹的大致路径，然后程序能够找到正确的图片路径，并能够正确进行文字识别。比如给定/Users/zhenhai/Downloads/SoftwareCup/Tess4J路径，程序能够找到/Users/zhenhai/Downloads/SoftwareCup/Tess4J/test/resources/tianmao1/1.jpg路径。然后将识别到的结果导出到Excel表格，问题也很简单，这里也就不给出相应代码。</p>
+<p><img src="http://p66yyzg4i.bkt.clouddn.com/%E7%BD%91%E5%BA%97%E5%B7%A5%E5%95%86%E4%BF%A1%E6%81%AF%E5%9B%BE%E7%89%87%E6%96%87%E5%AD%97%E6%8F%90%E5%8F%9602.png" alt="网店工商信息图片文字提取02"></p>
+<p>至此已经能够识别图片，而且准确率挺不错，准确率在95%左右，识别成功之后也能够正常导出至Excel表格。但时间依旧不理想，目前识别50张图片大概在2分钟30s左右。</p>
+<h3 id="4-待优化"><a href="#4-待优化" class="headerlink" title="4.待优化"></a>4.待优化</h3><p>图片文字识别方面只做了4天，之前也没有做过相关问题，所以还是有很大的优化空间。</p>
+<ul>
+<li>利用多线程，识别时间应该能够减少1分钟，达到1分钟30s识别50张(猜测)。</li>
+<li>由于我们直接利用网上的字库，没有对字库做任何训练。比如可以将出现频率较高的词设置更高的优先级，这样不仅能够提高准确率，而且能够进一步降低时间，比如上述的<strong>限</strong>不会再识别成<strong>眼</strong>。</li>
+<li>图片大小不一，可以将图片设置为平均宽度和高度，然后再进行分区域识别。而且每次识别时候不是识别企业注册号和企业名称的完整信息，而只是试探识别这几个字，如果识别成功之后，然后再扩大识别宽度，提取所需要的完整信息。</li>
+</ul>
+<h3 id="5-推广"><a href="#5-推广" class="headerlink" title="5.推广"></a>5.推广</h3><p>更多内容请关注公众号<strong>谓之小一</strong>，若有疑问可在公众号后台提问，随时回答，欢迎关注，内容转载请注明出处。</p>
+<p><img src="http://p66yyzg4i.bkt.clouddn.com/%E6%8E%A8%E5%B9%BF.png" alt="推广"></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/文字识别/" rel="tag"># 文字识别</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/18/机器学习之Apriori算法/" rel="next" title="机器学习之Apriori算法">
+                <i class="fa fa-chevron-left"></i> 机器学习之Apriori算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/12/效率软件推荐（一）/" rel="prev" title="效率软件推荐（一）">
+                效率软件推荐（一） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNDgwNS8xMTM0Mg=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="XiaoYi" />
+            
+              <p class="site-author-name" itemprop="name">XiaoYi</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/weizhixiaoyi" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/weizhixiaoyi/activities" target="_blank" title="ZhiHu" rel="external nofollow"><i class="fa fa-fw fa-book"></i>ZhiHu</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://p66yyzg4i.bkt.clouddn.com/wechat.png" target="_blank" title="WeChat" rel="external nofollow"><i class="fa fa-fw fa-weixin"></i>WeChat</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhenhai.gl@gmail.com" target="_blank" title="E-Mail" rel="external nofollow"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-网店工商信息图片文字提取"><span class="nav-text">1.网店工商信息图片文字提取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Tess4j"><span class="nav-text">2.Tess4j</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-网店工商信息图片文字提取"><span class="nav-text">3.网店工商信息图片文字提取</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1去除水印"><span class="nav-text">3.1去除水印</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2图片格式转换"><span class="nav-text">3.2图片格式转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3分区域识别"><span class="nav-text">3.3分区域识别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-图片二值化"><span class="nav-text">3.4 图片二值化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5图片模糊寻找和结果导出"><span class="nav-text">3.5图片模糊寻找和结果导出</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-待优化"><span class="nav-text">4.待优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-推广"><span class="nav-text">5.推广</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XiaoYi</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">155k</span>
+  
+
+  
+</div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("Sj2lCA09ErubMSsa2v9oFU9Y-gzGzoHsz", "qJejurdHKM06N75OQedX4SDK");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.get('time'));
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="E1Oy09IV-Rsypa8wpY-yrplcH8RMIHLCzj3m91nX1Eo" />
+
+
+
+  <meta name="msvalidate.01" content="9219CFDFC7384B4F0A08B73CF8790554" />
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="pvvBAkBQvG" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1.损失函数和激活函数简介通过前面深度神经网络之前向传播算法和深度神经网络之反向传播算法的学习，我们能够了解到损失函数是用来评估模型的预测值与真实值之间的差异程度。另外损失函数也是神经网络中优化的目标函数，神经网络训练或者优化的过程就是最小化损失函数的过程，损失函数越小，说明模型的预测值就越接近真实值，模型的准确性也就越好。前面我们已经学习过平方损失函数，对数损失函数、交叉熵损失函数等不同形式的损">
+<meta name="keywords" content="算法,深度学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度神经网络之损失函数和激活函数">
+<meta property="og:url" content="https://weizhixiaoyi.com/2018/06/30/深度神经网络之损失函数和激活函数/index.html">
+<meta property="og:site_name" content="谓之小一">
+<meta property="og:description" content="1.损失函数和激活函数简介通过前面深度神经网络之前向传播算法和深度神经网络之反向传播算法的学习，我们能够了解到损失函数是用来评估模型的预测值与真实值之间的差异程度。另外损失函数也是神经网络中优化的目标函数，神经网络训练或者优化的过程就是最小化损失函数的过程，损失函数越小，说明模型的预测值就越接近真实值，模型的准确性也就越好。前面我们已经学习过平方损失函数，对数损失函数、交叉熵损失函数等不同形式的损">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/06/30/深度神经网络之损失函数和激活函数/深度神经网络之损失函数和激活函数图片01.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/06/30/深度神经网络之损失函数和激活函数/深度神经网络之损失函数和激活函数图片02.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/06/30/深度神经网络之损失函数和激活函数/深度神经网络之损失函数和激活函数图片03.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/06/30/深度神经网络之损失函数和激活函数/深度神经网络之损失函数和激活函数图片04.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/06/30/深度神经网络之损失函数和激活函数/深度神经网络之损失函数和激活函数图片05.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/06/30/深度神经网络之损失函数和激活函数/深度神经网络之损失函数和激活函数图片06.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/06/30/深度神经网络之损失函数和激活函数/深度神经网络之损失函数和激活函数图片07.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/06/30/深度神经网络之损失函数和激活函数/深度神经网络之损失函数和激活函数图片08.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/06/30/深度神经网络之损失函数和激活函数/推广.png">
+<meta property="og:updated_time" content="2018-06-30T10:45:53.662Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深度神经网络之损失函数和激活函数">
+<meta name="twitter:description" content="1.损失函数和激活函数简介通过前面深度神经网络之前向传播算法和深度神经网络之反向传播算法的学习，我们能够了解到损失函数是用来评估模型的预测值与真实值之间的差异程度。另外损失函数也是神经网络中优化的目标函数，神经网络训练或者优化的过程就是最小化损失函数的过程，损失函数越小，说明模型的预测值就越接近真实值，模型的准确性也就越好。前面我们已经学习过平方损失函数，对数损失函数、交叉熵损失函数等不同形式的损">
+<meta name="twitter:image" content="https://weizhixiaoyi.com/2018/06/30/深度神经网络之损失函数和激活函数/深度神经网络之损失函数和激活函数图片01.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://weizhixiaoyi.com/2018/06/30/深度神经网络之损失函数和激活函数/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>深度神经网络之损失函数和激活函数 | 谓之小一</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b54e835b3551fd0696954b3aedf5d645";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">谓之小一</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">永远相信·美好的事情即将发生</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-favorite">
+    <a href="/favorite/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />喜欢</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/06/30/深度神经网络之损失函数和激活函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XiaoYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="谓之小一">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">深度神经网络之损失函数和激活函数
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-06-30 12:51:43" itemprop="dateCreated datePublished" datetime="2018-06-30T12:51:43+08:00">2018-06-30</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/06/30/深度神经网络之损失函数和激活函数/" class="leancloud_visitors" data-flag-title="深度神经网络之损失函数和激活函数">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">4.5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">7 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-损失函数和激活函数简介"><a href="#1-损失函数和激活函数简介" class="headerlink" title="1.损失函数和激活函数简介"></a>1.损失函数和激活函数简介</h3><p>通过前面<a href="https://mp.weixin.qq.com/s?__biz=MzU3MjA2NTQzMw==&amp;mid=2247483903&amp;idx=1&amp;sn=4e3f92578399013eba9f203d35afe972&amp;chksm=fcd7d209cba05b1ffc66494ea8008c669e40f3045398695b479aba14e1c425f85b7c8f033c4f&amp;scene=38#wechat_redirect" target="_blank" rel="noopener">深度神经网络之前向传播算法</a>和<a href="https://mp.weixin.qq.com/s?__biz=MzU3MjA2NTQzMw==&amp;mid=2247483911&amp;idx=1&amp;sn=bcc0fe6a4a0c20a422f254b3264a5fb8&amp;chksm=fcd7d1f1cba058e7bddefb3d47ba6f87879663c15a5cea5c6653138d0fb1aa9d3454e2ea605a&amp;scene=38#wechat_redirect" target="_blank" rel="noopener">深度神经网络之反向传播算法</a>的学习，我们能够了解到损失函数是用来评估模型的预测值与真实值之间的差异程度。另外损失函数也是神经网络中优化的目标函数，神经网络训练或者优化的过程就是最小化损失函数的过程，损失函数越小，说明模型的预测值就越接近真实值，模型的准确性也就越好。前面我们已经学习过<strong>平方损失函数</strong>，<strong>对数损失函数</strong>、<strong>交叉熵损失函数</strong>等不同形式的损失函数，这里也就不做太多介绍。</p>
+<p>那么在深度神经网络之中，激活函数的作用又是什么呢？首先我们来看单层感知机模型，如下图所示，感知机可以利用分割线将平面分割开来。<img src="/2018/06/30/深度神经网络之损失函数和激活函数/深度神经网络之损失函数和激活函数图片01.png" alt="深度神经网络之损失函数和激活函数图片01"></p>
+<p>现在我们利用多个感知机进行组合，获得更强的分类能力，模型分类效果如下图所示。</p>
+<p><img src="/2018/06/30/深度神经网络之损失函数和激活函数/深度神经网络之损失函数和激活函数图片02.png" alt="神经网络之损失函数和激活函数图片02"></p>
+<p>但无论怎样组合，模型输出的时候都只是线性模型，如何解决非线性分类呢？好吧，上面是我们没有增加激活函数的情况。那么现在我们在每一层迭代完之后，增加一个激活函数，如下图的y=σ(a)所示，这样模型的输出便能解决非线性情况。将多个有激活函数的神经元组合起来，我们就可以得到一个相当复杂的函数。</p>
+<p><img src="/2018/06/30/深度神经网络之损失函数和激活函数/深度神经网络之损失函数和激活函数图片03.png" alt="深度神经网络之损失函数和激活函数图片03"></p>
+<p>引入非线性激活函数之中，模型的表达能力增强，能够有效解决非线性情况。通过不同形式的激活函数，模型也就能够学习到不同形式的分类方式，比如<strong>平滑分类平面</strong>，方面我们解决各种问题。</p>
+<p><img src="/2018/06/30/深度神经网络之损失函数和激活函数/深度神经网络之损失函数和激活函数图片04.png" alt="深度神经网络之损失函数和激活函数图片04"></p>
+<p>通过上面的介绍，我们能够了解到神经网络之中损失函数和激活函数的作用，但实际上DNN可以使用的损失函数和激活函数有不少，这时我们应该如何去做选择呢？下面我们介绍一些DNN之中常见的损失函数和激活函数。</p>
+<h3 id="2-交叉熵损失函数和Sigmoid激活函数"><a href="#2-交叉熵损失函数和Sigmoid激活函数" class="headerlink" title="2.交叉熵损失函数和Sigmoid激活函数"></a>2.交叉熵损失函数和Sigmoid激活函数</h3><p>在<a href="https://mp.weixin.qq.com/s?__biz=MzU3MjA2NTQzMw==&amp;mid=2247483911&amp;idx=1&amp;sn=bcc0fe6a4a0c20a422f254b3264a5fb8&amp;chksm=fcd7d1f1cba058e7bddefb3d47ba6f87879663c15a5cea5c6653138d0fb1aa9d3454e2ea605a&amp;scene=38#wechat_redirect" target="_blank" rel="noopener">深度神经网络之反向传播算法</a>之中，我们用的是均方差损失函数和Sigmoid激活函数，首先我们看看<strong>均方差损失函数和Sigmoid激活函数</strong>有什么问题。如下所示，是我们已经非常熟悉的Sigmoid激活函数表达式</p>
+<script type="math/tex; mode=display">
+\sigma(z)=\frac{1}{1+e^{-z}}</script><p>其中σ(z)的图像如下图所示，从图中可以看出，当z越来越大时，函数曲线也就变得越平缓，意味着此时导数σ′(z)也越小。同样，当z越来越小时，也会出现σ′(z)也越小。仅仅当z取值为0的附近时，导数σ′(z)取值较大。</p>
+<p><img src="/2018/06/30/深度神经网络之损失函数和激活函数/深度神经网络之损失函数和激活函数图片05.png" alt="深度神经网络之损失函数和激活函数图片05"></p>
+<p>在<a href="https://mp.weixin.qq.com/s?__biz=MzU3MjA2NTQzMw==&amp;mid=2247483911&amp;idx=1&amp;sn=bcc0fe6a4a0c20a422f254b3264a5fb8&amp;chksm=fcd7d1f1cba058e7bddefb3d47ba6f87879663c15a5cea5c6653138d0fb1aa9d3454e2ea605a&amp;scene=38#wechat_redirect" target="_blank" rel="noopener">深度神经网络之反向传播算法</a>之中，我们了解到每次反向迭代递推时，都要乘以σ′(z)得到梯度变化值。而Sigmoid的曲线意味着在大多数时候，DNN的梯度变化值较小，则会导致W,b更新到极值的速度很慢。那么有什么办法可以改变这种情况呢？</p>
+<p>常见的方法是选用交叉熵损失函数来代替均方差损失函数，首先来看看交叉熵损失函数的形式。其中 <strong>∙</strong> 为向量内积，我们在<a href="https://mp.weixin.qq.com/s?__biz=MzU3MjA2NTQzMw==&amp;mid=2247483814&amp;idx=1&amp;sn=16a56382d24e304a95ab2a2a028993c6&amp;chksm=fcd7d250cba05b46e16e5db30a85965878d051a17517b90c27f3206d23c6f3784c4e363f06eb#rd" target="_blank" rel="noopener">机器学习之Logistic回归</a>中便用到类似的交叉熵损失函数形式。</p>
+<script type="math/tex; mode=display">
+J(W,b,a,y)=-y \cdot lna-(1-y)\cdot ln(1-a)</script><p>然后应用交叉熵损失函数之后，输出层 $\delta ^L$的梯度变化情况如下所示。</p>
+<script type="math/tex; mode=display">
+\delta^L=\frac{J(W,b,a^L,y)}{\partial z^L}=-y\frac{1}{a^L}(1-a^L)+(1-y)\frac{1}{1-a^L}a^L(1-a^L)</script><script type="math/tex; mode=display">
+=-y(1-a^L)+(1-y)a^L=a^L-y</script><p>使用交叉熵损失函数与<a href="https://mp.weixin.qq.com/s?__biz=MzU3MjA2NTQzMw==&amp;mid=2247483911&amp;idx=1&amp;sn=bcc0fe6a4a0c20a422f254b3264a5fb8&amp;chksm=fcd7d1f1cba058e7bddefb3d47ba6f87879663c15a5cea5c6653138d0fb1aa9d3454e2ea605a&amp;scene=38#wechat_redirect" target="_blank" rel="noopener">深度神经网络之反向传播算法</a>中使用均方差损失函数的$\delta^L$有什么区别呢？我们发现使用均方差损失函数时$\delta^L=(a^L-y)\odot {\sigma}’(z)$，对比发现使用交叉熵损失函数没有${\sigma}’(z)$。这样求得的$w^l,b^l$便不包含${\sigma}’(z)$，因此避免了反向传播收敛速度慢的问题。通常情况下，使用Sigmoid激活函数时，交叉熵损失函数比均方差损失函数好用。</p>
+<h3 id="3-对数似然损失函数和softmax激活函数"><a href="#3-对数似然损失函数和softmax激活函数" class="headerlink" title="3.对数似然损失函数和softmax激活函数"></a>3.对数似然损失函数和softmax激活函数</h3><p>前面我们假设模型的输出都是连续可导的值，但如果是分类问题，输出的是不同类别，那么怎么用DNN解决呢？比如我们有三个类别的分类问题，这样DNN输出层对应的便是三个神经元，每个神经元分别代表类别1、类别2、类别3，这样我们的期望输出应该是(1,0,0)、(0,1,0)、(0,0,1)，即样本真实类别对应的神经元输出应该无限接近或等于1。或者说，我们希望输出层的神经元对应的输出是若干个概率值，这若干个概率值即DNN模型对于输入值进行各类别的输出预测，同时这若干个概率之和为1。</p>
+<p>很明显，现在普通DNN无法满足目前要求，我们需要作出相应改变，来让DNN分类模型输出层的输出值在0到1之间，同时所有输出值之和为1。为此，我们定义输出层第i个神经元的激活函数如下所示</p>
+<script type="math/tex; mode=display">
+a_i^L=\frac{e^{z_i^L}}{\sum_{j=1}^{n_L}e^{z_j^L}}</script><p>其中$n_L$为输出层的神经元个数，或者说分类问题的类别数。很容易看出，所有的$a_i^L$都是在(0,1)之间的数字，而$\sum_{j=1}^{n_L}e^{z_j^L}$保证所有的$a_i^L$之和为1。</p>
+<p>下面我们通过例子来描述softmax激活函数在前向传播算法中的应用，假设输出层为三个神经元，未激活的输出为(3,1,-3)，求出各自的指数表达式为(20,2.7,0.05)，归一化后为22.75，求出三个类别的概率为(0.88,0.12,0)。</p>
+<p><img src="/2018/06/30/深度神经网络之损失函数和激活函数/深度神经网络之损失函数和激活函数图片06.png" alt="深度神经网络之损失函数和激活函数图片06"></p>
+<p>对于用作分类的softmax激活函数，对应的损失函数一般都是用对数似然函数，函数表达式如下所示。</p>
+<script type="math/tex; mode=display">
+J(W,b,a^L,y)=-\sum_ky_klna_k^l</script><p>其中$y_k$的取值为0或1，如果某一训练样本的输出为第i类，则$y_i=1$，其余的$j\neq i$都有$y_j=0$。由于每个样本只属于一个类别，所以对数似然函数简化为下式，其中i即为训练样本的类别序号。</p>
+<script type="math/tex; mode=display">
+J(W,b,a^L,y)=-lna_i^L</script><p>可见损失函数只是和真实类别对应的输出有关，这样假设真实类别是第i类，则其他不属于第i类序号对应的神经元梯度导数为0。对于真实类别第i类，所对应的梯度计算为</p>
+<script type="math/tex; mode=display">
+\frac{\partial J(W,b,a^L,y)}{\partial W_i^L}=\frac{\partial J(W,b,a^L,y)}{\partial a_i^L}\frac{\partial a_i^L}{\partial z_i^L}\frac{\partial z_i^L}{\partial W_i^L}</script><script type="math/tex; mode=display">
+=-\frac{1}{a_i^L}\frac{(e^{z_i^L})(\sum_{j=1}^{n_L}e^{z_j^L})-e^{z_i^L}e^{z_i^L}}{(\sum_{j=1}^{n_L}e^{z_j^L})^2}a_i^{L-1}=-\frac{1}{a_i^L}\{ \frac{e^{z_i^L}}{\sum_{j=1}^{n_L}e^{z_j^L}} -\frac{e^{z_i^L}}{\sum_{j=1}^{n_L}e^{z_j^L}}\frac{e^{z_i^L}}{\sum_{j=1}^{n_L}e^{z_j^L}} \}a_i^{L-1}</script><script type="math/tex; mode=display">
+=-\frac{1}{a_i^L}a_i^L(1-a_i^L) a_i^{L-1}=(a_i^L-1)a_i^L</script><script type="math/tex; mode=display">
+\frac{\partial J(W,b,a^L,y)}{\partial b_i^L}=a_i^L-1</script><p>可见，梯度计算相对较简单，也不会出现前面训练速度慢的问题。同样对于上面的例子，经过softmax函数激活后的概率输出为(0.88,0.12,0)，对第二类训练样本反向传播时，反向传播梯度的偏倚向量为(0.88,0.12-1,0)。</p>
+<h3 id="4-DNN其他激活函数"><a href="#4-DNN其他激活函数" class="headerlink" title="4.DNN其他激活函数"></a>4.DNN其他激活函数</h3><h4 id="4-1-ReLU激活函数"><a href="#4-1-ReLU激活函数" class="headerlink" title="4.1 ReLU激活函数"></a>4.1 ReLU激活函数</h4><p>ReLU(Rectified Linear Unit)表达式如下所示，也就是说，大于等于0则激活后不变，小于0则激活后为0。这个函数有什么意义呢？ReLU激活函数在梯度爆炸和梯度消失方面有重要应用。</p>
+<script type="math/tex; mode=display">
+\sigma(z)=max(0,z)</script><p>那什么是梯度爆炸和梯度消失呢？可以简单理解为，反向传播算法过程中，由于我们使用的是矩阵求导的链式法则，会有一系列连乘运算。如果连乘的数字在每层都是大于1的，则梯度越往前乘越大，最后导致梯度爆炸。同理，如果连乘的数字在每层都是小于1的，则梯度越往前乘越小，最后导致梯度消失。</p>
+<p>例如在<a href="https://mp.weixin.qq.com/s?__biz=MzU3MjA2NTQzMw==&amp;mid=2247483911&amp;idx=1&amp;sn=bcc0fe6a4a0c20a422f254b3264a5fb8&amp;chksm=fcd7d1f1cba058e7bddefb3d47ba6f87879663c15a5cea5c6653138d0fb1aa9d3454e2ea605a&amp;scene=38#wechat_redirect" target="_blank" rel="noopener">深度神经网络之反向传播算法</a>中介绍到的$\delta^l$的计算，表达式如下所示。如果每层$\frac{\partial z^{l+1}}{\partial z^{l}}$都小于1，则随着反向传播算法的进行，$\delta ^l$会越来越小，甚至接近于0，导致梯度消失。进而导致隐含层中的W,b参数随着迭代的进行，几乎没什么改变，更谈不上收敛。对于梯度爆炸和梯度消失问题，有很多解决方法，这里不做详细介绍，后续再专门写一篇文章进行讲解。</p>
+<script type="math/tex; mode=display">
+\delta^l=\frac{\partial J(W,b,x,y)}{\partial z^l}=\frac{\partial J(W,b,x,y)}{\partial z^L}\frac{\partial z^L}{\partial z^{L-1}} \frac{\partial z^{L-1}}{\partial z^{L-2}}...\frac{\partial z^{l+1}}{\partial z^{l}}</script><h4 id="4-2-Tanh激活函数"><a href="#4-2-Tanh激活函数" class="headerlink" title="4.2 Tanh激活函数"></a>4.2 Tanh激活函数</h4><p>Tanh激活函数是Sigmoid函数的变种，Tanh表达式如下所示。Tanh和Sigmoid函数的不同点是Tanh函数的输出值落在[-1,1]之间，因此Tanh输出可以进行标准化。同时Tanh自变量变化较大时，曲线变得平坦的幅度没有Sigmoid那么大，这样求梯度变化值有一些优势。当然，是使用Tanh函数还是使用Sigmoid函数需要根据具体问题而定。</p>
+<script type="math/tex; mode=display">
+tanh(z)=\frac{e^z-e^{-z}}{e^z+e^{-z}}</script><script type="math/tex; mode=display">
+tanh(z)=2Sigmoid(2z)-1</script><h4 id="4-3-Softplus激活函数"><a href="#4-3-Softplus激活函数" class="headerlink" title="4.3 Softplus激活函数"></a>4.3 Softplus激活函数</h4><p>Softplus激活函数是Sigmoid函数的原函数，表达式如下所示，Softplus函数和ReLU函数图像类似。</p>
+<script type="math/tex; mode=display">
+softplus(z)=log(1+e^z)</script><p><img src="/2018/06/30/深度神经网络之损失函数和激活函数/深度神经网络之损失函数和激活函数图片07.png" alt="深度神经网络之损失函数和激活函数图片07"></p>
+<h4 id="4-4-PReLU激活函数"><a href="#4-4-PReLU激活函数" class="headerlink" title="4.4 PReLU激活函数"></a>4.4 PReLU激活函数</h4><p>PReLU激活函数是ReLU的变种，特点是如果激活值小于0，激活值不是简单的变为0，而是逐渐的变化。</p>
+<p><img src="/2018/06/30/深度神经网络之损失函数和激活函数/深度神经网络之损失函数和激活函数图片08.png" alt="深度神经网络之损失函数和激活函数图片08"></p>
+<p>和普通的机器学习算法一样，DNN也会遇到过拟合的问题，需要考虑泛化，下篇文章我们将进行讲解深度神经网络之中的正则化问题。</p>
+<p>参考</p>
+<blockquote>
+<p><a href="https://www.zhihu.com/question/22334626/answer/21036590" target="_blank" rel="noopener">知乎-神经网络激励函数的作用是什么？有没有形象的解释?-颜沁睿</a></p>
+<p><a href="https://www.cnblogs.com/pinard/p/6437495.html" target="_blank" rel="noopener">刘建平Pinard-深度神经网络(DNN)损失函数和激活函数的选择(BP)</a></p>
+</blockquote>
+<h3 id="5-推广"><a href="#5-推广" class="headerlink" title="5.推广"></a>5.推广</h3><p>更多内容请关注公众号<strong>谓之小一</strong>，若有疑问可在公众号后台提问，随时回答，欢迎关注，内容转载请注明出处。</p>
+<p><img src="/2018/06/30/深度神经网络之损失函数和激活函数/推广.png" alt="推广"></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/27/深度神经网络之反向传播算法/" rel="next" title="深度神经网络之反向传播算法">
+                <i class="fa fa-chevron-left"></i> 深度神经网络之反向传播算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/03/深度神经网络之正则化/" rel="prev" title="深度神经网络之正则化">
+                深度神经网络之正则化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNDgwNS8xMTM0Mg=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="XiaoYi" />
+            
+              <p class="site-author-name" itemprop="name">XiaoYi</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/weizhixiaoyi" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/weizhixiaoyi/activities" target="_blank" title="ZhiHu" rel="external nofollow"><i class="fa fa-fw fa-book"></i>ZhiHu</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://p66yyzg4i.bkt.clouddn.com/wechat.png" target="_blank" title="WeChat" rel="external nofollow"><i class="fa fa-fw fa-weixin"></i>WeChat</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhenhai.gl@gmail.com" target="_blank" title="E-Mail" rel="external nofollow"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-损失函数和激活函数简介"><span class="nav-text">1.损失函数和激活函数简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-交叉熵损失函数和Sigmoid激活函数"><span class="nav-text">2.交叉熵损失函数和Sigmoid激活函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-对数似然损失函数和softmax激活函数"><span class="nav-text">3.对数似然损失函数和softmax激活函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-DNN其他激活函数"><span class="nav-text">4.DNN其他激活函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-ReLU激活函数"><span class="nav-text">4.1 ReLU激活函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-Tanh激活函数"><span class="nav-text">4.2 Tanh激活函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-Softplus激活函数"><span class="nav-text">4.3 Softplus激活函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-4-PReLU激活函数"><span class="nav-text">4.4 PReLU激活函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-推广"><span class="nav-text">5.推广</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XiaoYi</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">155k</span>
+  
+
+  
+</div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("Sj2lCA09ErubMSsa2v9oFU9Y-gzGzoHsz", "qJejurdHKM06N75OQedX4SDK");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.get('time'));
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

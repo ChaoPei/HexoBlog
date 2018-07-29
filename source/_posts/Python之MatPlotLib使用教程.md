@@ -30,7 +30,7 @@ plt.figure()#定义一个图像窗口
 plt.plot(x,y)#plot()画出曲线
 plt.show()#显示图像
 ```
-![图片01](http://img.blog.csdn.net/20180311144537863?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvWGlhb1lpX0VyaWM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![图片01](Python之MatPlotLib使用教程/01.png)
 #### 4.1figure图像
 matplotlib的figure为单独图像窗口，小窗口内还可以有更多的小图片。
 ```
@@ -42,7 +42,7 @@ plt.plot(x,y1,color='red',linewidth=2,linestyle='--')#颜色为红色，线宽�
 plt.plot(x,y2)#进行画图
 plt.show()#显示图
 ```
-![图片02](http://img.blog.csdn.net/20180311145427674?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvWGlhb1lpX0VyaWM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![图片02](Python之MatPlotLib使用教程/02.png)
 #### 4.2设置坐标轴
 ```
 x=np.linspace(-3,3,50)
@@ -57,7 +57,7 @@ plt.xlabel("I'm x")
 plt.ylabel("I'm y")
 plt.show()
 ```
-![图片03](http://img.blog.csdn.net/20180311151115803?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvWGlhb1lpX0VyaWM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![图片03](Python之MatPlotLib使用教程/03.png)
 自定义坐标轴
 ```
 x=np.linspace(-3,3,50)
@@ -78,7 +78,7 @@ plt.yticks([-2,-1,1,2,],
            [r'$really\ bad$','$bad$','$well$','$really\ well$'])
 plt.show()
 ```
-![图片04](http://img.blog.csdn.net/2018031115185255?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvWGlhb1lpX0VyaWM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![图片04](Python之MatPlotLib使用教程/04.png)
 设置边框属性
 ```
 x=np.linspace(-3,3,50)
@@ -98,7 +98,7 @@ ax.spines['right'].set_color('none')#边框属性设置为none 不显示
 ax.spines['top'].set_color('none')
 plt.show()
 ```
-![图片05](http://img.blog.csdn.net/20180311152822953?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvWGlhb1lpX0VyaWM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![图片05](Python之MatPlotLib使用教程/05.png)
 调整移动坐标轴
 ```
 x=np.linspace(-3,3,50)
@@ -122,7 +122,7 @@ ax.yaxis.set_ticks_position('left')
 ax.spines['left'].set_position(('data',0))#坐标中心点在(0,0)位置
 plt.show()
 ```
-![这里写图片描述](http://img.blog.csdn.net/20180311153109404?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvWGlhb1lpX0VyaWM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![这里写图片描述](Python之MatPlotLib使用教程/06.png)
 #### 4.3添加图例
 matplotlib中legend图例帮助我们展示数据对应的图像名称。
 ```
@@ -142,7 +142,7 @@ l2,=plt.plot(x,y2,label='square line')#进行画图
 plt.legend(loc='best')#显示在最好的位置
 plt.show()#显示图
 ```
-![图片07](http://img.blog.csdn.net/20180311163819992?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvWGlhb1lpX0VyaWM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![图片07](Python之MatPlotLib使用教程/07.png)
 调整位置和名称，单独修改label信息，我们可以在plt.legend输入更多参数
 ```
 plt.legend(handles=[l1, l2], labels=['up', 'down'],  loc='best')
@@ -192,7 +192,7 @@ plt.text(-3.7, 3, r'$This\ is\ the\ some\ text. \mu\ \sigma_i\ \alpha_t$',
          fontdict={'size': 16, 'color': 'r'})
 plt.show()
 ```
-![图片08](http://img.blog.csdn.net/2018031116474811?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvWGlhb1lpX0VyaWM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![图片08](Python之MatPlotLib使用教程/08.png)
 #### 4.5能见度调整
 ```
 x=np.linspace(-3, 3, 50)
@@ -217,7 +217,7 @@ for label in ax.get_xticklabels() + ax.get_yticklabels():
     label.set_bbox(dict(facecolor='red', edgecolor='None', alpha=0.7, zorder=2))
 plt.show()
 ```
-![图片09](http://img.blog.csdn.net/20180311172352949?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvWGlhb1lpX0VyaWM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![图片09](Python之MatPlotLib使用教程/09.png)
 ### 5.画图种类
 #### 5.1Scatter散点图
 ```
@@ -234,7 +234,7 @@ plt.yticks(())#忽略yticks
 plt.show()
 ```
 
-![图片10](http://img.blog.csdn.net/20180311174847167?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvWGlhb1lpX0VyaWM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![图片10](Python之MatPlotLib使用教程/10.png)
 #### 5.2条形图
 ```
 #基本图形
@@ -256,7 +256,7 @@ plt.ylim(-1.25,1.25)
 plt.yticks(())#忽略yticks
 plt.show()
 ```
-![图片11](http://img.blog.csdn.net/20180311181815729?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvWGlhb1lpX0VyaWM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![图片11](Python之MatPlotLib使用教程/11.png)
 #### 5.3等高线图
 
 ```
@@ -276,7 +276,7 @@ plt.xticks(())#隐藏坐标轴
 plt.yticks(())
 plt.show()
 ```
-![图片12](http://img.blog.csdn.net/20180311182506284?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvWGlhb1lpX0VyaWM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![图片12](Python之MatPlotLib使用教程/12.png)
 #### 5.4Image图片
 利用matplotlib打印出图像
 ```
@@ -290,9 +290,9 @@ plt.xticks(())
 plt.yticks(())
 plt.show()              
 ```
-![图片13](http://img.blog.csdn.net/20180311192757270?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvWGlhb1lpX0VyaWM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![图片13](Python之MatPlotLib使用教程/13.png)
 出图方式 此处采用内插法中的nearest-neighbor
-![图片14](http://img.blog.csdn.net/20180311193343476?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvWGlhb1lpX0VyaWM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![图片14](Python之MatPlotLib使用教程/14.png)
 #### 5.53D图像
 ```
 import numpy as np
@@ -313,7 +313,7 @@ ax.contourf(X,Y,Z,zdir='z',offset=-2,cmap=plt.get_cmap('rainbow'))#把图像进�
 ax.set_zlim(-2,2)
 plt.show()
 ```
-![图片15](http://img.blog.csdn.net/20180311194735746?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvWGlhb1lpX0VyaWM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![图片15](Python之MatPlotLib使用教程/15.png)
 
 ### 6.多图合并显示
 
@@ -504,4 +504,4 @@ plt.show()
 
 
 更多内容请关注公众号'谓之小一'，若有疑问可在公众号后台提问，随时回答，内容转载请注明出处。
-
+![推广](http://p66yyzg4i.bkt.clouddn.com/%E6%8E%A8%E5%B9%BF.png)

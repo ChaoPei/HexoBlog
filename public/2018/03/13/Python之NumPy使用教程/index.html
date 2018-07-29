@@ -129,13 +129,12 @@
 <meta property="og:site_name" content="谓之小一">
 <meta property="og:description" content="1.NumPy概述NumPy(Numerical Python)是用Python进行科学计算的基础软件包。包含以下特点：  强大的N维数组对象Array 成熟的函数库 用于集成C/C++和Fortran代码的工具 实用的线性代数、傅立叶变换和随机生成函数  2.NumPy安装1pip install numpy或pip3 install numpy 3.NumPy引入1import numpy a">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://img.blog.csdn.net/20180309135000807?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvWGlhb1lpX0VyaWM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="http://img.blog.csdn.net/20180308203132669?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvWGlhb1lpX0VyaWM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:updated_time" content="2018-03-14T03:16:53.604Z">
+<meta property="og:image" content="http://p66yyzg4i.bkt.clouddn.com/%E6%8E%A8%E5%B9%BF.png">
+<meta property="og:updated_time" content="2018-06-26T06:55:37.248Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python之NumPy使用教程">
 <meta name="twitter:description" content="1.NumPy概述NumPy(Numerical Python)是用Python进行科学计算的基础软件包。包含以下特点：  强大的N维数组对象Array 成熟的函数库 用于集成C/C++和Fortran代码的工具 实用的线性代数、傅立叶变换和随机生成函数  2.NumPy安装1pip install numpy或pip3 install numpy 3.NumPy引入1import numpy a">
-<meta name="twitter:image" content="http://img.blog.csdn.net/20180309135000807?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvWGlhb1lpX0VyaWM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta name="twitter:image" content="http://p66yyzg4i.bkt.clouddn.com/%E6%8E%A8%E5%B9%BF.png">
 
 
 
@@ -473,7 +472,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数"></span>
+                <span title="本文字数">5.5k</span>
               
 
               
@@ -487,7 +486,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长"></span>
+                <span title="阅读时长">9 分钟</span>
               
             </div>
           
@@ -550,7 +549,7 @@
 <h3 id="8-NumPy中copy和deep-copy"><a href="#8-NumPy中copy和deep-copy" class="headerlink" title="8.NumPy中copy和deep copy"></a>8.NumPy中copy和deep copy</h3><p>‘=’赋值方式会带有关联性<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">a=np.arange(<span class="number">4</span>)</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(a)</span></span></span><br><span class="line">#[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span>]</span><br><span class="line">b=a</span><br><span class="line">c=a</span><br><span class="line">d=b</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(b is a)</span></span></span><br><span class="line">#True</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(c is a)</span></span></span><br><span class="line">#True</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(d is a)</span></span></span><br><span class="line">#True</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">b</span>[<span class="number">0</span>]=<span class="number">5</span>#改变b的值，<span class="selector-tag">a</span>,c,d同样会进行改变</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(a)</span></span></span><br><span class="line">#[<span class="number">5</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span>]</span><br></pre></td></tr></table></figure></p>
 <p>‘copy()’赋值方式没有关联性<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a=np.arange(<span class="number">4</span>)#deep copy</span><br><span class="line">print(a)</span><br><span class="line">#[<span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line">b=a.copy()</span><br><span class="line">a[<span class="number">0</span>]=<span class="number">5</span></span><br><span class="line">print(b)#值并不发生改变</span><br><span class="line">#[<span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br></pre></td></tr></table></figure></p>
 <hr>
-<p>更多内容请关注公众号’谓之小一’，若有疑问可在公众号后台提问，随时回答，内容转载请注明出处。如果感觉不错的话，可以资助1元钱当作鼓励，Thank you谢谢!<br><img src="http://img.blog.csdn.net/20180309135000807?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvWGlhb1lpX0VyaWM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" width="400" height="400" alt="公众号" align="center/"> <img src="http://img.blog.csdn.net/20180308203132669?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvWGlhb1lpX0VyaWM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" width="400" height="400" alt="赞赏码" align="center/"></p>
+<p>更多内容请关注公众号’谓之小一’，若有疑问可在公众号后台提问，随时回答，内容转载请注明出处。如果感觉不错的话，可以资助1元钱当作鼓励，Thank you谢谢!<br><img src="http://p66yyzg4i.bkt.clouddn.com/%E6%8E%A8%E5%B9%BF.png" alt="推广"></p>
 
       
     </div>
@@ -679,7 +678,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -700,7 +699,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -735,7 +742,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -827,7 +842,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数"></span>
+    <span title="站点总字数">155k</span>
   
 
   
@@ -1413,9 +1428,25 @@
             });
           } else {
             
-              var $element = $(document.getElementById(url));
-              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
-              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
             
           }
         },

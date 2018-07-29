@@ -109,15 +109,19 @@ $$
 \alpha_k=\frac{e_k}{1-e_k}
 $$
 然后**更新样本权重D**，第k+1个弱分类器的样本集权重系数如下所示，其中Zk为规范化因子。
+
 $$
-w_{k+1,i}=\frac{w_{ki}}{Z_k}\alpha _k^{1-e_{ki}}
+w_{k+1,i}=\frac{w_{ki}}{Z_k}\alpha _k^{1-e_ { ki } }
 $$
 
 $$
 Z_k=\sum _{i=1}^{m}w_{ki}\alpha _k^{1-e_{ki}}
 $$
 
+
 最后Adaboost回归问题采用**加权平均法结合策略**，最终的强回归器为
+
+
 $$
 f(x)=\sum_{k=1}^{K}(ln\frac{1}{\alpha_k})G_k(x)
 $$
@@ -161,13 +165,23 @@ G_k(x)=\underset{G}{\underbrace{\arg\min}} \sum_{i=1}^{m}{w}'_{ki},I(y_i\neq G(x
 $$
 将Gk(x)代入损失函数，并对α进行求导，使其等于0，于是我们得到
 $$
-\alpha_k=\frac{1}{2}log\frac{1-e_k}{e_k}
+\alpha_k=\frac{1}{2}log\frac{1-e_k}{e_k}\
 $$
 其中ek为我们前面介绍的**分类误差率**
+
+
 $$
-e_k=\frac{\sum_{i=1}^{m}{w}'_{ki},I(y_i\neq G(x_i))}{\sum_{i=1}^{m}{w}'_{ki}}=\sum_{i=1}^{m}w_{ki},I(y_i\neq G(x_i))
+e_k=\frac{\sum_{i=1}^{m}{w}'_{ki},I(y_i\neq G(x_i))}{\sum_{i=1}^{m}{w}'_{ki}} \ \ \ \ \
 $$
+$$
+=\sum_{i=1}^{m}w_{ki},I(y_i\neq G(x_i))
+$$
+
+
+
 最后利用$f_k(x)=f_{k-1}(x)+\alpha_k G_k(x)$、${w}'_{k,i}=exp(-y_if_{k-1}(x))$、${w}'_{k+1,i}=exp(-y_if_{k}(x))$，我们即可得到**样本权重的更新**。
+
+
 $$
 {w}'_{k+1,i}={w}'_{k,i}exp[-y_i\alpha_kG_k(x_i)]
 $$

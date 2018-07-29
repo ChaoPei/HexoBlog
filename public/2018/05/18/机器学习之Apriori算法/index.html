@@ -129,13 +129,13 @@
 <meta property="og:site_name" content="谓之小一">
 <meta property="og:description" content="1.Apriori算法简介Apriori算法是常用于挖掘出数据关联规则的算法，能够发现事物数据库中频繁出现的数据集，这些联系构成的规则可帮助用户找出某些行为特征，以便进行企业决策。例如，某食品商店希望发现顾客的购买行为，通过购物篮分析得到大部分顾客会在一次购物中同时购买面包和牛奶，那么该商店便可以通过降价促销面包的同时提高面包和牛奶的销量。了解Apriori算法推导之前，我们先介绍一些基本概念。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://weizhixiaoyi.com/2018/05/18/机器学习之Apriori算法/机器学习之Apriori算法/机器学习之Apriori算法图片01.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/05/18/机器学习之Apriori算法/机器学习之Apriori算法图片01.png">
 <meta property="og:image" content="http://p66yyzg4i.bkt.clouddn.com/%E6%8E%A8%E5%B9%BF.png">
-<meta property="og:updated_time" content="2018-06-07T04:45:14.805Z">
+<meta property="og:updated_time" content="2018-06-07T17:52:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习之Apriori算法">
 <meta name="twitter:description" content="1.Apriori算法简介Apriori算法是常用于挖掘出数据关联规则的算法，能够发现事物数据库中频繁出现的数据集，这些联系构成的规则可帮助用户找出某些行为特征，以便进行企业决策。例如，某食品商店希望发现顾客的购买行为，通过购物篮分析得到大部分顾客会在一次购物中同时购买面包和牛奶，那么该商店便可以通过降价促销面包的同时提高面包和牛奶的销量。了解Apriori算法推导之前，我们先介绍一些基本概念。">
-<meta name="twitter:image" content="https://weizhixiaoyi.com/2018/05/18/机器学习之Apriori算法/机器学习之Apriori算法/机器学习之Apriori算法图片01.png">
+<meta name="twitter:image" content="https://weizhixiaoyi.com/2018/05/18/机器学习之Apriori算法/机器学习之Apriori算法图片01.png">
 
 
 
@@ -473,7 +473,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数"></span>
+                <span title="本文字数">2.1k</span>
               
 
               
@@ -487,7 +487,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长"></span>
+                <span title="阅读时长">4 分钟</span>
               
             </div>
           
@@ -509,28 +509,28 @@
       
         <h3 id="1-Apriori算法简介"><a href="#1-Apriori算法简介" class="headerlink" title="1.Apriori算法简介"></a>1.Apriori算法简介</h3><p><strong>Apriori</strong>算法是常用于挖掘出数据关联规则的算法，能够发现事物数据库中频繁出现的数据集，这些联系构成的规则可帮助用户找出某些行为特征，以便进行企业决策。例如，某食品商店希望发现顾客的购买行为，通过购物篮分析得到<strong>大部分顾客会在一次购物中同时购买面包和牛奶</strong>，那么该商店便可以通过降价促销面包的同时提高面包和牛奶的销量。了解Apriori算法推导之前，我们先介绍一些基本概念。</p>
 <ul>
-<li><strong>事务数据库：</strong>设$I={ i_1,i_2,…,i_m }$是一个全局项的集合，事物数据库$D={ t_1,t_2,..,t_n }$是一个事务的集合，每个事务$t_i(1\le i \le n)$都对应$I$上的一个子集，例如$t_1={ i_1,i_3,i_7}$。</li>
-<li><p><strong>关联规则：</strong>关联规则表示项之间的关系，是形如$X\rightarrow Y​$的蕴含表达式，其中$X​$和$Y​$是不相交的项集，$X​$称为规则的前件，$Y​$称为规则的后件。例如${ cereal,milk}\rightarrow {fruit }​$关联规则表示购买谷类食品和牛奶的人也会购买水果。通常关联规则的强度可以用支持度和置信度来度量。</p>
+<li><strong>事务数据库：</strong>设$I=\{ i_1,i_2,…,i_m \}$是一个全局项的集合，事物数据库$D=\{ t_1,t_2,..,t_n \}$是一个事务的集合，每个事务$t_i(1\le i \le n)$都对应$I$上的一个子集，例如$t_1=\{ i_1,i_3,i_7\}$。</li>
+<li><p><strong>关联规则：</strong>关联规则表示项之间的关系，是形如$X\rightarrow Y​$的蕴含表达式，其中$X​$和$Y​$是不相交的项集，$X​$称为规则的前件，$Y​$称为规则的后件。例如$\{ cereal,milk\}\rightarrow \{fruit \}​$关联规则表示购买谷类食品和牛奶的人也会购买水果。通常关联规则的强度可以用支持度和置信度来度量。</p>
 </li>
 <li><p><strong>支持度：</strong>支持度表示关联数据在数据集中出现的次数或所占的比重。</p>
 </li>
 </ul>
-<p>$$<br>support(X\rightarrow Y)=P(X\cup Y)=\frac{|X\cup Y|}{|D|}<br>$$</p>
-<ul>
+<script type="math/tex; mode=display">
+support(X\rightarrow Y)=P(X\cup Y)=\frac{|X\cup Y|}{|D|}</script><ul>
 <li><strong>置信度：</strong>置信度表示$Y$数据出现后，$X$数据出现的可能性，也可以说是数据的条件概率。</li>
 </ul>
-<p>$$<br>confidence(X\Leftarrow Y)=P(X|Y)=\frac{P(XY)}{P(Y)}<br>$$</p>
-<ul>
+<script type="math/tex; mode=display">
+confidence(X\Leftarrow Y)=P(X|Y)=\frac{P(XY)}{P(Y)}</script><ul>
 <li><strong>提升度：</strong>提升度体现$X$和$Y$之间的关联关系，提升度大于1表示$X$和$Y$之间具有强关联关系，提升度小于等于1表示$X$和$Y$之间无有效的强关联关系。</li>
 </ul>
-<p>$$<br>lift(X \Leftarrow Y)=\frac{confidence(X \Leftarrow Y)}{P(X)}=\frac{P(XY)}{P(X)P(Y)}<br>$$</p>
-<ul>
+<script type="math/tex; mode=display">
+lift(X \Leftarrow Y)=\frac{confidence(X \Leftarrow Y)}{P(X)}=\frac{P(XY)}{P(X)P(Y)}</script><ul>
 <li><strong>强关联规则：</strong>满足最小支持度和最小置信度的关联规则。</li>
 </ul>
 <p>关联规则的挖掘目标是<strong>找出所有的频繁项集</strong>和<strong>根据频繁项集产生强关联规则</strong>。对于Apriori算法来说，其目标是找出所有的频繁项集，因此对于数据集合中的频繁数据集，我们需要自定义评估标准来找出频繁项集，常用的评估标准就是用上述介绍的支持度。</p>
 <h3 id="2-Apriori算法原理"><a href="#2-Apriori算法原理" class="headerlink" title="2.Apriori算法原理"></a>2.Apriori算法原理</h3><p>Apriori算法是经典生成关联规则的频繁项集挖掘算法，其目标是<strong>找到最多的K项频繁集</strong>。那么什么是最多的K项频繁集呢？例如当我们找到符合支持度的频繁集AB和ABE，我们会选择3项频繁集ABE。下面我们介绍Apriori算法选择频繁K项集过程。</p>
 <p>Apriori算法采用迭代的方法，先搜索出候选1项集以及对应的支持度，剪枝去掉低于支持度的候选1项集，得到频繁1项集。然后对剩下的频繁1项集进行连接，得到候选2项集，筛选去掉低于支持度的候选2项集，得到频繁2项集。如此迭代下去，直到无法找到频繁k+1集为止，对应的频繁k项集的集合便是算法的输出结果。我们可以通过下面例子来看到具体迭代过程。</p>
-<p><img src="机器学习之Apriori算法/机器学习之Apriori算法图片01.png" alt="机器学习之Apriori算法图片01"></p>
+<p><img src="/2018/05/18/机器学习之Apriori算法/机器学习之Apriori算法图片01.png" alt="机器学习之Apriori算法图片01"></p>
 <p>数据集包含4条记录{‘134’,’235’,’1235’,’25’}，我们利用Apriori算法来寻找频繁k项集，最小支持度设置为50%。首先生成候选1项集，共包含五个数据{‘1’,’2’,’3’,’4’,’5’}，计算5个数据的支持度，然后对低于支持度的数据进行剪枝。其中数据{4}支持度为25%，低于最小支持度，进行剪枝处理，最终频繁1项集为{‘1’,’2’,’3’,’5’}。根据频繁1项集连接得到候选2项集{‘12’,’13’,’15’,’23’,’25’,’35’}，其中数据{‘12’,’15’}低于最低支持度，进行剪枝处理，得到频繁2项集为{‘13’,’23’,’25’,’35’}。如此迭代下去，最终能够得到频繁3项集{‘235’}，由于数据无法再进行连接，算法至此结束。</p>
 <h3 id="3-Apriori算法流程"><a href="#3-Apriori算法流程" class="headerlink" title="3.Apriori算法流程"></a>3.Apriori算法流程</h3><p>从Apriori算法原理中我们能够总结如下算法流程，其中输入数据为数据集合D和最小支持度α，输出数据为最大的频繁k项集。</p>
 <ul>
@@ -602,6 +602,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/10/网店工商信息图片文字提取/" rel="prev" title="网店工商信息图片文字提取">
+                网店工商信息图片文字提取 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -684,7 +688,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -705,7 +709,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -740,7 +752,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -832,7 +852,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数"></span>
+    <span title="站点总字数">155k</span>
   
 
   
@@ -1418,9 +1438,25 @@
             });
           } else {
             
-              var $element = $(document.getElementById(url));
-              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
-              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
             
           }
         },

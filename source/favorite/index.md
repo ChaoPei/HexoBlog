@@ -7,11 +7,21 @@ date: 2018-05-20 18:00:03
 
 {% stream %}
 
+{% figure http://p66yyzg4i.bkt.clouddn.com/%E8%82%96%E7%94%B3%E5%85%8B%E7%9A%84%E6%95%91%E8%B5%8E.png [《肖申克的救赎》](https://book.douban.com/subject/1829226/)%}
+
 {% figure http://p66yyzg4i.bkt.clouddn.com/%E6%98%8E%E6%9C%9D%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF.png 《明朝那些事儿》%}
 
 {% figure http://p66yyzg4i.bkt.clouddn.com/%E6%B2%89%E9%BB%98%E7%9A%84%E5%A4%A7%E5%A4%9A%E6%95%B0.png  《沉默的大多数》%}
 
-{% figure http://p66yyzg4i.bkt.clouddn.com/%E6%97%B6%E9%97%B4%E7%AE%80%E5%8F%B2.png  《时间简史》%}
+{% figure https://img3.doubanio.com/lpic/s28357056.jpg  《三体 》 %}
+
+{% figure https://img3.doubanio.com/lpic/s1168991.jpg 《阿甘正传》%}
+
+{% figure http://p66yyzg4i.bkt.clouddn.com/%E9%AA%84%E5%82%B2%E7%9A%84%E5%8D%B0%E5%BA%A6.png  《骄傲的印度》 %}
+
+{% figure http://p66yyzg4i.bkt.clouddn.com/%E6%96%AF%E9%87%8C%E5%85%B0%E5%8D%A1.png  《斯里兰卡 》%}
+
+{% figure http://p66yyzg4i.bkt.clouddn.com/%E8%B6%8A%E7%A6%81%E5%BF%8C%E8%B6%8A%E7%BE%8E%E4%B8%BD.png  《越禁忌越美丽 》%}
 
 {% figure http://p66yyzg4i.bkt.clouddn.com/%E7%9C%8B%E8%A7%81.png  《看见》%}
 
@@ -40,16 +50,6 @@ date: 2018-05-20 18:00:03
 {% figure http://p66yyzg4i.bkt.clouddn.com/%E7%BE%8A%E8%84%82%E7%90%83.png  [《羊脂球》 ](https://book.douban.com/subject/3144827/) %}
 
 {% figure http://p66yyzg4i.bkt.clouddn.com/%E8%A7%A3%E5%AF%86.png  《解密》 %}
-
-{% figure http://p66yyzg4i.bkt.clouddn.com/%E9%AA%84%E5%82%B2%E7%9A%84%E5%8D%B0%E5%BA%A6.png  《骄傲的印度》 %}
-
-{% figure http://p66yyzg4i.bkt.clouddn.com/%E6%96%AF%E9%87%8C%E5%85%B0%E5%8D%A1.png  《斯里兰卡 》%}
-
-{% figure http://p66yyzg4i.bkt.clouddn.com/%E8%B6%8A%E7%A6%81%E5%BF%8C%E8%B6%8A%E7%BE%8E%E4%B8%BD.png  《越禁忌越美丽 》%}
-
-{% figure https://img3.doubanio.com/lpic/s28357056.jpg  《三体 》 %}
-
-{% figure https://img3.doubanio.com/lpic/s1168991.jpg 《阿甘正传》%}
 
 {% figure https://img3.doubanio.com/lpic/s6384944.jpg 《百年孤独》%}
 
