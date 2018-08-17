@@ -367,6 +367,638 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/08/14/基于google-protobuf的gRPC实现-python版/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XiaoYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="谓之小一">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/14/基于google-protobuf的gRPC实现-python版/" itemprop="url">
+                  基于google protobuf的gRPC实现(python版)
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-14 12:01:12" itemprop="dateCreated datePublished" datetime="2018-08-14T12:01:12+08:00">2018-08-14</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/protobuf/" itemprop="url" rel="index"><span itemprop="name">protobuf</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/08/14/基于google-protobuf的gRPC实现-python版/" class="leancloud_visitors" data-flag-title="基于google protobuf的gRPC实现(python版)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">9.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">16 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          1.Protobuf简介Protobuf(Google Protocol Buffers)提供一种灵活、高效、自动化的机制，用于序列化结构数据。Protobuf仅需自定义一次所需要的数据格式，然后我们就可以使用Protobuf编译器自动生成各种语言的源码，方便我们读写自定义的格式化数据。另外Protobuf的使用与平台和语言无关，可以在不破坏原数据格式的基础上，扩展新的数据。
+我们可以将Protobuf与XML进行对比，但Protobuf更小、更快、更加简单。总结来说具有一下特点：
+
+性能好、效率高。Protobuf作用与XML、json类似，但它是二进制格式，所以性能更好。但同时因为是二进制格式，所以缺点也就是可读性差。
+代码生成机制，易于使用。
+解析速度快。
+支持多种语言，例C++、C#、Go、Java、Python等。
+向前兼容，向后兼容。
+
+2.Protobuf安装Mac用户可以使用brew进行安装，命令如下所示。
+
+brew install protobuf
+
+如需要安装特定版本，可以先进行搜索有哪些版本，命令如下所示。搜索完成之后，采用上述brew安装方法，安装特定版本即可
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/14/基于google-protobuf的gRPC实现-python版/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/08/14/Linux常用命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XiaoYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="谓之小一">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/14/Linux常用命令/" itemprop="url">
+                  Linux常用命令
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-14 11:12:37" itemprop="dateCreated datePublished" datetime="2018-08-14T11:12:37+08:00">2018-08-14</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/08/14/Linux常用命令/" class="leancloud_visitors" data-flag-title="Linux常用命令">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          1.常用指令
+ls显示文件或目录 
+​    -l列出文件详细信息(list) 
+​    -a列出当前目录下所有文件及目录，包含隐藏的a(all) 
+mkdir创建目录 
+​    -p创建目录，若无父目录，则创建p（parent） 
+cd切换目录 
+touch创建空文件 touch a.txt 
+echo创建带有内容的文件 echo ‘It is a good test’ &gt;b.txt 
+cat查看文件内容 cat a.txt 
+cp拷贝文件 cp b.txt c.txt 
+mv移动或重命名 mv c.txt cc.txt 
+rm删除文件 rm cc.txt 
+​    -r递归删除，可删除子目录及文件 
+​    -f强制删除 
+find在文件系统中搜索某文件 find / -name ‘hadoop-streaming’ 
+wc统计文本中行数、字数、字符数 wc b.txt 
+grep在文本文件中查找某个字符串 grep ‘good’ b.txt 显示b.txt中包含good的行 
+rmdir删除空目录 
+tree树形结构显示目录 tree -a 
+pwd显示当前目录 p
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/14/Linux常用命令/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/07/29/《剑指Offer》Python版/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XiaoYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="谓之小一">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/29/《剑指Offer》Python版/" itemprop="url">
+                  《剑指Offer》Python版
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-29 15:02:01" itemprop="dateCreated datePublished" datetime="2018-07-29T15:02:01+08:00">2018-07-29</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/07/29/《剑指Offer》Python版/" class="leancloud_visitors" data-flag-title="《剑指Offer》Python版">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">63k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1:false</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          1.二维数组中的查找题目： 在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。
+思路：遍历每一行，查找该元素是否在该行之中。
+12345678910111213141516# -*- coding:utf-8 -*-class Solution:    # array 二维列表    def Find(self, target, array):        # write code here        for line in array:            if target in line:                return True        return Falseif __name__=='__main__':    target=2    array=[[1,2,3,4],[2,3,4,5],[3,4,5,6],[4,5,6,7]]    solution=Solution()    ans=solution.F
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/29/《剑指Offer》Python版/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/07/03/深度神经网络之正则化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1380,621 +2012,11 @@ First, according the time series prediction model of the three indexes, the esti
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/06/12/效率软件推荐（一）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="XiaoYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="谓之小一">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/12/效率软件推荐（一）/" itemprop="url">
-                  效率软件推荐（一）
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-06-12 20:39:52" itemprop="dateCreated datePublished" datetime="2018-06-12T20:39:52+08:00">2018-06-12</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/软件/" itemprop="url" rel="index"><span itemprop="name">软件</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/06/12/效率软件推荐（一）/" class="leancloud_visitors" data-flag-title="效率软件推荐（一）">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">3.3k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">6 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          工欲善其事，必先利其器，为此给大家推荐几款效率软件，帮助你高效学习和工作。
-
-滴答清单：解决拖延症&amp;&amp;健忘症，高效完成任务和规划时间。
-印象笔记： 收集各类信息，捕捉灵感，做你的第二大脑。
-夸克浏览器：极简风格，满足你对浏览器最本质的需求。
-
-1.滴答清单身边的人多多少都有点拖延症(包括我)，不到DeadLine的时候，都不会想到去解决问题。为此还耽误了几次事情，但被老师或同学批评几次之后，痛定思痛，决定认真改变拖延症的习惯。奈何自制力又不是太强，没监督或者提醒的话，不久之后又恢复到以前的状态。某天闲逛知乎中，发现滴答清单这款软件，真心不错，用一段时间之后，我多年的老(tuo)寒(yan)腿(zheng)也给治愈啦。另外，多逛知乎也是有用处的，硬是逛出来一篇中文核心论文《面向知乎的个性化推荐模型研究》，在知网现在也能检索到啦，大雾。
-解决拖延症，首要具备的便是任务提醒功能，滴答清单默认每天9点通知该天内所有事项。另外，如果为某件事情设置了具体时间，滴答将会在该时间点时进行提醒。对于未完成的任务，滴答清单图标右上角会时刻显示通知，督促自己完成。
-针对需要完成的每项任务，可
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/12/效率软件推荐（一）/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/06/10/网店工商信息图片文字提取/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="XiaoYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="谓之小一">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/10/网店工商信息图片文字提取/" itemprop="url">
-                  网店工商信息图片文字提取
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-06-10 21:00:24" itemprop="dateCreated datePublished" datetime="2018-06-10T21:00:24+08:00">2018-06-10</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/文字识别/" itemprop="url" rel="index"><span itemprop="name">文字识别</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/06/10/网店工商信息图片文字提取/" class="leancloud_visitors" data-flag-title="网店工商信息图片文字提取">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">5.6k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">9 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          首先非常抱歉，最近一段时间由于学校课程作业较多，外加个人较懒，所以一直没有更新文章，以后一定会勤奋点，多加更新。正如前几天在stormzhang(张哥)的公众号里看到的一样，写作其实并不难，每个人都可以做到，但是长期坚持写作就非常难，这也是写作者想要长期创作遇到的第一个大问题，所以贵在坚持。另外长期写作的第二大问题是什么呢？你猜猜看，看看我们认为的是不是一样。
-最近主要是完成专业内的一些课程作业，比如Oracle数据库、JaveEE、搜索引擎等作业。国内大学总是会学很多课程，其实对多数学生来说，一些课程都不知道学着有什么意义。这点国外做的较是不错，在英国UWS当交换生的时候，可以选择自己喜欢的课程，这样也就有很大的兴趣去学习这些知识点。
-在解决这些课程作业之中，有件事感觉可以和大家分享一下。我们都知道计算机行业技术更新非常快，然而JavaEE老师教的知识点还是10多年前的内容，每次课程结束之中还需完成一个实验。但就是这样一个简单实验，却需要我们学生花费2天或者3天时间去完成。花这么长时间，按理来说应该很难吧，恰恰相反，实验很简单，那为什么还要花这么长时间呢。其实多数时间都是用在各种环境
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/10/网店工商信息图片文字提取/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/05/18/机器学习之Apriori算法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="XiaoYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="谓之小一">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/18/机器学习之Apriori算法/" itemprop="url">
-                  机器学习之Apriori算法
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-05-18 10:05:37" itemprop="dateCreated datePublished" datetime="2018-05-18T10:05:37+08:00">2018-05-18</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/05/18/机器学习之Apriori算法/" class="leancloud_visitors" data-flag-title="机器学习之Apriori算法">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">2.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">4 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          1.Apriori算法简介Apriori算法是常用于挖掘出数据关联规则的算法，能够发现事物数据库中频繁出现的数据集，这些联系构成的规则可帮助用户找出某些行为特征，以便进行企业决策。例如，某食品商店希望发现顾客的购买行为，通过购物篮分析得到大部分顾客会在一次购物中同时购买面包和牛奶，那么该商店便可以通过降价促销面包的同时提高面包和牛奶的销量。了解Apriori算法推导之前，我们先介绍一些基本概念。
-
-事务数据库：设$I=\{ i_1,i_2,…,i_m \}$是一个全局项的集合，事物数据库$D=\{ t_1,t_2,..,t_n \}$是一个事务的集合，每个事务$t_i(1\le i \le n)$都对应$I$上的一个子集，例如$t_1=\{ i_1,i_3,i_7\}$。
-关联规则：关联规则表示项之间的关系，是形如$X\rightarrow Y​$的蕴含表达式，其中$X​$和$Y​$是不相交的项集，$X​$称为规则的前件，$Y​$称为规则的后件。例如$\{ cereal,milk\}\rightarrow \{fruit \}​$关联规则表示购买谷类食品和牛奶的人也会购买水果。通常关联
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/18/机器学习之Apriori算法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2041,7 +2063,7 @@ First, according the time series prediction model of the three indexes, the esti
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-count">33</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2070,7 +2092,13 @@ First, according the time series prediction model of the three indexes, the esti
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2113,7 +2141,15 @@ First, according the time series prediction model of the three indexes, the esti
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2189,7 +2225,7 @@ First, according the time series prediction model of the three indexes, the esti
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">155k</span>
+    <span title="站点总字数">229k</span>
   
 
   
@@ -2826,9 +2862,9 @@ First, according the time series prediction model of the three indexes, the esti
   
     
       
-        
-      
     
+      
+        
       
     
       

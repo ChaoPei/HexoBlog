@@ -123,7 +123,7 @@
 
   <meta property="og:type" content="website">
 <meta property="og:title" content="谓之小一">
-<meta property="og:url" content="https://weizhixiaoyi.com/tags/python/index.html">
+<meta property="og:url" content="https://weizhixiaoyi.com/tags/Python/index.html">
 <meta property="og:site_name" content="谓之小一">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
@@ -134,7 +134,7 @@
 
 
 
-  <link rel="canonical" href="https://weizhixiaoyi.com/tags/python/"/>
+  <link rel="canonical" href="https://weizhixiaoyi.com/tags/Python/"/>
 
 
 
@@ -144,7 +144,7 @@
   };
 </script>
 
-  <title>标签: python | 谓之小一</title>
+  <title>标签: Python | 谓之小一</title>
   
 
 
@@ -382,7 +382,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h2>python<small>标签</small>
+        <h2>Python<small>标签</small>
         </h2>
       </div>
 
@@ -394,37 +394,9 @@
 
       <h3 class="post-title">
         
-            <a class="post-title-link" href="/2018/03/14/Python之MatPlotLib使用教程/" itemprop="url">
+            <a class="post-title-link" href="/2018/04/15/Python之Sklearn使用教程/" itemprop="url">
               
-                <span itemprop="name">Python之MatPlotLib使用教程</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-14T11:43:07+08:00"
-              content="2018-03-14" >
-          03-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/13/Python之NumPy使用教程/" itemprop="url">
-              
-                <span itemprop="name">Python之NumPy使用教程</span>
+                <span itemprop="name">Python之Sklearn使用教程</span>
               
             </a>
         
@@ -432,37 +404,9 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-13T17:35:25+08:00"
-              content="2018-03-13" >
-          03-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/12/Python之Pandas使用教程/" itemprop="url">
-              
-                <span itemprop="name">Python之Pandas使用教程</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-12T13:18:48+08:00"
-              content="2018-03-12" >
-          03-12
+              datetime="2018-04-15T11:43:18+08:00"
+              content="2018-04-15" >
+          04-15
         </time>
       </div>
 
@@ -523,7 +467,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-count">33</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -552,7 +496,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -595,7 +545,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -671,7 +629,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">155k</span>
+    <span title="站点总字数">229k</span>
   
 
   
@@ -1254,6 +1212,87 @@
               newcounter.set("time", 1);
               newcounter.save(null, {
                 success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+) {
                   var $element = $(document.getElementById(url));
                   $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
                 },

@@ -7,6 +7,8 @@ date: 2018-05-20 18:00:03
 
 {% stream %}
 
+{% figure http://p66yyzg4i.bkt.clouddn.com/%E7%9F%A5%E8%A1%8C%E5%90%88%E4%B8%80%E7%8E%8B%E9%98%B3%E6%98%8E.png [《知行合一王阳明》](https://book.douban.com/subject/25911978/)%}
+
 {% figure http://p66yyzg4i.bkt.clouddn.com/%E8%82%96%E7%94%B3%E5%85%8B%E7%9A%84%E6%95%91%E8%B5%8E.png [《肖申克的救赎》](https://book.douban.com/subject/1829226/)%}
 
 {% figure http://p66yyzg4i.bkt.clouddn.com/%E6%98%8E%E6%9C%9D%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF.png 《明朝那些事儿》%}
