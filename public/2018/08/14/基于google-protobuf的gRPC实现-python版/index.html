@@ -132,7 +132,7 @@
 <meta property="og:image" content="https://weizhixiaoyi.com/2018/08/14/基于google-protobuf的gRPC实现-python版/基于google-protobuf的gRPC实现-python版图片01.png">
 <meta property="og:image" content="https://weizhixiaoyi.com/2018/08/14/基于google-protobuf的gRPC实现-python版/基于google-protobuf的gRPC实现-python版图片02.png">
 <meta property="og:image" content="https://weizhixiaoyi.com/2018/08/14/基于google-protobuf的gRPC实现-python版/推广.png">
-<meta property="og:updated_time" content="2018-08-14T15:29:28.056Z">
+<meta property="og:updated_time" content="2018-08-14T15:33:51.053Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于google protobuf的gRPC实现(python版)">
 <meta name="twitter:description" content="1.Protobuf简介Protobuf(Google Protocol Buffers)提供一种灵活、高效、自动化的机制，用于序列化结构数据。Protobuf仅需自定义一次所需要的数据格式，然后我们就可以使用Protobuf编译器自动生成各种语言的源码，方便我们读写自定义的格式化数据。另外Protobuf的使用与平台和语言无关，可以在不破坏原数据格式的基础上，扩展新的数据。 我们可以将Proto">
@@ -525,15 +525,15 @@
 <blockquote>
 <p>brew search protobuf</p>
 </blockquote>
-<p>安装完成之后，可以通过protoc —version查看是否安装成功。</p>
+<p>安装完成之后，可以通过protoc --version查看是否安装成功。</p>
 <blockquote>
-<p>protoc —version<br>libprotoc 3.6.0</p>
+<p>protoc --version<br>libprotoc 3.6.0</p>
 </blockquote>
 <p>另外可以通过which protoc命令查看protoc安装所在的位置。</p>
 <blockquote>
 <p>which protoc<br>/usr/local/bin/protoc</p>
 </blockquote>
-<h3 id="3-Protobuf实例"><a href="#3-Protobuf实例" class="headerlink" title="3.Protobuf实例"></a>3.Protobuf实例</h3><h4 id="3-1编译-proto文件"><a href="#3-1编译-proto文件" class="headerlink" title="3.1编译.proto文件"></a>3.1编译.proto文件</h4><p>首先我们需要创建一个以<strong>.proto</strong>结尾的文件，可以在其中定义<strong>message</strong>来指定所需要序列化的数据格式。每一个message都是一个小的信息逻辑单元，包含一系列的name-value值对。以官网上示例，我们创建一个addressbook.proto文件，内容如下所示。</p>
+<h3 id="3-Protobuf实例"><a href="#3-Protobuf实例" class="headerlink" title="3.Protobuf实例"></a>3.Protobuf实例</h3><h4 id="3-1编译-proto文件"><a href="#3-1编译-proto文件" class="headerlink" title="3.1编译.proto文件"></a>3.1编译.proto文件</h4><p>首先我们需要创建一个以<strong>.proto</strong>结尾的文件，可以在其中定义<strong>message</strong>来指定所需要序列化的数据格式。每一个message都是一个小的信息逻辑单元，包含一系列的name-value值对。以官网上的示例，我们创建一个addressbook.proto文件，内容如下所示。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">syntax = <span class="string">"proto2"</span>;</span><br><span class="line"></span><br><span class="line">package tutorial;</span><br><span class="line"></span><br><span class="line">message Person &#123;</span><br><span class="line">  required string name = <span class="number">1</span>;</span><br><span class="line">  required int32 id = <span class="number">2</span>;</span><br><span class="line">  optional string email = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">  enum PhoneType &#123;</span><br><span class="line">    MOBILE = <span class="number">0</span>;</span><br><span class="line">    HOME = <span class="number">1</span>;</span><br><span class="line">    WORK = <span class="number">2</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  message PhoneNumber &#123;</span><br><span class="line">    required string number = <span class="number">1</span>;</span><br><span class="line">    optional PhoneType type = <span class="number">2</span> [default = HOME];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  repeated PhoneNumber phones = <span class="number">4</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">message AddressBook &#123;</span><br><span class="line">  repeated Person people = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><strong>syntax=”proto2”</strong>代表版本，目前支持proto2和proto3，不写默认proto2。</li>
@@ -551,7 +551,7 @@
 </blockquote>
 <p>编译完成之后会生成addressbook_pb2.py文件，里面包含序列化和反序列化等方法。</p>
 <h3 id="3-2序列化"><a href="#3-2序列化" class="headerlink" title="3.2序列化"></a>3.2序列化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> addressbook_pb2</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">PromptForAddress</span><span class="params">(person)</span>:</span></span><br><span class="line">  person.id = int(raw_input(<span class="string">"Enter person ID number: "</span>))</span><br><span class="line">  person.name = raw_input(<span class="string">"Enter name: "</span>)</span><br><span class="line"></span><br><span class="line">  email = raw_input(<span class="string">"Enter email address (blank for none): "</span>)</span><br><span class="line">  <span class="keyword">if</span> email != <span class="string">""</span>:</span><br><span class="line">    person.email = email</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">    number = raw_input(<span class="string">"Enter a phone number (or leave blank to finish): "</span>)</span><br><span class="line">    <span class="keyword">if</span> number == <span class="string">""</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    phone_number = person.phones.add()</span><br><span class="line">    phone_number.number = number</span><br><span class="line"></span><br><span class="line">    type = raw_input(<span class="string">"Is this a mobile, home, or work phone? "</span>)</span><br><span class="line">    <span class="keyword">if</span> type == <span class="string">"mobile"</span>:</span><br><span class="line">        phone_number.type = addressbook_pb2.Person.MOBILE</span><br><span class="line">    <span class="keyword">elif</span> type == <span class="string">"home"</span>:</span><br><span class="line">        phone_number.type = addressbook_pb2.Person.HOME</span><br><span class="line">    <span class="keyword">elif</span> type == <span class="string">"work"</span>:</span><br><span class="line">        phone_number.type = addressbook_pb2.Person.WORK</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"Unknown phone type; leaving as default value."</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> len(sys.argv) != <span class="number">2</span>:</span><br><span class="line">  <span class="keyword">print</span> <span class="string">"Usage:"</span>, sys.argv[<span class="number">0</span>], <span class="string">"ADDRESS_BOOK_FILE"</span></span><br><span class="line">  sys.exit(<span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line">address_book = addressbook_pb2.AddressBook()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Read the existing address book.</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">  f = open(sys.argv[<span class="number">1</span>], <span class="string">"rb"</span>)</span><br><span class="line">  address_book.ParseFromString(f.read())</span><br><span class="line">  f.close()</span><br><span class="line"><span class="keyword">except</span> IOError:</span><br><span class="line">  <span class="keyword">print</span> sys.argv[<span class="number">1</span>] + <span class="string">": Could not open file.  Creating a new one."</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Add an address.</span></span><br><span class="line">PromptForAddress(address_book.people.add())</span><br><span class="line"></span><br><span class="line"><span class="comment"># Write the new address book back to disk.</span></span><br><span class="line">f = open(sys.argv[<span class="number">1</span>], <span class="string">"wb"</span>)</span><br><span class="line">f.write(address_book.SerializeToString())</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
-<p>创建add_person.py文件，代码如上所示，然后通过SerializeToString()方法来进行序列化addressbook.proto中所定义的信息。如果想要运行上述代码的话，我们首先需要创建一个输入文件，例如命名为input.txt，不需输入值。然后采用<code>python add_person input.txt</code>，便可进行序列化所输入的数据。如果<code>python add_person</code>不带参数的话，则会报错。</p>
+<p>创建add_person.py文件，代码如上所示，然后通过SerializeToString()方法来进行序列化addressbook.proto中所定义的信息。如果想要运行上述代码的话，我们首先需要创建一个输入文件，例如命名为input.txt，不需输入值。然后采用<code>python add_person input.txt</code>，便可进行序列化所输入的数据。如果运行<code>python add_person</code>的话，不指定输入文件，则会报错。</p>
 <blockquote>
 <p>Enter person ID number: 1001<br>Enter name: 1001<br>Enter email address (blank for none): hello@email.com<br>Enter a phone number (or leave blank to finish): 10010<br>Is this a mobile, home, or work phone? work<br>Enter a phone number (or leave blank to finish): </p>
 </blockquote>
@@ -673,6 +673,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/08/27/进程、线程、锁的概念/" rel="prev" title="进程、线程、锁的概念">
+                进程、线程、锁的概念 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -754,7 +758,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-count">34</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -789,7 +793,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -840,7 +846,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">19</span>
+                      
+                    
+                    <span class="site-state-item-count">20</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -932,7 +940,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">229k</span>
+    <span title="站点总字数">234k</span>
   
 
   
