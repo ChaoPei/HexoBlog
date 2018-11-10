@@ -129,12 +129,12 @@
 <meta property="og:site_name" content="谓之小一">
 <meta property="og:description" content="1.Pandas概述 Pandas是Python的一个数据分析包，该工具为解决数据分析任务而创建。 Pandas纳入大量库和标准数据模型，提供高效的操作数据集所需的工具。 Pandas提供大量能使我们快速便捷地处理数据的函数和方法。 Pandas是字典形式，基于NumPy创建，让NumPy为中心的应用变得更加简单。     2.Pandas安装1pip3 install pandas 3.Pand">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://p66yyzg4i.bkt.clouddn.com/%E6%8E%A8%E5%B9%BF.png">
-<meta property="og:updated_time" content="2018-06-26T06:54:48.386Z">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/03/12/Python之Pandas使用教程/推广.png">
+<meta property="og:updated_time" content="2018-11-07T02:12:45.733Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python之Pandas使用教程">
 <meta name="twitter:description" content="1.Pandas概述 Pandas是Python的一个数据分析包，该工具为解决数据分析任务而创建。 Pandas纳入大量库和标准数据模型，提供高效的操作数据集所需的工具。 Pandas提供大量能使我们快速便捷地处理数据的函数和方法。 Pandas是字典形式，基于NumPy创建，让NumPy为中心的应用变得更加简单。     2.Pandas安装1pip3 install pandas 3.Pand">
-<meta name="twitter:image" content="http://p66yyzg4i.bkt.clouddn.com/%E6%8E%A8%E5%B9%BF.png">
+<meta name="twitter:image" content="https://weizhixiaoyi.com/2018/03/12/Python之Pandas使用教程/推广.png">
 
 
 
@@ -539,7 +539,7 @@
 <p>Indicator合并<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">df1 = pd.DataFrame(&#123;<span class="string">'col1'</span>:[<span class="number">0</span>,<span class="number">1</span>], <span class="string">'col_left'</span>:[<span class="string">'a'</span>,<span class="string">'b'</span>]&#125;)</span><br><span class="line">print(df1)</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">   col1 col_left</span></span><br><span class="line"><span class="string">0     0        a</span></span><br><span class="line"><span class="string">1     1        b</span></span><br><span class="line"><span class="string"> '''</span></span><br><span class="line">df2 = pd.DataFrame(&#123;<span class="string">'col1'</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>],<span class="string">'col_right'</span>:[<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>]&#125;)</span><br><span class="line">print(df2)</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">   col1  col_right</span></span><br><span class="line"><span class="string">0     1          2</span></span><br><span class="line"><span class="string">1     2          2</span></span><br><span class="line"><span class="string">2     2          2</span></span><br><span class="line"><span class="string"> '''</span></span><br><span class="line"></span><br><span class="line">res=pd.merge(df1,df2,on=<span class="string">'col1'</span>,how=<span class="string">'outer'</span>,indicator=<span class="keyword">True</span>)<span class="comment">#依据col1进行合并 并启用indicator=True输出每项合并方式</span></span><br><span class="line">print(res)</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">   col1 col_left  col_right      _merge</span></span><br><span class="line"><span class="string">0     0        a        NaN   left_only</span></span><br><span class="line"><span class="string">1     1        b        2.0        both</span></span><br><span class="line"><span class="string">2     2      NaN        2.0  right_only</span></span><br><span class="line"><span class="string">3     2      NaN        2.0  right_only</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line">res = pd.merge(df1, df2, on=<span class="string">'col1'</span>, how=<span class="string">'outer'</span>, indicator=<span class="string">'indicator_column'</span>)<span class="comment">#自定义indicator column名称</span></span><br><span class="line">print(res)</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">   col1 col_left  col_right indicator_column</span></span><br><span class="line"><span class="string">0     0        a        NaN        left_only</span></span><br><span class="line"><span class="string">1     1        b        2.0             both</span></span><br><span class="line"><span class="string">2     2      NaN        2.0       right_only</span></span><br><span class="line"><span class="string">3     2      NaN        2.0       right_only</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure></p>
 <p>依据index合并<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">left = pd.DataFrame(&#123;<span class="string">'A'</span>: [<span class="string">'A0'</span>, <span class="string">'A1'</span>, <span class="string">'A2'</span>],</span><br><span class="line">                                  <span class="string">'B'</span>: [<span class="string">'B0'</span>, <span class="string">'B1'</span>, <span class="string">'B2'</span>]&#125;,</span><br><span class="line">                                  index=[<span class="string">'K0'</span>, <span class="string">'K1'</span>, <span class="string">'K2'</span>])</span><br><span class="line">print(left)</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">     A   B</span></span><br><span class="line"><span class="string">K0  A0  B0</span></span><br><span class="line"><span class="string">K1  A1  B1</span></span><br><span class="line"><span class="string">K2  A2  B2</span></span><br><span class="line"><span class="string"> '''</span></span><br><span class="line">right = pd.DataFrame(&#123;<span class="string">'C'</span>: [<span class="string">'C0'</span>, <span class="string">'C2'</span>, <span class="string">'C3'</span>],</span><br><span class="line">                                     <span class="string">'D'</span>: [<span class="string">'D0'</span>, <span class="string">'D2'</span>, <span class="string">'D3'</span>]&#125;,</span><br><span class="line">                                      index=[<span class="string">'K0'</span>, <span class="string">'K2'</span>, <span class="string">'K3'</span>])</span><br><span class="line">print(right)</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">     C   D</span></span><br><span class="line"><span class="string">K0  C0  D0</span></span><br><span class="line"><span class="string">K2  C2  D2</span></span><br><span class="line"><span class="string">K3  C3  D3</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line">res=pd.merge(left,right,left_index=<span class="keyword">True</span>,right_index=<span class="keyword">True</span>,how=<span class="string">'outer'</span>)<span class="comment">#根据index索引进行合并 并选择外联合并</span></span><br><span class="line">print(res)</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">      A    B    C    D</span></span><br><span class="line"><span class="string">K0   A0   B0   C0   D0</span></span><br><span class="line"><span class="string">K1   A1   B1  NaN  NaN</span></span><br><span class="line"><span class="string">K2   A2   B2   C2   D2</span></span><br><span class="line"><span class="string">K3  NaN  NaN   C3   D3</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line">res=pd.merge(left,right,left_index=<span class="keyword">True</span>,right_index=<span class="keyword">True</span>,how=<span class="string">'inner'</span>)</span><br><span class="line">print(res)</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">     A   B   C   D</span></span><br><span class="line"><span class="string">K0  A0  B0  C0  D0</span></span><br><span class="line"><span class="string">K2  A2  B2  C2  D2</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure></p>
 <hr>
-<p>更多内容请关注公众号’谓之小一’，若有疑问可在公众号后台提问，随时回答，内容转载请注明出处。「谓之小一」希望提供给读者别处看不到的内容，关于互联网、机器学习、数据挖掘、编程、书籍、生活…<br><img src="http://p66yyzg4i.bkt.clouddn.com/%E6%8E%A8%E5%B9%BF.png" alt="推广"></p>
+<p>更多内容请关注公众号’谓之小一’，若有疑问可在公众号后台提问，随时回答，内容转载请注明出处。「谓之小一」希望提供给读者别处看不到的内容，关于互联网、机器学习、数据挖掘、编程、书籍、生活…<br><img src="/2018/03/12/Python之Pandas使用教程/推广.png" alt="推广"></p>
 
       
     </div>
@@ -573,18 +573,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/12/面向知乎的个性化推荐模型研究论文/" rel="next" title="面向知乎的个性化推荐模型研究">
-                <i class="fa fa-chevron-left"></i> 面向知乎的个性化推荐模型研究
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/13/Python之NumPy使用教程/" rel="prev" title="Python之NumPy使用教程">
-                Python之NumPy使用教程 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/12/面向知乎的个性化推荐模型研究论文/" rel="prev" title="面向知乎的个性化推荐模型研究">
+                面向知乎的个性化推荐模型研究 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -668,7 +664,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -850,7 +846,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">234k</span>
+    <span title="站点总字数">251k</span>
   
 
   

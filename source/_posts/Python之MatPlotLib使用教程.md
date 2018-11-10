@@ -504,4 +504,4 @@ plt.show()
 
 
 更多内容请关注公众号'谓之小一'，若有疑问可在公众号后台提问，随时回答，内容转载请注明出处。
-![推广](http://p66yyzg4i.bkt.clouddn.com/%E6%8E%A8%E5%B9%BF.png)
+![推广](Python之MatPlotLib使用教程/推广.png)

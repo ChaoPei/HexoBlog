@@ -367,6 +367,612 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/10/24/循环神经网络之前向反向传播算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XiaoYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="谓之小一">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/24/循环神经网络之前向反向传播算法/" itemprop="url">
+                  循环神经网络之前向反向传播算法
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-24 15:01:47" itemprop="dateCreated datePublished" datetime="2018-10-24T15:01:47+08:00">2018-10-24</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/10/24/循环神经网络之前向反向传播算法/" class="leancloud_visitors" data-flag-title="循环神经网络之前向反向传播算法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">4.3k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">7 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          前面我们已经介绍了深度神经网络和卷积神经网络，这些算法都是前向反馈，模型的输出和模型本身没有关联关系。今天我们学习输出和模型间有反馈的神经网络，循环神经网络(Recurrent Neual Networks)，其广泛应用于自然语言处理中的语音识别，书写识别和机器翻译等领域。
+1.RNN简介前面介绍的DNN和CNN之中，训练样本的输入和输出都是确定的。但对于训练样本输入是连续的序列，训练样本长度不同的样本，比如一段连续的语音和手写文字，DNN和CNN是比较难处理的。而对于上述问题，RNN则是比较擅长，那么RNN是怎么做到的呢？
+RNN假设输入样本是基于序列的，比如是从序列索引1到序列索引τ，对于其中的任意序列索引号t，输入是对应样本序列的$x^{(t)}$。而模型在序列索引号t位置的隐藏状态$h^{(t)}$，则由$x^{(t)}$和t-1时刻的隐藏状态$h^{(t-1)}$共同决定。在任意序列索引号t，也有相对应的模型预测输出$o^{t}$。通过预测输出$o^{(t)}$和训练序列的真实输出$y^{(t)}$，以及损失函数$L^{(t)}$，我们就可以用和DNN类似的方法来训练模型，接
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/24/循环神经网络之前向反向传播算法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/10/21/卷积神经网络之反向传播算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XiaoYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="谓之小一">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/21/卷积神经网络之反向传播算法/" itemprop="url">
+                  卷积神经网络之反向传播算法
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-21 14:24:00" itemprop="dateCreated datePublished" datetime="2018-10-21T14:24:00+08:00">2018-10-21</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/10/21/卷积神经网络之反向传播算法/" class="leancloud_visitors" data-flag-title="卷积神经网络之反向传播算法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">8k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">13 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          前面已经推导学习了卷积神经网络之前向传播算法，本篇文章将推导卷积神经网络之反向传播算法。在学习卷积神经网络算法之前，希望你对深度神经网络有一定程度的了解，我在之前也有写过相关的文章，包括深度神经网络之前向传播算法、深度神经网络之反向传播算法、深度神经网络之损失函数和激活函数、深度神经网络之正则化，可以先看一下再学习卷积神经网络。
+1.DNN反向传播算法学习CNN(卷积神经网络)反向传播算法之前，我们先回顾下DNN(深度神经网络)反向传播算法。DNN之中，我们是首先计算出输出层的$\delta^L$
+
+\delta^L = \frac{\partial J(W,b)}{\partial z^L} = \frac{\partial J(W,b)}{a^L} \odot {\sigma}'(z^L)然后利用数学归纳法，用$\delta^{l+1}$的值向前求出第$l$层的$\delta ^{l}$，表达式为
+
+\delta^{l}= \delta^{l+1}\frac{\partial z^{l+1}}{\partial z^l}=(W^{l+1})^T\delta^{l+1}\odot {
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/21/卷积神经网络之反向传播算法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/10/14/卷积神经网络之前向传播算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XiaoYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="谓之小一">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/14/卷积神经网络之前向传播算法/" itemprop="url">
+                  卷积神经网络之前向传播算法
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-14 16:35:28" itemprop="dateCreated datePublished" datetime="2018-10-14T16:35:28+08:00">2018-10-14</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/10/14/卷积神经网络之前向传播算法/" class="leancloud_visitors" data-flag-title="卷积神经网络之前向传播算法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">5.1k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">8 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          0.杂谈本来个人是准备毕业直接工作的，但前段时间学校保研大名单出来之后，发现本人有保研机会，于是就和主管请了几天假，回学校准备保研的事情。经过两天的准备，也是非常幸运，成功拿到本院的保研名额。明确得到保研名额的时候已经是9月18号，然而国家推免系统开放时间是9月28号，也就是说我只还有10天时间准备保研，而且这个时间点很多学校夏令营、预报名活动早已结束，不再接受学生申请。所以能够申请的学校也就很少，同时这10天之间，还要赶回北京实习，所以时间还是很赶的。
+短短10天，发生了很多有趣的事情，但不论怎样，最后的结果还是很不错的，成功保研到华中科技大学，全国排名前10左右的高校，而且计算机很强 。但华科要求，本科非985高校不允许读学硕，只能读专硕。我倒觉得无所谓，反正不准备继续读博，学硕、专硕没有太大区别。
+被华科预录取之后，导师要求提前到实验室学习，于是10月10号便来到实验室搬砖。怎么说呢，感觉还是挺累的，比工作还累，早9晚10。但确实能够学习到很多东西，实验室环境很不错，每人一台电脑，等等福利都很好。至此，一直准备工作的我，成功走上读研之路，加油啦。前段时间一直想写篇关于从双非到98
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/14/卷积神经网络之前向传播算法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/08/27/进程、线程、锁的概念/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1396,623 +2002,6 @@ pwd显示当前目录 p
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/06/30/深度神经网络之损失函数和激活函数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="XiaoYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="谓之小一">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/30/深度神经网络之损失函数和激活函数/" itemprop="url">
-                  深度神经网络之损失函数和激活函数
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-06-30 12:51:43" itemprop="dateCreated datePublished" datetime="2018-06-30T12:51:43+08:00">2018-06-30</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/06/30/深度神经网络之损失函数和激活函数/" class="leancloud_visitors" data-flag-title="深度神经网络之损失函数和激活函数">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">4.5k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">7 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          1.损失函数和激活函数简介通过前面深度神经网络之前向传播算法和深度神经网络之反向传播算法的学习，我们能够了解到损失函数是用来评估模型的预测值与真实值之间的差异程度。另外损失函数也是神经网络中优化的目标函数，神经网络训练或者优化的过程就是最小化损失函数的过程，损失函数越小，说明模型的预测值就越接近真实值，模型的准确性也就越好。前面我们已经学习过平方损失函数，对数损失函数、交叉熵损失函数等不同形式的损失函数，这里也就不做太多介绍。
-那么在深度神经网络之中，激活函数的作用又是什么呢？首先我们来看单层感知机模型，如下图所示，感知机可以利用分割线将平面分割开来。
-现在我们利用多个感知机进行组合，获得更强的分类能力，模型分类效果如下图所示。
-
-但无论怎样组合，模型输出的时候都只是线性模型，如何解决非线性分类呢？好吧，上面是我们没有增加激活函数的情况。那么现在我们在每一层迭代完之后，增加一个激活函数，如下图的y=σ(a)所示，这样模型的输出便能解决非线性情况。将多个有激活函数的神经元组合起来，我们就可以得到一个相当复杂的函数。
-
-引入非线性激活函数之中，模型的表达能力增强，能够有效解决非线性情况。通
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/30/深度神经网络之损失函数和激活函数/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/06/27/深度神经网络之反向传播算法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="XiaoYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="谓之小一">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/27/深度神经网络之反向传播算法/" itemprop="url">
-                  深度神经网络之反向传播算法
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-06-27 18:18:42" itemprop="dateCreated datePublished" datetime="2018-06-27T18:18:42+08:00">2018-06-27</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/06/27/深度神经网络之反向传播算法/" class="leancloud_visitors" data-flag-title="深度神经网络之反向传播算法">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">4.2k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">7 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          1.DNN反向传播算法简介回顾我们前面学到的监督问题，通常会遇到这种情况，假如有$m$个训练样本，分别为$\{(x_1,y_1),(x_2,y_2),(x_3,y_3),…,(x_m,y_m) \}$，其中$x$为输入变量，特征维度为n_in，y为输出向量，特征维度为n_out。现在我们利用这m个训练样本来训练模型，当有测试样本$(x_{test},?)$时，需要我们能够预测出$y_{test}$向量的输出。
-现在对应到我们的DNN模型之中，即输入层有n_in个神经元，输出层有n_out个神经元，再加上一些含有若干个神经元的隐含层。此时我们需要找到所有隐含层和输出层所对应的线性系数矩阵W、偏倚向量b，希望通过DNN对所有的训练样本计算后，计算结果能够等于或很接近样本输出，当有新的测试样本数据时，能够有效预测样本输出。但怎样找到合适的线形系数矩阵W和偏倚变量b呢?
-回顾我们前面学习的机器学习之Logistic回归、机器学习之SVM支持向量机等机器学习算法，很容易联想到，我们可以用一个合适的损失函数来度量训练样本的输出损失。然后对损失函数优化，求损失函数最小化的极值，此时对应的线性系数矩阵
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/27/深度神经网络之反向传播算法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/06/27/深度神经网络之前向传播算法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="XiaoYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="谓之小一">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/27/深度神经网络之前向传播算法/" itemprop="url">
-                  深度神经网络之前向传播算法
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-06-27 09:13:06" itemprop="dateCreated datePublished" datetime="2018-06-27T09:13:06+08:00">2018-06-27</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/06/27/深度神经网络之前向传播算法/" class="leancloud_visitors" data-flag-title="深度神经网络之前向传播算法">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">387</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          1.深度神经网络简介深度神经网络(Deep Neural Networks,DNN)从字面上理解，也就是深层次的神经网络，从网络结构上看来就是有多个隐含层的神经网络。深度神经网络不仅能够用于分类和回归，在降维、聚类、语音识别、图像识别方面也有许多应用。由于神经网络内容较多，将分多次写作，本次主要讲解深度神经网络中的前向传播算法，后续还有反向传播算法、损失函数和激活函数、正则化。
-2.从感知机到神经网络在机器学习之Logistic回归之中，我们利用过感知机的模型。如下图所示，也就是有若干个输入和一个输出的感知机模型。
-
-感知机通过输入和输出学习得到一个线性模型，得到中间输出结果z。然后利用激活函数，从而得到我们希望的结果，例如1或-1。
-
-z=\sum _{i=1}^{m}w_i x_i +b
-sign(z)=\left\{\begin{matrix}
--1 & z上述模型只能用于二元分类，且无法学习比较复杂的非线形模型。而神经网络则是在感知机的模型上做扩展，主要增加以下三点。
-
-增加隐含层：如下图所示，隐含层可以有多层，增加模型的表达能力。当然隐含层增加，模型的复杂度也就会增加。
-
-
-
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/27/深度神经网络之前向传播算法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2064,7 +2053,7 @@ sign(z)=\left\{\begin{matrix}
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2230,7 +2219,7 @@ sign(z)=\left\{\begin{matrix}
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">234k</span>
+    <span title="站点总字数">251k</span>
   
 
   
@@ -2867,11 +2856,11 @@ sign(z)=\left\{\begin{matrix}
   
     
       
-    
-      
-    
-      
         
+      
+    
+      
+    
       
     
       

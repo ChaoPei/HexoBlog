@@ -129,14 +129,14 @@
 <meta property="og:site_name" content="谓之小一">
 <meta property="og:description" content="首先非常抱歉，最近一段时间由于学校课程作业较多，外加个人较懒，所以一直没有更新文章，以后一定会勤奋点，多加更新。正如前几天在stormzhang(张哥)的公众号里看到的一样，写作其实并不难，每个人都可以做到，但是长期坚持写作就非常难，这也是写作者想要长期创作遇到的第一个大问题，所以贵在坚持。另外长期写作的第二大问题是什么呢？你猜猜看，看看我们认为的是不是一样。 最近主要是完成专业内的一些课程作业，">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://p66yyzg4i.bkt.clouddn.com/%E7%BD%91%E5%BA%97%E5%B7%A5%E5%95%86%E4%BF%A1%E6%81%AF%E5%9B%BE%E7%89%87%E6%96%87%E5%AD%97%E6%8F%90%E5%8F%9601.png">
-<meta property="og:image" content="http://p66yyzg4i.bkt.clouddn.com/%E7%BD%91%E5%BA%97%E5%B7%A5%E5%95%86%E4%BF%A1%E6%81%AF%E5%9B%BE%E7%89%87%E6%96%87%E5%AD%97%E6%8F%90%E5%8F%9602.png">
-<meta property="og:image" content="http://p66yyzg4i.bkt.clouddn.com/%E6%8E%A8%E5%B9%BF.png">
-<meta property="og:updated_time" content="2018-08-20T08:44:55.214Z">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/06/10/网店工商信息图片文字提取/网店工商信息图片文字提取01.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/06/10/网店工商信息图片文字提取/网店工商信息图片文字提取02.png">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/06/10/网店工商信息图片文字提取/推广.PNG">
+<meta property="og:updated_time" content="2018-11-07T02:17:29.580Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网店工商信息图片文字提取">
 <meta name="twitter:description" content="首先非常抱歉，最近一段时间由于学校课程作业较多，外加个人较懒，所以一直没有更新文章，以后一定会勤奋点，多加更新。正如前几天在stormzhang(张哥)的公众号里看到的一样，写作其实并不难，每个人都可以做到，但是长期坚持写作就非常难，这也是写作者想要长期创作遇到的第一个大问题，所以贵在坚持。另外长期写作的第二大问题是什么呢？你猜猜看，看看我们认为的是不是一样。 最近主要是完成专业内的一些课程作业，">
-<meta name="twitter:image" content="http://p66yyzg4i.bkt.clouddn.com/%E7%BD%91%E5%BA%97%E5%B7%A5%E5%95%86%E4%BF%A1%E6%81%AF%E5%9B%BE%E7%89%87%E6%96%87%E5%AD%97%E6%8F%90%E5%8F%9601.png">
+<meta name="twitter:image" content="https://weizhixiaoyi.com/2018/06/10/网店工商信息图片文字提取/网店工商信息图片文字提取01.png">
 
 
 
@@ -524,7 +524,7 @@
 </li>
 <li>识别速度保持在60秒识别50张图片，识别正确率保证在95%以上。</li>
 </ul>
-<p><img src="http://p66yyzg4i.bkt.clouddn.com/%E7%BD%91%E5%BA%97%E5%B7%A5%E5%95%86%E4%BF%A1%E6%81%AF%E5%9B%BE%E7%89%87%E6%96%87%E5%AD%97%E6%8F%90%E5%8F%9601.png" alt="网店工商信息图片文字提取01"></p>
+<p><img src="/2018/06/10/网店工商信息图片文字提取/网店工商信息图片文字提取01.png" alt="网店工商信息图片文字提取01"></p>
 <h3 id="2-Tess4j"><a href="#2-Tess4j" class="headerlink" title="2.Tess4j"></a>2.Tess4j</h3><p>了解题目要求之后，我们便开始来解决问题。首先明确一点的是，肯定不能从头去写文字识别算法或者文字识别程序，OCR(Optical Character Recognition , 光学字符识别)发展这么多年来，开源的库肯定不少，只需找到适合中文识别的类库或者项目即可。</p>
 <p>个人采用的是Tess4j开源库，其中Tess4j是由Tesseract扩展而来，Tesseract是HP实验室开发由Google维护的开源OCR引擎，Tess4j支持Tiff,jpeg,gif,png,pdf等多种格式识别。我们只需要在<a href="https://sourceforge.net/projects/tess4j/" target="_blank" rel="noopener">https://sourceforge.net/projects/tess4j/</a>下载类库，然后编写下述代码便可实现文字识别，使用方法很简单。如果你要使用的话，请注意package,imageFile,instance的位置。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> net.sourceforge.tess4j.example;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> net.sourceforge.tess4j.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TesseractExample1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;        </span><br><span class="line">    	</span><br><span class="line">        File imageFile = <span class="keyword">new</span> File(<span class="string">"/Users/zhenhai/Downloads/SoftwareCup/Tess4J/test/resources/tianmao/1.png"</span>);</span><br><span class="line">        ITesseract instance = <span class="keyword">new</span> Tesseract();  <span class="comment">// JNA Interface Mapping</span></span><br><span class="line">        <span class="comment">// ITesseract instance = new Tesseract1(); // JNA Direct Mapping</span></span><br><span class="line">        instance.setDatapath(<span class="string">"/Users/zhenhai/Downloads/SoftwareCup/Tess4J"</span>);</span><br><span class="line">		instance.setLanguage(<span class="string">"chi_sim"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            String result = instance.doOCR(imageFile);</span><br><span class="line">            System.out.println(result);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (TesseractException e) &#123;</span><br><span class="line">            System.err.println(e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -588,7 +588,7 @@
 <p>企业名称 : 宁波中哲幕尚电子商务有限公司</p>
 </blockquote>
 <h4 id="3-5图片模糊寻找和结果导出"><a href="#3-5图片模糊寻找和结果导出" class="headerlink" title="3.5图片模糊寻找和结果导出"></a>3.5图片模糊寻找和结果导出</h4><p>图片模糊寻找的意思也就是，给出图片文件夹的大致路径，然后程序能够找到正确的图片路径，并能够正确进行文字识别。比如给定/Users/zhenhai/Downloads/SoftwareCup/Tess4J路径，程序能够找到/Users/zhenhai/Downloads/SoftwareCup/Tess4J/test/resources/tianmao1/1.jpg路径。然后将识别到的结果导出到Excel表格，问题也很简单，这里也就不给出相应代码。</p>
-<p><img src="http://p66yyzg4i.bkt.clouddn.com/%E7%BD%91%E5%BA%97%E5%B7%A5%E5%95%86%E4%BF%A1%E6%81%AF%E5%9B%BE%E7%89%87%E6%96%87%E5%AD%97%E6%8F%90%E5%8F%9602.png" alt="网店工商信息图片文字提取02"></p>
+<p><img src="/2018/06/10/网店工商信息图片文字提取/网店工商信息图片文字提取02.png" alt="网店工商信息图片文字提取02"></p>
 <p>至此已经能够识别图片，而且准确率挺不错，准确率在95%左右，识别成功之后也能够正常导出至Excel表格。但时间依旧不理想，目前识别50张图片大概在2分钟30s左右。</p>
 <h3 id="4-待优化"><a href="#4-待优化" class="headerlink" title="4.待优化"></a>4.待优化</h3><p>图片文字识别方面只做了4天，之前也没有做过相关问题，所以还是有很大的优化空间。</p>
 <ul>
@@ -597,7 +597,7 @@
 <li>图片大小不一，可以将图片设置为平均宽度和高度，然后再进行分区域识别。而且每次识别时候不是识别企业注册号和企业名称的完整信息，而只是试探识别这几个字，如果识别成功之后，然后再扩大识别宽度，提取所需要的完整信息。</li>
 </ul>
 <h3 id="5-推广"><a href="#5-推广" class="headerlink" title="5.推广"></a>5.推广</h3><p>更多内容请关注公众号<strong>谓之小一</strong>，若有疑问可在公众号后台提问，随时回答，欢迎关注，内容转载请注明出处。</p>
-<p><img src="http://p66yyzg4i.bkt.clouddn.com/%E6%8E%A8%E5%B9%BF.png" alt="推广"></p>
+<p><img src="/2018/06/10/网店工商信息图片文字提取/推广.PNG" alt="推广"></p>
 
       
     </div>
@@ -726,7 +726,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -908,7 +908,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">234k</span>
+    <span title="站点总字数">251k</span>
   
 
   

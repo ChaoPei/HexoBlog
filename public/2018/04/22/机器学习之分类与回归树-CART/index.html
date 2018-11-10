@@ -130,8 +130,8 @@
 <meta property="og:description" content="1.分类与回归树简介分类与回归树的英文是Classfication And Regression Tree，缩写为CART。CART算法采用二分递归分割的技术将当前样本集分为两个子样本集，使得生成的每个非叶子节点都有两个分支。非叶子节点的特征取值为True和False，左分支取值为True，右分支取值为False，因此CART算法生成的决策树是结构简洁的二叉树。CART可以处理连续型变量和离散型变">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://weizhixiaoyi.com/2018/04/22/机器学习之分类与回归树-CART/机器学习之分类与回归树CART图片01.png">
-<meta property="og:image" content="http://p66yyzg4i.bkt.clouddn.com/%E6%8E%A8%E5%B9%BF.png">
-<meta property="og:updated_time" content="2018-06-07T17:52:51.000Z">
+<meta property="og:image" content="https://weizhixiaoyi.com/2018/04/22/机器学习之分类与回归树-CART/推广.png">
+<meta property="og:updated_time" content="2018-11-07T01:59:51.077Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习之分类与回归树(CART)">
 <meta name="twitter:description" content="1.分类与回归树简介分类与回归树的英文是Classfication And Regression Tree，缩写为CART。CART算法采用二分递归分割的技术将当前样本集分为两个子样本集，使得生成的每个非叶子节点都有两个分支。非叶子节点的特征取值为True和False，左分支取值为True，右分支取值为False，因此CART算法生成的决策树是结构简洁的二叉树。CART可以处理连续型变量和离散型变">
@@ -823,7 +823,7 @@ T_0>T_1>T_2>T_3>...>T_n</script><p><strong>因此CART剪枝分为两部分，分
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> tree</span><br><span class="line"></span><br><span class="line"><span class="comment">#load data</span></span><br><span class="line">iris=load_iris()</span><br><span class="line">X=iris.data</span><br><span class="line">y=iris.target</span><br><span class="line">clf=tree.DecisionTreeClassifier()</span><br><span class="line">clf=clf.fit(X,y)</span><br><span class="line"></span><br><span class="line"><span class="comment">#export the decision tree</span></span><br><span class="line"><span class="keyword">import</span> graphviz</span><br><span class="line"><span class="comment">#export_graphviz support a variety of aesthetic options</span></span><br><span class="line">dot_data=tree.export_graphviz(clf,out_file=<span class="keyword">None</span>,</span><br><span class="line">                              feature_names=iris.feature_names,</span><br><span class="line">                              class_names=iris.target_names,</span><br><span class="line">                              filled=<span class="keyword">True</span>,rounded=<span class="keyword">True</span>,</span><br><span class="line">                              special_characters=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">graph=graphviz.Source(dot_data)</span><br><span class="line">graph.view()</span><br></pre></td></tr></table></figure>
 <p><img src="/2018/04/22/机器学习之分类与回归树-CART/机器学习之分类与回归树CART图片01.png" alt="机器学习之分类与回归树CART图片01"></p>
 <h3 id="6-推广"><a href="#6-推广" class="headerlink" title="6.推广"></a>6.推广</h3><p>更多内容请关注公众号<strong>谓之小一</strong>，若有疑问可在公众号后台提问，随时回答，欢迎关注，内容转载请注明出处。</p>
-<p><img src="http://p66yyzg4i.bkt.clouddn.com/%E6%8E%A8%E5%B9%BF.png" alt="推广"></p>
+<p><img src="/2018/04/22/机器学习之分类与回归树-CART/推广.png" alt="推广"></p>
 
       
     </div>
@@ -954,7 +954,7 @@ T_0>T_1>T_2>T_3>...>T_n</script><p><strong>因此CART剪枝分为两部分，分
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1136,7 +1136,7 @@ T_0>T_1>T_2>T_3>...>T_n</script><p><strong>因此CART剪枝分为两部分，分
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">234k</span>
+    <span title="站点总字数">251k</span>
   
 
   

@@ -367,6 +367,622 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/05/13/机器学习之K近邻-KNN-算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XiaoYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="谓之小一">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/13/机器学习之K近邻-KNN-算法/" itemprop="url">
+                  机器学习之K近邻(KNN)算法
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-05-13 11:34:01" itemprop="dateCreated datePublished" datetime="2018-05-13T11:34:01+08:00">2018-05-13</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/05/13/机器学习之K近邻-KNN-算法/" class="leancloud_visitors" data-flag-title="机器学习之K近邻(KNN)算法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">8 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          1.KNN简介K近邻(K-Nearest Neighbors, KNN)算法既可处理分类问题，也可处理回归问题，其中分类和回归的主要区别在于最后做预测时的决策方式不同。KNN做分类预测时一般采用多数表决法，即训练集里和预测样本特征最近的K个样本，预测结果为里面有最多类别数的类别。KNN做回归预测时一般采用平均法，预测结果为最近的K个样本数据的平均值。其中KNN分类方法的思想对回归方法同样适用，因此本文主要讲解KNN分类问题，下面我们通过一个简单例子来了解下KNN算法流程。
+如下图所示，我们想要知道绿色点要被决定赋予哪个类，是红色三角形还是蓝色正方形？我们利用KNN思想，如果假设K=3，选取三个距离最近的类别点，由于红色三角形所占比例为2/3，因此绿色点被赋予红色三角形类别。如果假设K=5，由于蓝色正方形所占比例为3/5，因此绿色点被赋予蓝色正方形类别。
+
+从上面实例，我们可以总结下KNN算法过程
+
+计算测试数据与各个训练数据之间的距离。
+按照距离的递增关系进行排序，选取距离最小的K个点。
+确定前K个点所在类别的出现频率，返回前K个点中出现频率最高的类别作为测试数据的预测分类。
+
+从KN
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/13/机器学习之K近邻-KNN-算法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/05/12/机器学习之K均值-K-Means-算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XiaoYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="谓之小一">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/12/机器学习之K均值-K-Means-算法/" itemprop="url">
+                  机器学习之K均值(K-Means)算法
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-05-12 13:44:19" itemprop="dateCreated datePublished" datetime="2018-05-12T13:44:19+08:00">2018-05-12</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/05/12/机器学习之K均值-K-Means-算法/" class="leancloud_visitors" data-flag-title="机器学习之K均值(K-Means)算法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">3.7k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">6 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          1.K-Means简介K均值(K-Means)算法是无监督的聚类方法，实现起来比较简单，聚类效果也比较好，因此应用很广泛。K-Means算法针对不同应用场景，有不同方面的改进。我们从最传统的K-Means算法讲起，然后在此基础上介绍初始化质心优化K-Means++算法，距离计算优化Elkan K-Means算法和大样本情况下Mini Batch K-Means算法。
+K-Means算法的思想很简单，对于给定的样本集，按照样本之间的距离大小，将样本集划分为K个簇。让簇内的点尽可能紧密的连在一起，而让簇间的距离尽量的大，下面我们引入K-Means目标函数。
+假设样本集输入变量为(x1,x2,x3,…,xm)，样本集划分为K个簇(C1,C2,C3,…,Ck)，则我们的目标是最小化平方误差E。
+
+E=\sum _{i=1}^{k} \sum _{x \in C_i}||x-\mu _i||^2其中μi是簇Ci的均值向量，也可称作质心，表达式为
+
+\mu _i=\frac{1}{|C_i|}\sum _{x \in C_i}x如果直接求解上述最小值的话，那么为NP Hard问题，因此K-Mean
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/12/机器学习之K均值-K-Means-算法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/05/09/机器学习之最大期望-EM-算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XiaoYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="谓之小一">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/09/机器学习之最大期望-EM-算法/" itemprop="url">
+                  机器学习之最大期望(EM)算法
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-05-09 10:20:41" itemprop="dateCreated datePublished" datetime="2018-05-09T10:20:41+08:00">2018-05-09</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/05/09/机器学习之最大期望-EM-算法/" class="leancloud_visitors" data-flag-title="机器学习之最大期望(EM)算法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">12k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">20 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          1.EM算法简介最大期望(Expectation Maximum)算法是一种迭代优化算法，其计算方法是每次迭代分为期望(E)步和最大(M)步。我们先看下最大期望算法能够解决什么样的问题。
+假如班级里有50个男生和50个女生，且男生站左，女生站右。我们假定男生和女生的身高分布分别服从正态分布。这时我们用极大似然法，分别通过这50个男生和50个女生的样本来估计这两个正态分布的参数，便可知道男女身高分布的情况。
+
+N_1(\mu_1,\sigma_1^2)\ ; N_2(\mu_2,\sigma_2^2)但我们面对下类问题如何解决呢？就是这50个男生和50个女生混在一起，我们拥有100个人的身高数据，但却不知道这100个同学中的每个人是男生还是女生。通常来说，我们只有知道了精确的男女身高的正态分布参数才能知道每位同学更有可能是男生还是女生，从另一方面来说我们只有知道每个人是男生还是女生才能尽可能准确的估计男女生各自身高的正态分布参数。但现在两者都不知道，如何去估计呢？ 
+EM算法表示我们可以用迭代的方法来解决问题。我们先假设男生身高和女生身高分布的参数(初始值)，然后根据这些参数去判断每个人
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/09/机器学习之最大期望-EM-算法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/05/03/机器学习之自适应增强-Adaboost/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1493,623 +2109,6 @@ Gini(p)=\sum_{k=1}^{m}p_k(1-p_k)=1-\sum_{k=1}^{K}p_{k}^{2}根据基尼指数定�
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/04/15/Python之Sklearn使用教程/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="XiaoYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="谓之小一">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/15/Python之Sklearn使用教程/" itemprop="url">
-                  Python之Sklearn使用教程
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-04-15 11:43:18" itemprop="dateCreated datePublished" datetime="2018-04-15T11:43:18+08:00">2018-04-15</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python库/" itemprop="url" rel="index"><span itemprop="name">Python库</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/04/15/Python之Sklearn使用教程/" class="leancloud_visitors" data-flag-title="Python之Sklearn使用教程">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">9.2k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">15 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          1.Sklearn简介Scikit-learn(sklearn)是机器学习中常用的第三方模块，对常用的机器学习方法进行了封装，包括回归(Regression)、降维(Dimensionality Reduction)、分类(Classfication)、聚类(Clustering)等方法。当我们面临机器学习问题时，便可根据下图来选择相应的方法。Sklearn具有以下特点：
-
-简单高效的数据挖掘和数据分析工具
-
-
-让每个人能够在复杂环境中重复使用
-建立NumPy、Scipy、MatPlotLib之上
-
-
-2.Sklearn安装Sklearn安装要求Python(&gt;=2.7 or &gt;=3.3)、NumPy (&gt;= 1.8.2)、SciPy (&gt;= 0.13.3)。如果已经安装NumPy和SciPy，安装scikit-learn可以使用pip install -U scikit-learn。
-3.Sklearn通用学习模式Sklearn中包含众多机器学习方法，但各种学习方法大致相同，我们在这里介绍Sklearn通用学习模式。首先引入需要训练的数据，Sklearn自带部
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/15/Python之Sklearn使用教程/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/04/04/机器学习之SVM支持向量机（二）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="XiaoYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="谓之小一">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/04/机器学习之SVM支持向量机（二）/" itemprop="url">
-                  机器学习之SVM支持向量机（二）
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-04-04 21:06:26" itemprop="dateCreated datePublished" datetime="2018-04-04T21:06:26+08:00">2018-04-04</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/04/04/机器学习之SVM支持向量机（二）/" class="leancloud_visitors" data-flag-title="机器学习之SVM支持向量机（二）">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">8.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">14 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          1.知识回顾机器学习之SVM支持向量机（一）中我们介绍了SVM损失函数、最大间隔分类、为什么SVM能形成最大间隔分类器、核函数、SVM中Gaussian Kernel的使用知识点。上文我们从Logistic Regression损失函数中推出SVM损失函数，本篇文章我们将更加直观的分析得到SVM损失函数、如何求解SVM对偶问题、如何解决outliers点，并且最终利用sklearn实现SVM。
-2.函数间隔和几何间隔上文我们从logistic Regression损失函数推导出SVM损失函数，本文我们采用另一种方法得到SVM损失函数。首先定义超平面可以用分类函数$f(x)=w^Tx+b$表示，当$f(x)$等于0的时候，$x$便是位于超平面上的点，而$f(x)$大于0对应$y=1$的数据点，$f(x)$小于0对应于$y=-1$的点，如下图所示：
-
-在超平面$w^Tx+b=0$确定的情况下，$|w^Tx+b|$能够表示点$x$到超平面的远近，而通过观察$w^Tx+b$的符号与类标记$y$的符号是否一致可判断分类是否正确。因此我们用$y*(w^Tx+b)$的正负性来判定分类的正确性，于是引
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/04/机器学习之SVM支持向量机（二）/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://weizhixiaoyi.com/2018/03/29/机器学习之SVM支持向量机（一）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="XiaoYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="谓之小一">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/29/机器学习之SVM支持向量机（一）/" itemprop="url">
-                  机器学习之SVM支持向量机（一）
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-03-29 15:51:41" itemprop="dateCreated datePublished" datetime="2018-03-29T15:51:41+08:00">2018-03-29</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/03/29/机器学习之SVM支持向量机（一）/" class="leancloud_visitors" data-flag-title="机器学习之SVM支持向量机（一）">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">5.6k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">9 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          我们思考这样一个问题，给两个标签，蓝色和红色点，数据有两个特征(x,y)。我们想要一个分类器，给定一对(x,y)，能找到很好的分类边界，判断是蓝色点还是红色点。对于下图的数据，我们如何解决呢。本文通过引入Support Vector Machine（SVM）算法来详解此类问题。
-
-1.SVM损失函数针对前面介绍的机器学习之线性回归、机器学习之Logistic回归，我们已经了解Cost Function的概念，这里我们利用Logistic Regression的损失函数来引入SVM损失函数。
-首先我们先复习下Logistic Regression Function
-
-h_{\theta}=\frac{1}{1+e^{-\theta^Tx}}如果$y=1$，我们希望$h_{\theta}\approx1$，那么$\theta^Tx\gg0$。如果$y=0$，我们希望$h_{\theta}\approx0$，那么$\theta^Tx\ll0$。我们以Logistic Regression为例
-
-LR Cost Example=-\left( (ylogh_\theta(x))+(1-y)lo
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/29/机器学习之SVM支持向量机（一）/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2161,7 +2160,7 @@ LR Cost Example=-\left( (ylogh_\theta(x))+(1-y)lo
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2327,7 +2326,7 @@ LR Cost Example=-\left( (ylogh_\theta(x))+(1-y)lo
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">234k</span>
+    <span title="站点总字数">251k</span>
   
 
   
